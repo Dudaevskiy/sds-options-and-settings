@@ -1,0 +1,11 @@
+.swal2-container.swal2-center.swal2-fade.swal2-shown {
+    z-index: 999999 !important;
+}
+
+html.swal2-shown body {
+    padding-right: 0px !important;
+}
+
+/*div#SDSTudioSO_AddToAnyBlock_for_SweetAlert2 > div {*/
+/*    margin-left: 12px !important;*/
+/*}*/

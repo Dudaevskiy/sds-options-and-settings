@@ -1,0 +1,21 @@
+.SDStudio_SweetAlert2_SharePopup.swal2-show {
+    max-width: 443px;
+}
+
+div#SDSTudioSO_AddToAnyBlock_for_SweetAlert2 .a2a_kit {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+/* PRELOADER */
+
+/* div#SDSTudioSO_AddToAnyBlock_for_SweetAlert2 > .a2a_kit { */
+    /* background-image: url(/wp-content/plugins/sdstudio-options-and-settings/img/SDS_Preloader.svg); */
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+    /* background-size: contain; */
+/* } */
+
+/* div#SDSTudioSO_AddToAnyBlock_for_SweetAlert2 > .a2a_kit[style="line-height: 32px;"] { */
+    /* background-color: white !important; */
+/* } */

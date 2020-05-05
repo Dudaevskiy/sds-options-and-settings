@@ -1,0 +1,3 @@
+SweetAlert2 это отличный плагин для всплывающих оповещений. Дательную информацию можно узнать [здесь](https://sweetalert2.github.io/)
+
+В случае если на сайте установлен плагин [WPML](https://wpml.org/ru/) Вы можете использевать плагин [WPML Shortcodes](https://techblog.sdstudio.top/blog/wpml-tekst-v-shortkode-dlya-wordpress) для реализации перевода всплывающих уведомлений. После активации плагина **WPML Shortcodes** оберните тексты\-переводы в шорт коды как указано в [данном посте](https://techblog.sdstudio.top/blog/wpml-tekst-v-shortkode-dlya-wordpress)
