@@ -503,6 +503,7 @@ $section = [
             'data' => array(
                 'login_redirects-sds-options-and-settings-login-url',
             ),
+            'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'false' ),
             'default'  => '',
         ],
         [
@@ -514,10 +515,44 @@ $section = [
 //                'login_redirects-sds-options-and-settings-login-url',
                 'login_redirects-sds-options-and-settings-exit-url',
             ),
+            'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'false' ),
             'default'  => '/',
 //            'default'  => array(
 //                'text'=>'https://cdn.cacher.io/attachments/u/3aboiw1y8lm64/rFpFGFkRo8L94062hnUPRcXhqzd00jHS/500px-Wordpress-Logo.svg.png'
 //            ),
+        ],
+        // WP RECALL
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+
+            'id'       => 'enable_wp_recall_options_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('WP-RECALL Включить обработку вода и выхода для плагина', 'redux-framework-demo'),
+//            'subtitle' => __('', 'redux-framework-demo'),
+            'desc'  => __( 'При активации опции, будет включена опция входа и выхода для плагина WP-RECALL.', 'sds-options-and-settings' ),
+            'default'  => false,
+        ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+
+            'id'       => 'enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('WP-RECALL отключить админ панель для всех кроме администратора', 'redux-framework-demo'),
+//            'subtitle' => __('', 'redux-framework-demo'),
+            'desc'  => __( 'При активации опции, будет отключена полоса дамин анели для всех кроме даминистратора системы' ),
+            'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'true' ),
+            'default'  => false,
+        ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+
+            'id'       => 'enable_wp_recall_replace_wp_login_on_wprecallpage_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('WP-RECALL Заменить страницу wp-login на страницу wp-recall', 'redux-framework-demo'),
+//            'subtitle' => __('', 'redux-framework-demo'),
+            'desc'  => __( 'При активации опции, при попытке перейти на стандартную страницу входа wp-admin,wp-login. Будет происходить редирект на страницу авторизации плагина WP-RECALL - "/account"' ),
+            'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'true' ),
+            'default'  => false,
         ],
     ],
 
