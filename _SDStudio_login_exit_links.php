@@ -77,6 +77,21 @@ if ($enable_wp_recall_options_sds_options_and_settings == 0){
         exit();
     }
 
+    // Выход при нажатии --НЕ-- СТАНДАРТНОЙ и --НЕ-- WP-RECALL кнопки выхода допустим в для моб. устройств
+    add_action('check_admin_referer', 'logout_without_confirm', 10, 2);
+    function logout_without_confirm($action, $result)
+    {
+
+        //Разрешить выход без подтверждения
+
+        if ($action == "log-out" && !isset($_GET['_wpnonce'])) {
+            $redirect_to = isset($_REQUEST['redirect_to']) ? $_REQUEST['redirect_to'] : '/';
+            $location = str_replace('&', '&', wp_logout_url($redirect_to));
+            header("Location: $location");
+            die;
+        }
+    }
+
     /**
      * ВХОД - Перенаправляем пользователя в зависимости от его роли
      */
