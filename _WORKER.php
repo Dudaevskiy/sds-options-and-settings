@@ -1108,6 +1108,8 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 include_once(ABSPATH . 'wp-includes/pluggable.php');
 //|| current_user_can( 'editor' ) === false
 if (current_user_can( 'administrator' ) === false ) {
+    /*
+
     function load_my_google_adsense_code() {
         ?>
         <!-- Асинхронная загрузка Google ADSense START -->
@@ -1115,6 +1117,7 @@ if (current_user_can( 'administrator' ) === false ) {
         <?php
     }
     add_action('wp_head', 'load_my_google_adsense_code');
+    */
 }
 
 
