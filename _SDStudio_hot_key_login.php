@@ -19,7 +19,7 @@ $custom_url_login = $redux['custom_url_login-page-posts-sds-options-and-settings
 if (!empty($enable_hot_key_login ) && $enable_hot_key_login  == 1){
 //    s($custom_url_login);
 
-    add_action( 'wp_head', 'sdstudio_add_scripts_for_hot_key_login' );
+    add_action( 'wp_footer', 'sdstudio_add_scripts_for_hot_key_login', 50 );
     function sdstudio_add_scripts_for_hot_key_login() {
         global $custom_url_login;
 
