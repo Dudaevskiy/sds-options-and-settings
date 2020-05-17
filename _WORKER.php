@@ -40,7 +40,7 @@ $MarkdownParser = new \cebe\markdown\Markdown();
 // s($parser->parse($markdown));
 
 
-if ( !function_exists( 'run_prettify' ) ){
+if ( !function_exists( 'run_prettify' ) && is_admin()){
 	
 	add_action( 'wp_enqueue_scripts', 'run_prettify' );
 	
