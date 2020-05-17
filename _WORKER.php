@@ -947,7 +947,6 @@ $section = [
                 //                                'desc' => '<br><br>',
                 'default'  => false,
             ],
-<<<<<<< HEAD
             [
                 //Link: https://docs.redux.io/core-fields/switch.html
                 'id'       => 'enable_DISABLE_FOR_ADMIN_highlight-and-share_sds-options-and-settings',
@@ -970,8 +969,6 @@ $section = [
                 //                                'desc' => '<br><br>',
                 'default'  => false,
             ],
-=======
->>>>>>> 640da323bce3989f6040a742d78e78ee5554147a
         ],
     ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
