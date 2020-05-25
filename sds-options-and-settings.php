@@ -126,56 +126,7 @@ function run_sds_options_and_settings() {
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_CSS_Styles.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_arrows.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_code_edit_addons.php';
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_ADMIN_BAR.php';
 
 }
 run_sds_options_and_settings();
-
-
-
-
-
-//Следующий код добавляет ссылку на библиотеку мультимедиа в раскрывающееся меню с именем сайта.
-add_action( 'admin_bar_menu', 'add_link_to_admin_bar',999 );
-
-function add_link_to_admin_bar($admin_bar) {
-    $args = array(
-        'parent' => 'site-name',
-        'id'     => 'media-libray',
-        'title'  => 'Media Library',
-        'href'   => esc_url( admin_url( 'upload.php' ) ),
-        'meta'   => false
-    );
-    $admin_bar->add_node( $args );
-}
-//Следующий код добавляет библиотеку мультимедиа и ссылку на плагины в раскрывающемся меню имени сайта.
-add_action( 'admin_bar_menu', 'add_links_to_admin_bar',999 );
-
-function add_links_to_admin_bar($admin_bar) {
-    $args = array(
-        'parent' => 'site-name',
-        'id'     => 'media-libray',
-        'title'  => '<span class="ab-icon dashicons-admin-media" style="float: left;display: contents;"></span>  Медиатека',
-        'href'   => esc_url( admin_url( 'upload.php' ) ),
-        'meta'   => false
-    );
-    $admin_bar->add_node( $args );
-
-    $args = array(
-        'parent' => 'site-name',
-        'id'     => 'plugins',
-        'title'  => '<span class="ab-icon dashicons-admin-plugins" style="float: left;display: contents;"></span> Плагины',
-        'href'   => esc_url( admin_url( 'plugins.php' ) ),
-        'meta'   => false
-    );
-    $admin_bar->add_node( $args );
-
-    $args = array(
-        'parent' => 'site-name',
-        'id'     => 'drafts',
-        'title'  => '<span class="ab-icon dashicons-media-default" style="float: left;display: contents;"></span> Черновики',
-        'href'   => esc_url('/wp-admin/edit.php?post_status=draft&post_type=post' ),
-        'meta'   => false
-    );
-    $admin_bar->add_node( $args );
-    //<div class="wp-menu-image dashicons-before dashicons-admin-media"><br></div>
-}
