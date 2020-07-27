@@ -22,7 +22,8 @@ if ($sds_options_and_settings__enable_sweetalert2_for_AddToAny == 1){
     }
 
     // Подключаем сам скрипт для отображения AddToAny
-    wp_enqueue_script('AddToAny_loader', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_loader.js');
+//    wp_enqueue_script('AddToAny_loader', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_loader.js');
+    wp_enqueue_script('AddToAny_loader', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_loader.js',array ( 'jquery' ), 1.1, true);
     // Подключаем кастомный стиль
     wp_register_style('AddToAny_CUSTOM', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_custom.css');
     wp_enqueue_style('AddToAny_CUSTOM');

@@ -28,7 +28,7 @@ if ($sds_options_and_settings__enable_sweetalert2 == 1 ) {
             wp_register_style('sweetalert_animate', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . 'sweetalert2/animate.min.css');
             wp_register_style('sweetalert_css', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . 'sweetalert2/sweetalert2.min.css');
             wp_register_style('SweetAlert2_CUSTOM', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . 'sweetalert2/__SweetAlert2_CUSTOM.css');
-            wp_enqueue_script('sweetalert2_js', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . 'sweetalert2/sweetalert2.min.js');
+            wp_enqueue_script('sweetalert2_js', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . 'sweetalert2/sweetalert2.min.js',array ( 'jquery' ), 1.1, true);
         }
 
         // use the registered jquery and style above
