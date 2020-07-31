@@ -1,6 +1,5 @@
-/*
-(function( $ ) {
-	'use strict';
+//(function( $ ) {
+//	'use strict';
 
 	/**
 	 * All of the code for your public-facing JavaScript source
@@ -30,5 +29,4 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
-})( jQuery );
-*/
+//})( jQuery );
