@@ -1234,6 +1234,51 @@ $section = [
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
+
+/**
+ * Google Adsense
+ */
+//$SDStudio_CSS_table_styles = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/CSS_table_styles.md') );
+$section = [
+    'title' => __( 'Yandex', 'arrows_pages_sds-options-and-settings' ),
+//    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
+    'id'    => 'yandex_sds-options-and-settings',
+    'subsection' => false,
+    // Иконки брать здесь
+    // http://elusiveicons.com/icons/
+    'icon'  => 'el el-view-mode',
+    'desc'  => 'Активируем опции Yandex',
+//    'ajax_save' => false,
+    'fields' => [
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_yandex_code_sds-options-and-settings',
+            'type'     => 'switch',
+            'icon'  => 'el el-chevron-right',
+            'title'    => __('Активировать код отслеживания Yandex?', 'redux-framework-demo'),
+            'subtitle' => "Добавляет в header страниц сайта код отслеживания Yandex",
+//            'desc'  => raw("<pre><meta name=\"yandex-verification\" content=\"00017ddb0314e8c\" /></pre>"),
+//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'CODE__enable_yandex_code_sds-options-and-settings',
+            'type'     => 'text',
+            'icon'  => 'el el-chevron-right',
+            'placeholder'  => '00000ddbf314e8cf',
+            'title'    => __('Вставьте ID отслеживания', 'redux-framework-demo'),
+            'subtitle' => 'Вставьте ID из предоставленного Yandex кода отслеживания из content="00000ddbf314e8cf" (В даном случае это 00000ddbf314e8cf )Вашего метатега Yandex',
+//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+                'required' => array('enable_yandex_code_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
 /**
  * Отладка кода
  */

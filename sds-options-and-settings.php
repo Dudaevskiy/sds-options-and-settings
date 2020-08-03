@@ -127,6 +127,7 @@ function run_sds_options_and_settings() {
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_arrows.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_code_edit_addons.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_ADMIN_BAR.php';
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_Yandex.php';
 
 }
 run_sds_options_and_settings();
