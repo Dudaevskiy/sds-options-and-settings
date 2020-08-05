@@ -1212,21 +1212,21 @@ $section = [
             'type'     => 'switch',
             'icon'  => 'el el-chevron-right',
             'title'    => __('Активировать код Google Adsense?', 'redux-framework-demo'),
-            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+//            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
 //                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
             //                                'desc' => '<br><br>',
             'default'  => false,
         ],
         [
             //Link: https://docs.redux.io/core-fields/switch.html
-            'id'       => 'enable_google_adsense_sds-options-and-settings',
-            'type'     => 'switch',
-            'icon'  => 'el el-chevron-right',
+            'id'       => 'CODE__enable_google_adsense_sds-options-and-settings',
+            'type'     => 'text',
+            'placeholder'  => 'ca-pub-XXXXXXXXXXXXXXXX',
             'title'    => __('Вставьте код', 'redux-framework-demo'),
-            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
-//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+//            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+                'required' => array('enable_google_adsense_sds-options-and-settings', '=', 'true' ),
             //                                'desc' => '<br><br>',
             'default'  => false,
         ],
@@ -1361,18 +1361,7 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
  */
 include_once(ABSPATH . 'wp-includes/pluggable.php');
 //|| current_user_can( 'editor' ) === false
-if (current_user_can( 'administrator' ) === false ) {
-    /*
 
-    function load_my_google_adsense_code() {
-        ?>
-        <!-- Асинхронная загрузка Google ADSense START -->
-        <script data-ad-client="ca-pub-2063014188830666" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <?php
-    }
-    add_action('wp_head', 'load_my_google_adsense_code');
-    */
-}
 
 
 
