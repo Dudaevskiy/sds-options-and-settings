@@ -1196,7 +1196,7 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
  */
 //$SDStudio_CSS_table_styles = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/CSS_table_styles.md') );
 $section = [
-    'title' => __( 'DEV - Google Adsense', 'arrows_pages_sds-options-and-settings' ),
+    'title' => __( 'Google Adsense', 'arrows_pages_sds-options-and-settings' ),
 //    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
     'id'    => 'google_adsense_sds-options-and-settings',
     'subsection' => false,
