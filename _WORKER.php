@@ -1222,10 +1222,10 @@ $section = [
             //Link: https://docs.redux.io/core-fields/switch.html
             'id'       => 'CODE__enable_google_adsense_sds-options-and-settings',
             'type'     => 'text',
-            'placeholder'  => 'ca-pub-XXXXXXXXXXXXXXXX',
-            'title'    => __('Вставьте код', 'redux-framework-demo'),
+            'placeholder'  => 'XXXXXXXXXXXXXXXX',
+            'title'    => __('Вставьте код (цифры из ca-pub-XXXXXXXXXXXXXXXX)', 'redux-framework-demo'),
 //            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+            'desc'  => __('Активация опции добавляет в интерфейс сайта возможность подгрузки рекламных блоков Google ADSence после полной загрузки страницы. Рекламные блоки почти автоматически встраиваются на страницу. Обязательно на странице должен быть пустой div блок с классом  "advDiv"', 'redux-framework-demo'),
                 'required' => array('enable_google_adsense_sds-options-and-settings', '=', 'true' ),
             //                                'desc' => '<br><br>',
             'default'  => false,
