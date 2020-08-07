@@ -1224,6 +1224,13 @@ $section = [
             'type'     => 'text',
             'placeholder'  => 'XXXXXXXXXXXXXXXX',
             'title'    => __('Вставьте код (цифры из ca-pub-XXXXXXXXXXXXXXXX)', 'redux-framework-demo'),
+            'subtitle'    => "
+            Эталон для вставки:
+            <code>
+        <!--  Google ADS  -->
+        div class=\"advDiv\">
+           </code>
+            ",
 //            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
             'desc'  => __('Активация опции добавляет в интерфейс сайта возможность подгрузки рекламных блоков Google ADSence после полной загрузки страницы. Рекламные блоки почти автоматически встраиваются на страницу. Обязательно на странице должен быть пустой div блок с классом  "advDiv"', 'redux-framework-demo'),
                 'required' => array('enable_google_adsense_sds-options-and-settings', '=', 'true' ),

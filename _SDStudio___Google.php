@@ -10,7 +10,7 @@ global $CODE__enable_google_adsense_sds_options_and_settings;
 $CODE__enable_google_adsense_sds_options_and_settings = $redux['CODE__enable_google_adsense_sds-options-and-settings'];
 
 
-if ($enable_google_adsense_sds_options_and_settings == 1 ) {
+if ($enable_google_adsense_sds_options_and_settings == 1 && !empty($CODE__enable_google_adsense_sds_options_and_settings)) {
 
 //    if (current_user_can( 'administrator' ) === false ) {
     if ( !is_user_logged_in()){
