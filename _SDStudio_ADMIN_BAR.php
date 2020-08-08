@@ -40,6 +40,47 @@ function add_links_to_admin_bar($admin_bar) {
     );
     $admin_bar->add_node( $args );
 
+    $pluginList = get_option( 'active_plugins' );
+    $plugin = 'facetwp/index.php';
+
+    /***
+     * Duplicator
+     */
+    $duplicator_active = 'duplicator-pro/duplicator-pro.php';
+    if ( in_array( $duplicator_active , $pluginList ) ) {
+        $duplicator_active = 'active';
+    }
+    if ($duplicator_active === 'active'){
+        $args = array(
+            'parent' => 'site-name',
+            'id'     => 'duplicator-pro',
+            'title'  => '<span class="ab-icon dashicons-backup" style="float: left;display: contents;"></span> Duplicator Backup',
+            'href'   => '/wp-admin/admin.php?page=duplicator-pro',
+            'meta'   => false
+        );
+        $admin_bar->add_node( $args );
+    }
+
+    /***
+     * SDStudio Editor Tools
+     */
+    $sds_editor_tools_active = 'sds-editor-tools/sds-editor-tools.php';
+    if ( in_array( $sds_editor_tools_active , $pluginList ) ) {
+        $sds_editor_tools_active = 'active';
+    }
+    if ($sds_editor_tools_active === 'active'){
+        $args = array(
+            'parent' => 'site-name',
+            'id'     => 'sds_editor_tools_active',
+            'title'  => '<span class="ab-icon dashicons-hammer" style="float: left;display: contents;"></span> SDStudio Editor Tools',
+            'href'   => '/wp-admin/admin.php?page=sds-editor-tools&tab=1',
+            'meta'   => false
+        );
+        $admin_bar->add_node( $args );
+    }
+
+
+
     $args = array(
         'parent' => 'site-name',
         'id'     => 'drafts',
