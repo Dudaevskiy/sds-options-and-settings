@@ -129,6 +129,7 @@ function run_sds_options_and_settings() {
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_ADMIN_BAR.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio___Yandex.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio___Google.php';
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio___JivoSite.php';
 
 }
 run_sds_options_and_settings();
