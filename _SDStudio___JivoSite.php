@@ -18,6 +18,7 @@ if ($enable_jivosite_sds_options_and_settings == 1 && !empty($enable_jivosite_sd
             ?>
             <script type="text/javascript">
                 jQuery(document).ready(function ($) {
+					setTimeout(function(){
                     (function(){ document.jivositeloaded=0;var widget_id = '<?php echo $CODE_enable_jivosite_sds_options_and_settings;?>';var d=document;var w=window;function l(){var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}//эта строка обычная для кода JivoSite
                         function zy(){
                             //удаляем EventListeners
@@ -55,6 +56,7 @@ if ($enable_jivosite_sds_options_and_settings == 1 && !empty($enable_jivosite_sd
                             zy();
                         }
                     })();
+					}, 6000);
                 });
             </script>
 
