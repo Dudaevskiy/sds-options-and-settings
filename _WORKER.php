@@ -1283,7 +1283,7 @@ $section = [
         ],
     ],
 ];
-Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+//Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 /**
  * Yandex
@@ -1325,6 +1325,8 @@ $section = [
             'default'  => false,
         ],
         // ======================================================
+        // Источник:
+        // https://bit.ly/3o0UAF7
         [
             //Link: https://docs.redux.io/core-fields/switch.html
             'id'       => 'enable_yandex_metrik_scroll_load_sds-options-and-settings',
@@ -1332,9 +1334,6 @@ $section = [
             'icon'  => 'el el-chevron-right',
             'title'    => __('Активировать Yandex Metrika после того как пользователь начал скролить?', 'redux-framework-demo'),
             'subtitle' => "Добавляет на сайт код отслеживания Yandex метрики только после того как пользователь начал скролить страницу. Самый оптимальный вариант что бы Google Page Speed остался доволен",
-//            'desc'  => raw("<pre><meta name=\"yandex-verification\" content=\"00017ddb0314e8c\" /></pre>"),
-//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
-            //                                'desc' => '<br><br>',
             'default'  => false,
         ],
         [
