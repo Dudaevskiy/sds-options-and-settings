@@ -128,8 +128,9 @@ function run_sds_options_and_settings() {
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_code_edit_addons.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_ADMIN_BAR.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio___Yandex.php';
-    require_once plugin_dir_path( __FILE__ ) . '_SDStudio___Google.php';
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio___Google_ADS.php';
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio___Google_Tag.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio___JivoSite.php';
-
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio____SCROLL_LAZY_LOADER.php';
 }
 run_sds_options_and_settings();

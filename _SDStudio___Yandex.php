@@ -16,7 +16,6 @@ if ($enable_yandex_code_sds_options_and_settings == 1 ) {
     function theme_xyz_header_metadata() {
         // Post object if needed
         // global $post;
-
         // Page conditional if needed
         // if( is_page() ){}
         global $CODE__enable_yandex_code_sds_options_and_settings;
@@ -40,6 +39,7 @@ global $CUSTOM_LINK__enable_yandex_metrik_scroll_load_sds_options_and_settings;
 $CUSTOM_LINK__enable_yandex_metrik_scroll_load_sds_options_and_settings = $redux['CUSTOM_LINK__enable_yandex_metrik_scroll_load_sds-options-and-settings'];
 
 
+
 if ($enable_yandex_metrik_scroll_load_sds_options_and_settings == 1 ) {
 
     function SDStudio_Add_Yandex_Metrik_If_User_Scroll() {
@@ -48,36 +48,19 @@ if ($enable_yandex_metrik_scroll_load_sds_options_and_settings == 1 ) {
         if ($CUSTOM_LINK__enable_yandex_metrik_scroll_load_sds_options_and_settings == ''){
             $CUSTOM_LINK__enable_yandex_metrik_scroll_load_sds_options_and_settings = 'https://mc.yandex.ru/metrika/tag.js';
         }
-        ?>
-<script type="text/javascript">
-    /* SDStudio_Add_Yandex_Metrik_If_User_Scroll() */
-    var fired = false;
-    window.addEventListener('scroll', () => {
-        if (fired === false) {
-            fired = true;
-            setTimeout(() => {
-                console.log('✅ Yandex Metrika подключена');
-                <?php
-                // Здесь все эти тормознутые трекеры, чаты и прочая ересь,
-                // без которой жить не может отдел маркетинга, и которые
-                // дико бесят разработчиков, когда тот же маркетинг приходит
-                // с вопросом "почему сайт медленно грузится, нам гугл сказал"
-                ?>
-                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-                (window, document, "script", "<?php echo $CUSTOM_LINK__enable_yandex_metrik_scroll_load_sds_options_and_settings;?>", "ym");
-
-                ym(<?php echo $CODE__enable_yandex_metrik_scroll_load_sds_options_and_settings;?>, "init", {
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true
-                });
-            }, 1000)
-        }
-    });
-</script>
-        <?php
+        $YandexMetrikaCode = '';
+        $YandexMetrikaCode .= '                    console.log(\'✅ Yandex Metrika подключена\');'."\n";
+        $YandexMetrikaCode .= '                    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};'."\n";
+        $YandexMetrikaCode .= '                    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})'."\n";
+        $YandexMetrikaCode .= '                    (window, document, "script", "'.$CUSTOM_LINK__enable_yandex_metrik_scroll_load_sds_options_and_settings.'", "ym");'."\n";
+        $YandexMetrikaCode .=   "\n";
+        $YandexMetrikaCode .= '                    ym('.$CODE__enable_yandex_metrik_scroll_load_sds_options_and_settings.', "init", {'."\n";
+        $YandexMetrikaCode .= '                    clickmap:true,'."\n";
+        $YandexMetrikaCode .= '                    trackLinks:true,'."\n";
+        $YandexMetrikaCode .= '                    accurateTrackBounce:true'."\n";
+        $YandexMetrikaCode .= '                    });'."\n";
+        return $YandexMetrikaCode;
     }
-    add_action( 'wp_head', 'SDStudio_Add_Yandex_Metrik_If_User_Scroll' );
+//    add_action( 'wp_head', 'SDStudio_Add_Yandex_Metrik_If_User_Scroll' );
 
 }

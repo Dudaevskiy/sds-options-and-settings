@@ -1242,19 +1242,17 @@ $section = [
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 
+
 /**
- * Google Менеджер тегов (Google Tag Manager)
+ * Google Tag Manager - Global Tag
  */
 $section = [
-    'title' => __( 'DEV -  Google Менеджер тегов (Google Tag Manager)', 'arrows_pages_sds-options-and-settings' ),
+    'title' => __( 'Google Менеджер тегов (Global tag)', 'arrows_pages_sds-options-and-settings' ),
 //    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
     'id'    => 'google_tag_manager_sds-options-and-settings',
     'subsection' => false,
-    // Иконки брать здесь
-    // http://elusiveicons.com/icons/
     'icon'  => 'el el-view-mode',
     'desc'  => 'Активируем опции Google Менеджера тегов (Google Tag Manager)',
-//    'ajax_save' => false,
     'fields' => [
         [
             //Link: https://docs.redux.io/core-fields/switch.html
@@ -1262,7 +1260,7 @@ $section = [
             'type'     => 'switch',
             'icon'  => 'el el-chevron-right',
             'title'    => __('Установить Google Менеджер тегов на сайт?', 'redux-framework-demo'),
-            'subtitle' => "Добавляет в header и body страниц сайта код отслеживания Google Tag Manager",
+            'subtitle' => "Через секунду после того как пользователь начал скролить страницу, активирует глобальный тег Google Tag Manager",
 //            'desc'  => raw("<pre><meta name=\"yandex-verification\" content=\"00017ddb0314e8c\" /></pre>"),
 //                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
             //                                'desc' => '<br><br>',
@@ -1273,9 +1271,9 @@ $section = [
             'id'       => 'CODE_enable_google_tag_manager_code_sds-options-and-settings',
             'type'     => 'text',
             'icon'  => 'el el-chevron-right',
-            'placeholder'  => 'GTM-XXXXXX',
-            'title'    => __('Вставьте ID отслеживания (GTM-XXXXXX)', 'redux-framework-demo'),
-            'subtitle' => 'Вставьте ID из предоставленного Google Tag Manage кода отслеживания (GTM-XXXXXX)',
+            'placeholder'  => 'G-XXXXXXXXXX',
+            'title'    => __('Вставьте ИДЕНТИФИКАТОР ПОКАЗАТЕЛЯ (G-XXXXXXXXXX)', 'redux-framework-demo'),
+            'subtitle' => 'Вставьте ИДЕНТИФИКАТОР ПОКАЗАТЕЛЯ из предоставленного Google кода отслеживания (G-XXXXXXXXXX)',
 //            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
             'required' => array('enable_header_code_google_tag_manager_sds-options-and-settings', '=', 'true' ),
             //                                'desc' => '<br><br>',
@@ -1283,7 +1281,7 @@ $section = [
         ],
     ],
 ];
-//Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 /**
  * Yandex
@@ -1356,7 +1354,7 @@ $section = [
             'placeholder'  => 'https://cdn.jsdelivr.net/npm/yandex-metrika-watch/tag.js',
             'title'    => __('Применить альтернативный CDN для */metrika/tag.js', 'redux-framework-demo'),
             'subtitle' => 'Вставьте альтернативный CDN для файла */metrika/tag.js. В основном данная опция нужна если внушительная часть аудитории сайта находится в Украине, где Яндекс запрещен.',
-            'desc'  => __('Внимание! Не трогайте данную опцию, и метрика будет подключена по стандартному линку - https://mc.yandex.ru/metrika/tag.js! Водить альтернативный линк имеет смысл только в случае если Вы при генирации кода яндекс метрики применимли опцию "Альтернативный CDN".', 'redux-framework-demo'),
+            'desc'  => __('Внимание! Не трогайте данную опцию, и метрика будет подключена по стандартному линку - https://cdn.jsdelivr.net/npm/yandex-metrika-watch/tag.js! Водить альтернативный линк имеет смысл только в случае если Вы при генирации кода яндекс метрики применимли опцию "Альтернативный CDN".', 'redux-framework-demo'),
             'required' => array('enable_yandex_metrik_scroll_load_sds-options-and-settings', '=', 'true' ),
             //                                'desc' => '<br><br>',
             'default'  => false,
