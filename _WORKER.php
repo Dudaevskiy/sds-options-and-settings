@@ -1364,6 +1364,48 @@ $section = [
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 /**
+ * Mail.ru поиск
+ */
+$section = [
+    'title' => __( 'Mail.ru', 'arrows_pages_sds-options-and-settings' ),
+//    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
+    'id'    => 'mailru_tag_sds-options-and-settings',
+    'subsection' => false,
+    'icon'  => 'el el-view-mode',
+    'desc'  => 'Активируем опции Mail.ru',
+    'fields' => [
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_header_code_mailru_tag_sds-options-and-settings',
+            'type'     => 'switch',
+            'icon'  => 'el el-chevron-right',
+            'title'    => __('Установить мета-тэг Mail.ru на сайт?', 'redux-framework-demo'),
+            'subtitle' => "Добавляет на сайт мета тег Mail.ru верификации домена",
+//            'desc'  => raw("<pre><meta name=\"yandex-verification\" content=\"00017ddb0314e8c\" /></pre>"),
+//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'CODE_enable_mailru_tag_sds-options-and-settings',
+            'type'     => 'text',
+            'icon'  => 'el el-chevron-right',
+            'placeholder'  => 'c432e207c096f28492c87997xxxxxxxx',
+            'title'    => __('Вставьте ИДЕНТИФИКАТОР верификации домена (c432e207c096f28492c87997xxxxxxxx)', 'redux-framework-demo'),
+            'subtitle' => 'Вставьте ИДЕНТИФИКАТОР верификации который предоставлен Mail.ru из content="c432e207c096f28492c87997xxxxxxxx" ',
+//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+            'required' => array('enable_header_code_mailru_tag_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
+
+/**
+/**
  * Jivosite
  */
 //$SDStudio_CSS_table_styles = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/CSS_table_styles.md') );
