@@ -1187,6 +1187,18 @@ $section = [
             //                                'desc' => '<br><br>',
             'default'  => false,
         ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_arrows_only_for_admin_pages_sds-options-and-settings',
+            'type'     => 'switch',
+            'icon'  => 'el el-chevron-right',
+            'title'    => __('Включить только для администратора сайта?', 'redux-framework-demo'),
+            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи которые будут отображаться только для администратора сайта', 'redux-framework-demo'),
+                'required' => array('enable_arrows_pages_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
     ],
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
