@@ -33,6 +33,29 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
 
 
 
+
+    /**
+     * Подключаем Eleganttips
+     * https://eleganttips.herokuapp.com/
+     *
+     */
+
+        add_action('init', 'SDStudio_content_assistant__Eleganttips_css');
+        function SDStudio_content_assistant__Eleganttips_css() {
+            // IMAGES
+            //wp_enqueue_script('SDStudio_content_assistant__IMAGES', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . '__IMAGES.js');
+            // tooltipster
+//            wp_enqueue_script('tipso_js', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . '_tipso/src/tipso.js');
+            //        wp_enqueue_script('tooltipster_js', SDS_EDITOR_TOOLS__PLUGIN_URL . 'tooltipster/dist/js/tooltipster.bundle.js');
+            wp_register_style('Eleganttips_css', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . '_eleganttips/eleganttips.min.css');
+            //        wp_register_style('SweetAlert2_CUSTOM', SDS_EDITOR_TOOLS__PLUGIN_URL . 'sweetalert2/__SweetAlert2_CUSTOM.css');
+        }
+        add_action('wp_enqueue_scripts', 'SDStudio_content_assistant__Eleganttips_css_enqueue');
+        function SDStudio_content_assistant__Eleganttips_css_enqueue(){
+            wp_enqueue_style('Eleganttips_css');
+        }
+
+
     /**
      * Подключаем Tipso
      * Функция рабочая, просто пока не дописал всплывающие сообщения. Вот и отключил.
@@ -55,66 +78,6 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
 //    }
 
 
-    /**
-     * Функция для получения следующей и предидущейщей ссылки для любого типа постов
-     * @param string $direction
-     * @param string $type
-     * @param $current
-     * @return mixed|string
-     * https://bit.ly/3eAYFeZ
-     * custom_posttype_get_adjacent_ID('prev', 'project', get_the_ID());
-     */
-    function custom_posttype_get_adjacent_ID($direction = 'prev', $type = 'post', $current) {
-        // Получаем статус поста
-        $post_id = get_the_ID();
-        $post_data = get_postdata($post_id);
-        $post_status = $post_data['post_status'];
-
-        // Get all posts with this custom post type
-        $query = array(
-            'post_type'=> $type,
-            'post_status' => $post_status,
-            'posts_per_page' => -1,
-            'orderby' => 'publish_date',
-            'order' => 'ASC',
-            // Получаем только ID
-            'fields' => 'ids',
-        );
-        $posts  = get_posts($query);
-        // Получаем первый и последний элемент
-        $firstEle = $posts[0];
-        $lastEle = $posts[count($posts) - 1];
-        // Общая длинна массива
-        $postsLength = sizeof($posts)-1;
-
-        $currentIndex = 0;
-        $index = 0;
-        $result = 0;
-
-        // Iterate all posts in order to find the current one
-        foreach($posts as $p){
-            if($p == $current) $currentIndex = $index;
-            $index++;
-        }
-
-        if($direction == 'prev') {
-            // If it's 'prev' return the previous one unless it's the first one, in this case return the last.
-            $result = !$currentIndex ? $posts[$postsLength] : $posts[$currentIndex - 1];
-            // Если это последний пост с текущим статусом то присваиваем #
-            if ($result == $lastEle){
-                $result = '#';
-            }
-        } else {
-            // If it's 'next' return the next one unless it's the last one, in this case return the first.
-            $result = $currentIndex == $postsLength ? $posts[0] : $posts[$currentIndex + 1];
-            // Если это первый пост с текущим статусом то присваиваем #
-            if ($result == $firstEle){
-                $result = '#';
-            }
-        }
-        return $result;
-    }
-
 
     add_action("wp_head", "wp_head_css");
     function wp_head_css()
@@ -122,6 +85,123 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
 //        global $post;
 
         if(is_single()) {
+            /**
+             * Функция для получения следующей и предидущейщей ссылки для любого типа постов
+             * @param string $direction
+             * @param string $type
+             * @param $current
+             * @return mixed|string
+             * https://bit.ly/3eAYFeZ
+             * custom_posttype_get_adjacent_ID('prev', 'project', get_the_ID());
+             */
+            function custom_posttype_get_adjacent_ID($direction = 'prev', $type = 'post', $current) {
+                // Получаем статус поста
+                $post_id = get_the_ID();
+                $post_data = get_postdata($post_id);
+                $post_status = $post_data['post_status'];
+
+                // Get all posts with this custom post type
+                $query = array(
+                    'post_type'=> $type,
+                    'post_status' => $post_status,
+                    'posts_per_page' => -1,
+                    'orderby' => 'publish_date',
+                    'order' => 'ASC',
+                    // Получаем только ID
+                    'fields' => 'ids',
+                );
+                $posts  = get_posts($query);
+                // Получаем первый и последний элемент
+                $firstEle = $posts[0];
+                $lastEle = $posts[count($posts) - 1];
+                // Общая длинна массива
+                $postsLength = sizeof($posts)-1;
+
+                $currentIndex = 0;
+                $index = 0;
+                $result = 0;
+
+                // Iterate all posts in order to find the current one
+                foreach($posts as $p){
+                    if($p == $current) $currentIndex = $index;
+                    $index++;
+                }
+
+                if($direction == 'prev') {
+                    // If it's 'prev' return the previous one unless it's the first one, in this case return the last.
+                    $result = !$currentIndex ? $posts[$postsLength] : $posts[$currentIndex - 1];
+                    // Если это последний пост с текущим статусом то присваиваем #
+                    if ($result == $lastEle){
+                        $result = '#';
+                    }
+                } else {
+                    // If it's 'next' return the next one unless it's the last one, in this case return the first.
+                    $result = $currentIndex == $postsLength ? $posts[0] : $posts[$currentIndex + 1];
+                    // Если это первый пост с текущим статусом то присваиваем #
+                    if ($result == $firstEle){
+                        $result = '#';
+                    }
+                }
+                return $result;
+            }
+
+            /**
+             * Получаем номер в списке среди постов для next & prev
+             * @param $direction - next || prev
+             * @param string $type - post
+             * @param $current - post_id
+             */
+            global $SDStudio_PostsLength;
+            function CURRENT_NUM_in_posts_get_adjacent_ID($direction, $type = 'post')
+            {
+                // Получаем статус поста
+                $post_id = get_the_ID();
+                $post_data = get_postdata($post_id);
+                $post_status = $post_data['post_status'];
+
+                // Get all posts with this custom post type
+                $query = array(
+                    'post_type' => $type,
+                    'post_status' => $post_status,
+                    'posts_per_page' => -1,
+                    'orderby' => 'publish_date',
+                    'order' => 'ASC',
+                    // Получаем только ID
+                    'fields' => 'ids',
+                );
+                $posts = get_posts($query);
+                // Получаем первый и последний элемент
+                $firstEle = $posts[0];
+                $lastEle = $posts[count($posts) - 1];
+                // Общая длинна массива
+                global $SDStudio_PostsLength;
+                $SDStudio_PostsLength = sizeof($posts) - 1;
+                $postsLength = sizeof($posts) - 1;
+
+
+                $currentIndex = 0;
+                $index = 0;
+                $result = 0;
+
+                // Iterate all posts in order to find the current one
+                foreach ($posts as $p) {
+                    if ($p == $post_id) $currentIndex = $index;
+                    $index++;
+                }
+                if($direction == 'prev') {
+                    // If it's 'prev' return the previous one unless it's the first one, in this case return the last.
+                    $result = $currentIndex - 1;
+                    // Если это последний пост с текущим статусом то присваиваем #
+                } else {
+                    // If it's 'next' return the next one unless it's the last one, in this case return the first.
+                    $result = $currentIndex + 1;
+                    // Если это первый пост с текущим статусом то присваиваем #
+                }
+                return $result;
+            }
+            $prev_num = CURRENT_NUM_in_posts_get_adjacent_ID('prev', $type = 'post');
+            $next_num = CURRENT_NUM_in_posts_get_adjacent_ID('next', $type = 'post');
+            global $SDStudio_PostsLength;
             ?>
             <div id="sdstudio-editor-tools-next-prev-btns">
                 <?php
@@ -140,17 +220,105 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                 }
 
                 if (custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID())){
+//                    <div class="alignleft sdstudio_PrevLink">
+/*                        <a href="<?php echo $PrevLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID()))?>">&laquo;</a>*/
+//                    </div>
+//                    dd(wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()))[0]);
                     ?>
                     <div class="alignleft sdstudio_PrevLink">
-                        <a href="<?php echo $PrevLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID()))?>">&laquo;</a>
+                        <a href="<?php echo $PrevLink; ?>">
+                            <button class="et" style="
+                                border: none;
+                                background-color: transparent !important;
+                            ">
+                                                            «
+                                <span class="et-right-bottom" style="
+                                    border: none;
+                                    background-color: white;
+                                    max-width: 168px;
+                                ">
+<!--                                    <i class="fa fa-file-text-o" aria-hidden="true" style="-->
+<!--                                        font-size: 22px;-->
+<!--                                        margin-left: 0px;-->
+<!--                                        cursor: pointer;-->
+<!--                                    "-->
+<!--                                   id="SDStudio_check_this_post_CONTENT"-->
+<!--                                   title="Применить проверку содержания"></i>-->
+<!--                                    <i class="fa fa-image" aria-hidden="true" style="-->
+<!--                                        font-size: 22px;-->
+<!--                                        margin-left: 10px;-->
+<!--                                        cursor: pointer;"-->
+<!--                                    id="SDStudio_check_this_post_IMAGE"-->
+<!--                                    title="Применить проверку изображений"></i>-->
+                                    <span style="text-align: left;min-width: 100%;display: block;margin-top: -13px;"">
+                                        <b><?php echo $prev_num?></b> из <?php echo $SDStudio_PostsLength?>
+                                    </span>
+                                    <hr style="
+                                        margin-top: -10px;
+                                        margin-bottom: 7px;
+                                    ">
+                                    <div style="
+                                        line-height: 1.3;
+                                        font-size: 14px;
+                                    ">
+                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID()))?></b>
+                                    </div>
+
+                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID())))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
+                                </span>
+                            </button>
+                        </a>
                     </div>
                     <?
                 }
 
                 if (custom_posttype_get_adjacent_ID('next', 'post', get_the_ID())){
+
                     ?>
                     <div class="alignright sdstudio_NextLink">
-                        <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID()))?>">&raquo;</a>
+                        <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID()))?>">
+                            <button class="et" style="
+                                border: none;
+                                background-color: transparent !important;
+                            ">
+                                &raquo;
+                                <span class="et-left-bottom" style="
+                                    border: none;
+                                    background-color: white;
+                                    max-width: 168px;
+                                ">
+                                    <span style="text-align: right;min-width: 100%;display: block;margin-top: -13px;">
+                                        <b><?php echo $next_num?></b> из <?php echo $SDStudio_PostsLength?>
+                                    </span>
+<!--                                    <i class="fa fa-file-text-o" aria-hidden="true" style="-->
+<!--                                        font-size: 22px;-->
+<!--                                        margin-left: 21px;-->
+<!--                                        cursor: pointer;-->
+<!--                                    "-->
+<!--                                       id="SDStudio_check_this_post_CONTENT"-->
+<!--                                       title="Применить проверку содержания"></i>-->
+<!--                                    <i class="fa fa-image" aria-hidden="true" style="-->
+<!--                                        font-size: 22px;-->
+<!--                                        margin-left: 10px;-->
+<!--                                        cursor: pointer;-->
+<!--                                    "-->
+<!--                                       id="SDStudio_check_this_post_IMAGE"-->
+<!--                                       title="Применить проверку изображений"></i>-->
+                                    <hr style="
+                                        margin-top: -10px;
+                                        margin-bottom: 7px;
+                                    ">
+                                    <div style="
+                                        line-height: 1.3;
+                                        font-size: 14px;
+                                    ">
+                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID()))?></b>
+                                    </div>
+
+                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID())))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
+                                </span>
+                            </button>
+                        </a>
                     </div>
                 <?php
                 }
@@ -273,6 +441,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
             </div>
 
             <?php
+
 
         }
     }
