@@ -229,6 +229,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                         <a href="<?php echo $PrevLink; ?>">
                             <button class="et" style="
                                 border: none;
+                                text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
                                 background-color: transparent !important;
                             ">
                                                             «
@@ -278,6 +279,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                     <div class="alignright sdstudio_NextLink">
                         <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID()))?>">
                             <button class="et" style="
+                                text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
                                 border: none;
                                 background-color: transparent !important;
                             ">
