@@ -220,10 +220,6 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                 }
 
                 if (custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID())){
-//                    <div class="alignleft sdstudio_PrevLink">
-/*                        <a href="<?php echo $PrevLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID()))?>">&laquo;</a>*/
-//                    </div>
-//                    dd(wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()))[0]);
                     ?>
                     <div class="alignleft sdstudio_PrevLink">
                         <a href="<?php echo $PrevLink; ?>">
@@ -238,19 +234,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                                     background-color: white;
                                     max-width: 168px;
                                 ">
-<!--                                    <i class="fa fa-file-text-o" aria-hidden="true" style="-->
-<!--                                        font-size: 22px;-->
-<!--                                        margin-left: 0px;-->
-<!--                                        cursor: pointer;-->
-<!--                                    "-->
-<!--                                   id="SDStudio_check_this_post_CONTENT"-->
-<!--                                   title="Применить проверку содержания"></i>-->
-<!--                                    <i class="fa fa-image" aria-hidden="true" style="-->
-<!--                                        font-size: 22px;-->
-<!--                                        margin-left: 10px;-->
-<!--                                        cursor: pointer;"-->
-<!--                                    id="SDStudio_check_this_post_IMAGE"-->
-<!--                                    title="Применить проверку изображений"></i>-->
+
                                     <span style="text-align: left;min-width: 100%;display: block;margin-top: -13px;"">
                                         <b><?php echo $prev_num?></b> из <?php echo $SDStudio_PostsLength?>
                                     </span>
@@ -274,7 +258,6 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                 }
 
                 if (custom_posttype_get_adjacent_ID('next', 'post', get_the_ID())){
-
                     ?>
                     <div class="alignright sdstudio_NextLink">
                         <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID()))?>">
@@ -292,20 +275,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                                     <span style="text-align: right;min-width: 100%;display: block;margin-top: -13px;">
                                         <b><?php echo $next_num?></b> из <?php echo $SDStudio_PostsLength?>
                                     </span>
-<!--                                    <i class="fa fa-file-text-o" aria-hidden="true" style="-->
-<!--                                        font-size: 22px;-->
-<!--                                        margin-left: 21px;-->
-<!--                                        cursor: pointer;-->
-<!--                                    "-->
-<!--                                       id="SDStudio_check_this_post_CONTENT"-->
-<!--                                       title="Применить проверку содержания"></i>-->
-<!--                                    <i class="fa fa-image" aria-hidden="true" style="-->
-<!--                                        font-size: 22px;-->
-<!--                                        margin-left: 10px;-->
-<!--                                        cursor: pointer;-->
-<!--                                    "-->
-<!--                                       id="SDStudio_check_this_post_IMAGE"-->
-<!--                                       title="Применить проверку изображений"></i>-->
+
                                     <hr style="
                                         margin-top: -10px;
                                         margin-bottom: 7px;

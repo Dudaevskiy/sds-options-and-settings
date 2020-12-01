@@ -1464,6 +1464,60 @@ $section = [
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 
+
+/**
+ * Jivosite
+ */
+//$SDStudio_CSS_table_styles = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/CSS_table_styles.md') );
+//$image_this = $MarkDownImageFolder_sds_options_and_settings.'data-hendle.png';
+//dd($image_this);
+$section = [
+    'title' => __( 'Admitad', 'code_edit_sds-options-and-settings' ),
+//    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
+    'id'    => 'admitad_sds-options-and-settings',
+    'subsection' => false,
+    // Иконки брать здесь
+    // http://elusiveicons.com/icons/
+    'icon'  => 'el el-view-mode',
+    'desc'  => "Активирует на сайте все что нужно дял запуска Admited",
+
+//    'ajax_save' => false,
+    'fields' => [
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_admitad_sds-options-and-settings',
+            'type'     => 'switch',
+            'icon'  => 'el el-chevron-right',
+            'title'    => __('Активировать мета тег подтверждения домена в Admitad на сайте?', 'redux-framework-demo'),
+//            'subtitle' => "Активирует на сайте все что нужно дял запуска Admited",
+//            'desc'  => raw("<pre><meta name=\"yandex-verification\" content=\"00017ddb0314e8c\" /></pre>"),
+//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'CODE_enable_admitad_sds-options-and-settings',
+            'type'     => 'text',
+            'icon'  => 'el el-chevron-right',
+            'placeholder'  => 'b0ac4e6r11',
+            'title'    => __('Вставьте атрибут "content" например "b0ac4e6r11"', 'redux-framework-demo'),
+            'subtitle' => 'Вставьте ID из предоставленного берем из кода выданного на сайте мета тега <meta  name="verify-admitad" content="ВОТ-ЗДЕСЬ-ТО-ЧТО-НАМ-НУЖНО"',
+//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+            'required' => array('enable_admitad_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
+
+// ============================================================
+// ============================================================
+// ============================================================
+
+
 /**
  * Отладка кода
  */

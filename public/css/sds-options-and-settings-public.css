@@ -2,3 +2,14 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+div#sdstudio-editor-tools-next-prev-btns button.et {
+    font-family: inherit;
+    font-size: 40px;
+    line-height: inherit;
+}
+
+/* Only Generate Press */
+body[class*="generatepress"] div#sdstudio-editor-tools-next-prev-btns button.et{
+    top: -17px;
+}
