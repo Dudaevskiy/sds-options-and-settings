@@ -22,8 +22,8 @@ if ($sds_options_and_settings__enable_sweetalert2_for_AddToAny == 1){
     }
 
     // Подключаем сам скрипт для отображения AddToAny
-//    wp_enqueue_script('AddToAny_loader', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_loader.js');
-    wp_enqueue_script('AddToAny_loader', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_loader.js',array ( 'jquery' ), 1.1, true);
+    wp_enqueue_script('AddToAny_loader', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_loader.js');
+//    wp_enqueue_script('AddToAny_loader', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_loader.js',array ( 'jquery' ), 1.1, true);
     // Подключаем кастомный стиль
     wp_register_style('AddToAny_CUSTOM', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL.'AddToAny/AddToAny_custom.css');
     wp_enqueue_style('AddToAny_CUSTOM');
@@ -75,108 +75,109 @@ function cbr_addtoany_and_sweetalert_share_addtoany(){
         $FullContent_Share_Popup .= '<a class="a2a_dd" href="https://www.addtoany.com/share"></a>';
     }
     if (array_intersect(explode(' ', 'a2a_button_copy_link'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_copy_link">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_copy_link"></a>';
     }
 
 //    if (array_intersect(explode(' ', 'a2a_button_facebook'), $enable_sweetalert2_for_AddToAny_activate_social)){
     if (array_intersect(explode(' ', 'a2a_facebook'),  $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .= '<a class="a2a_button_facebook">';
+        $FullContent_Share_Popup .= '<a class="a2a_button_facebook"></a>';
     }
     if (array_intersect(explode(' ', 'a2a_twitter'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_twitter">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_twitter"></a>';
     }
     if (array_intersect(explode(' ', 'a2a_whatsapp'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_whatsapp">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_whatsapp"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_email'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_email">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_email"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_linkedin'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_linkedin">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_linkedin"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_telegram'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_telegram">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_telegram"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_evernote'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_evernote">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_evernote"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_skype'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_skype">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_skype"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_viber'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_viber">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_viber"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_trello'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_trello">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_trello"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_livejournal'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_livejournal">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_livejournal"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_facebook_messenger'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_facebook_messenger">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_facebook_messenger"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_tumblr'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_tumblr">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_tumblr"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_pocket'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_pocket">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_pocket"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_pinterest'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_pinterest">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_pinterest"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_printfriendly'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_printfriendly">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_printfriendly"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_button_pinboard'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_pinboard">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_pinboard"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_button_wordpress'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_wordpress">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_wordpress"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_button_flipboard'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_flipboard">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_flipboard"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_button_mail_ru'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_mail_ru">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_mail_ru"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_button_livejournal'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_livejournal">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_livejournal"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_button_vk'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_vk">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_vk"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_button_google_classroom'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_google_classroom">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_google_classroom"></a>';
     }
 
     if (array_intersect(explode(' ', 'a2a_button_google_bookmarks'), $enable_sweetalert2_for_AddToAny_activate_social)){
-        $FullContent_Share_Popup .=  '<a class="a2a_button_google_bookmarks">';
+        $FullContent_Share_Popup .=  '<a class="a2a_button_google_bookmarks"></a>';
     }
 
 
 
     $FullContent_Share_Popup .= '</div>';
     $FullContent_Share_Popup .= '</div>';
+//    dd($FullContent_Share_Popup);
     echo $FullContent_Share_Popup;
     ?>
             <style>
