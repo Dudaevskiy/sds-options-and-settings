@@ -1187,18 +1187,57 @@ $section = [
             //                                'desc' => '<br><br>',
             'default'  => false,
         ],
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'enable_arrows_only_for_admin_pages_sds-options-and-settings',
+                'type'     => 'switch',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Включить только для администратора сайта?', 'redux-framework-demo'),
+                'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи которые будут отображаться только для администратора сайта', 'redux-framework-demo'),
+                    'required' => array('enable_arrows_pages_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
+
+
+        // Elementor дополнения
         [
             //Link: https://docs.redux.io/core-fields/switch.html
-            'id'       => 'enable_arrows_only_for_admin_pages_sds-options-and-settings',
+            'id'       => 'enable_elementor_frontend_addons_sds-options-and-settings',
             'type'     => 'switch',
             'icon'  => 'el el-chevron-right',
-            'title'    => __('Включить только для администратора сайта?', 'redux-framework-demo'),
-            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи которые будут отображаться только для администратора сайта', 'redux-framework-demo'),
-                'required' => array('enable_arrows_pages_sds-options-and-settings', '=', 'true' ),
+            'title'    => __('Elementor дополнительные динамические данные', 'redux-framework-demo'),
+            'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+            'desc'  => __('Активация опции добавляет в динамические данные виджетов плагина Elementor дополнительные данные для вывода (Счетчик просмотров страниц и записей, лайки страниц и записей и т.д.)', 'redux-framework-demo'),
+//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
             //                                'desc' => '<br><br>',
             'default'  => false,
         ],
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'enable_posts_counter_sds-options-and-settings',
+                'type'     => 'switch',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Отобразить счетчик просмотра поста', 'redux-framework-demo'),
+                'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                'desc'  => __('Активация опции добавляет в динамические данные виджета вывод счетчика постов', 'redux-framework-demo'),
+                'required' => array('enable_elementor_frontend_addons_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'enable_posts_like_raiteng_sds-options-and-settings',
+                'type'     => 'switch',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Отобразить счетчик ретинга поста', 'redux-framework-demo'),
+                'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                'desc'  => __('Активация опции добавляет в динамические данные виджета вывод ретинга постов', 'redux-framework-demo'),
+                'required' => array('enable_elementor_frontend_addons_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
     ],
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );

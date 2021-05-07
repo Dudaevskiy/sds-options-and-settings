@@ -1,0 +1,47 @@
+.pt-like-it {
+    display: inline-block;
+    position: relative;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 16px;
+    outline: 0;
+    color: #57ad68;
+    background: rgba(0,0,0,0);
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #a9d8b2;
+    vertical-align: bottom;
+    white-space: nowrap;
+    text-rendering: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-sizing: border-box;
+    border-radius: 999em;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+}
+.pt-like-it:hover,
+.pt-like-it:hover a {
+    border-color: #57ad68;
+    color: #468c54;
+}
+.pt-like-it > a.like-button {
+    border: none;
+}
+.pt-like-it .like-button:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: '\f087';
+    margin-right: 3px;
+}
+.pt-like-it .like-count {
+    padding-left: 10px;
+}

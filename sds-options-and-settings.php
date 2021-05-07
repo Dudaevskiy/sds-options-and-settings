@@ -113,6 +113,7 @@ function run_sds_options_and_settings() {
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_images_sizes.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_image_settings.php';
     require_once plugin_dir_path( __FILE__ ) . '_WORKER.php';
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_FRONTEND_ELEMENTOR.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_login_page.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_login_exit_links.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_hot_key_login.php';
