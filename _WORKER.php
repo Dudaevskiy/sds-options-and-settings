@@ -1180,6 +1180,18 @@ $section = [
     'fields' => [
         [
             //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_disable_full_width_guthenberg_sds-options-and-settings',
+            'type'     => 'switch',
+            'icon'  => 'el el-chevron-right',
+            'title'    => __('Отключить отображение во всю ширину в редакторе Gutenberg', 'redux-framework-demo'),
+            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция ВКЛЮЧЕНА.', 'redux-framework-demo'),
+//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => true,
+        ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
             'id'       => 'enable_publish_posts_sds-options-and-settings',
             'type'     => 'switch',
             'icon'  => 'el el-chevron-right',
@@ -1318,6 +1330,19 @@ $section = [
                 'title'    => __('Отобразить время чтения записи', 'redux-framework-demo'),
                 'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
                 'desc'  => __('Активация опции добавляет в динамические данные виджета вывода времени на чтение поста', 'redux-framework-demo'),
+                'required' => array('enable_elementor_frontend_addons_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
+
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'enable_oput_sds-options-and-settings',
+                'type'     => 'switch',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Отобразить опыт работы', 'redux-framework-demo'),
+                'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                'desc'  => __('Активация опции добавляет в динамические данные виджета вывода опыта. Для работы опции необходимо мета поле ', 'redux-framework-demo'),
                 'required' => array('enable_elementor_frontend_addons_sds-options-and-settings', '=', 'true' ),
                 //                                'desc' => '<br><br>',
                 'default'  => false,

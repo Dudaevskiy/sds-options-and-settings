@@ -4,6 +4,13 @@
  */
 $redux = get_option( 'redux_sds_options_and_settings' );
 
+// Отключить отображение во всю ширину в редакторе Gutenberg
+global $enable_disable_full_width_guthenberg_sds_options_and_settings;
+$enable_disable_full_width_guthenberg_sds_options_and_settings = $redux['enable_disable_full_width_guthenberg_sds-options-and-settings'];
+
+
+
+
 // Активация опции настройки публикации записей
 global $enable_publish_posts_sds_options_and_settings;
 $enable_publish_posts_sds_options_and_settings = $redux['enable_publish_posts_sds-options-and-settings'];
@@ -17,6 +24,19 @@ global $email_users_publish_sdstudio_editor_tools;
 $email_users_publish_sdstudio_editor_tools = $redux['email_users_publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings'];
 
 
+
+if ($enable_disable_full_width_guthenberg_sds_options_and_settings == 1){
+    /**
+     * Отключаем отображение поста в полную ширину для Guthenberg
+     */
+    if (is_admin()) {
+        function jba_disable_editor_fullscreen_by_default() {
+            $script = "jQuery( window ).load(function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } });";
+            wp_add_inline_script( 'wp-blocks', $script );
+        }
+        add_action( 'enqueue_block_editor_assets', 'jba_disable_editor_fullscreen_by_default' );
+    }
+}
 
 
 if ($enable_publish_posts_sds_options_and_settings == 1) {
