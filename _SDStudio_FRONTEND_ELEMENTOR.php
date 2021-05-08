@@ -156,6 +156,7 @@ if ($enable_posts_like_raiteng_sds_options_and_settings == 1){
  * Elementor Динамически генерируемая сума по формуле цена * метраж
  * https://developers.elementor.com/dynamic-tags/
  */
+if (is_plugin_active( 'elementor/elementor.php' )) {
 //Class Elementor_SDStudio_REPLACER_1_price_base extends \Elementor\Core\DynamicTags\Tag {
 class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\Tag
 {
@@ -405,5 +406,5 @@ if ($enable_elementor_frontend_addons_sds_options_and_settings == 1) {
 
 
 
-
+}
 
