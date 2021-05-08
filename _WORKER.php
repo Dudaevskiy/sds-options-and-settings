@@ -1160,6 +1160,65 @@ $section = [
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 
+
+
+
+
+/**
+ * Публикация записей
+ */
+//$SDStudio_CSS_table_styles = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/CSS_table_styles.md') );
+$section = [
+    'title' => __( 'Публикация записей', 'publish_posts_sds-options-and-settings' ),
+    'id'    => 'publish_posts_sds-options-and-settings',
+    'subsection' => false,
+    // Иконки брать здесь
+    // http://elusiveicons.com/icons/
+    'icon'  => 'el el-pencil-alt',
+    'desc'  => 'Настройки публикации записей на сайте',
+
+    'fields' => [
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_publish_posts_sds-options-and-settings',
+            'type'     => 'switch',
+            'icon'  => 'el el-chevron-right',
+            'title'    => __('Активировать дополнительные настройки публикации записей', 'redux-framework-demo'),
+            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings',
+                'type'     => 'switch',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Разрешить публикацю записей только выбранным пользователям', 'redux-framework-demo'),
+                'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+    //            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+                    'required' => array('enable_publish_posts_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'email_users_publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings',
+                'type'     => 'text',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Укажите email пользователей которым разрешена публикация записей, через запятую', 'redux-framework-demo'),
+//                'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                //            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+                'required' => array('publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
+
 /**
  * Элементы интерфейса
  */
@@ -1171,7 +1230,7 @@ $section = [
     'subsection' => false,
     // Иконки брать здесь
     // http://elusiveicons.com/icons/
-    'icon'  => 'el el-view-mode',
+    'icon'  => 'el el-chevron-right',
     'desc'  => 'Дополнительные элементы интерфейса для сайта',
 //    'ajax_save' => false,
     'fields' => [
@@ -1234,6 +1293,31 @@ $section = [
                 'title'    => __('Отобразить счетчик ретинга поста', 'redux-framework-demo'),
                 'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
                 'desc'  => __('Активация опции добавляет в динамические данные виджета вывод ретинга постов', 'redux-framework-demo'),
+                'required' => array('enable_elementor_frontend_addons_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'enable_commets_count_posts_like_raiteng_sds-options-and-settings',
+                'type'     => 'switch',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Отобразить счетчик комментариев поста', 'redux-framework-demo'),
+                'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                'desc'  => __('Активация опции добавляет в динамические данные виджета вывода счетчика комментариев поста', 'redux-framework-demo'),
+                'required' => array('enable_elementor_frontend_addons_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
+
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'enable_time_reading_sds-options-and-settings',
+                'type'     => 'switch',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Отобразить время чтения записи', 'redux-framework-demo'),
+                'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                'desc'  => __('Активация опции добавляет в динамические данные виджета вывода времени на чтение поста', 'redux-framework-demo'),
                 'required' => array('enable_elementor_frontend_addons_sds-options-and-settings', '=', 'true' ),
                 //                                'desc' => '<br><br>',
                 'default'  => false,
