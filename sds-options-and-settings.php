@@ -26,6 +26,10 @@
 
 GitHub Plugin URI: https://github.com/username/theme-or-plugin-slug
 GitHub Branch: master
+
+ *
+ * GitHub Plugin URI: https://github.com/username/theme-or-plugin-slug
+ * GitHub Branch: master
  */
 
 /**
