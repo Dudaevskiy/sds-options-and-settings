@@ -23,6 +23,9 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       sds-options-and-settings
  * Domain Path:       /languages
+
+GitHub Plugin URI: https://github.com/username/theme-or-plugin-slug
+GitHub Branch: master
  */
 
 /**
