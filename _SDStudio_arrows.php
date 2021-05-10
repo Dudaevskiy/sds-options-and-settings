@@ -266,7 +266,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                     }
                 }
 
-                if (custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())){
+                if (custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())){git 
                     ?>
                     <div class="alignleft sdstudio_PrevLink">
                         <a href="<?php echo $PrevLink; ?>">

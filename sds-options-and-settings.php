@@ -24,11 +24,11 @@
  * Text Domain:       sds-options-and-settings
  * Domain Path:       /languages
 
-GitHub Plugin URI: https://github.com/username/theme-or-plugin-slug
+GitHub Plugin URI: https://github.com/Dudaevskiy/sds-options-and-settings
 GitHub Branch: master
 
  *
- * GitHub Plugin URI: https://github.com/username/theme-or-plugin-slug
+ * GitHub Plugin URI: https://github.com/Dudaevskiy/sds-options-and-settings
  * GitHub Branch: master
  */
 
