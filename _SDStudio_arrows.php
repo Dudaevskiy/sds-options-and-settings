@@ -94,7 +94,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
              * https://bit.ly/3eAYFeZ
              * custom_posttype_get_adjacent_ID('prev', 'project', get_the_ID());
              */
-            function custom_posttype_get_adjacent_ID($direction = 'prev', $type = 'post', $current) {
+            function custom_posttype_get_adjacent_ID($direction = 'prev', $type, $current) {
                 // Получаем статус поста
                 $post_id = get_the_ID();
                 $post_data = get_postdata($post_id);
@@ -110,7 +110,20 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                     // Получаем только ID
                     'fields' => 'ids',
                 );
+                global $sitepress;
+                // ✅ WPML ENABLE
+                if ($sitepress && $query['post_type'] !== 'orig_post') {
+                    // Применение данного фильтра исключает дублирование постов в запросе
+                    $query['suppress_filters'] = '0';
+
+                    $current_lang = $sitepress->get_current_language();
+                    $sitepress->switch_lang($current_lang );
+                }
+
+//                dd($query);
+
                 $posts  = get_posts($query);
+
                 // Получаем первый и последний элемент
                 $firstEle = $posts[0];
                 $lastEle = $posts[count($posts) - 1];
@@ -152,12 +165,15 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
              * @param $current - post_id
              */
             global $SDStudio_PostsLength;
-            function CURRENT_NUM_in_posts_get_adjacent_ID($direction, $type = 'post')
+            function CURRENT_NUM_in_posts_get_adjacent_ID($direction, $type)
             {
+//                dd($type);
                 // Получаем статус поста
                 $post_id = get_the_ID();
                 $post_data = get_postdata($post_id);
                 $post_status = $post_data['post_status'];
+
+
 
                 // Get all posts with this custom post type
                 $query = array(
@@ -169,6 +185,23 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                     // Получаем только ID
                     'fields' => 'ids',
                 );
+
+
+
+                global $sitepress;
+                // ✅ WPML ENABLE
+                if ($sitepress && $query['post_type'] !== 'orig_post') {
+
+                    // Применение данного фильтра исключает дублирование постов в запросе
+                    $query['suppress_filters'] = '0';
+
+                    $current_lang = $sitepress->get_current_language();
+                    $sitepress->switch_lang($current_lang );
+                }
+
+//                dd($query);
+
+
                 $posts = get_posts($query);
                 // Получаем первый и последний элемент
                 $firstEle = $posts[0];
@@ -199,27 +232,41 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                 }
                 return $result;
             }
-            $prev_num = CURRENT_NUM_in_posts_get_adjacent_ID('prev', $type = 'post');
-            $next_num = CURRENT_NUM_in_posts_get_adjacent_ID('next', $type = 'post');
+
+            // Получаем статус поста
+            $post_id = get_the_ID();
+            $post_data = get_postdata($post_id);
+            $post_type = $post_data['post_type'];
+//            dd($post_type);
+            $post_status = $post_data['post_status'];
+
+            $prev_num = CURRENT_NUM_in_posts_get_adjacent_ID('prev', $type = $post_type);
+            $next_num = CURRENT_NUM_in_posts_get_adjacent_ID('next', $type = $post_type);
             global $SDStudio_PostsLength;
             ?>
             <div id="sdstudio-editor-tools-next-prev-btns">
                 <?php
-                // Получаем статус поста
-                $post_id = get_the_ID();
-                $post_data = get_postdata($post_id);
-                $post_status = $post_data['post_status'];
 
                 if ($post_status == 'publish'){
-                    $PrevLink = '/?p='.custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID());
-                    $NextLink = '/?p='.custom_posttype_get_adjacent_ID('next', 'post', get_the_ID());
+                    if ($post_type == 'post') {
+                        $PrevLink = '/?p=' . custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID());
+                        $NextLink = '/?p=' . custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID());
+                    } else if ($post_type == 'orig_post') {
+                        $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())   );
+                        $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())   );
+                    }
                 } else {
-                    // Для всех других статусов, делаем ссылку для просмотра
-                    $PrevLink = '/?p='.custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID()).'&preview=true';
-                    $NextLink = '/?p='.custom_posttype_get_adjacent_ID('next', 'post', get_the_ID()).'&preview=true';
+                    if ($post_type == 'post') {
+                        // Для всех других статусов, делаем ссылку для просмотра
+                        $PrevLink = '/?p='.custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID()).'&preview=true';
+                        $NextLink = '/?p='.custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()).'&preview=true';
+                    } else if ($post_type == 'orig_post') {
+                        $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())   );
+                        $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())   );
+                    }
                 }
 
-                if (custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID())){
+                if (custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())){
                     ?>
                     <div class="alignleft sdstudio_PrevLink">
                         <a href="<?php echo $PrevLink; ?>">
@@ -246,10 +293,10 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                                         line-height: 1.3;
                                         font-size: 14px;
                                     ">
-                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID()))?></b>
+                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID()))?></b>
                                     </div>
 
-                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID('prev', 'post', get_the_ID())))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
+                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
                                 </span>
                             </button>
                         </a>
@@ -257,10 +304,10 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                     <?
                 }
 
-                if (custom_posttype_get_adjacent_ID('next', 'post', get_the_ID())){
+                if (custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())){
                     ?>
                     <div class="alignright sdstudio_NextLink">
-                        <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID()))?>">
+                        <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()))?>">
                             <button class="et" style="
                                 text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
                                 border: none;
@@ -284,10 +331,10 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                                         line-height: 1.3;
                                         font-size: 14px;
                                     ">
-                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID()))?></b>
+                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()))?></b>
                                     </div>
 
-                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID('next', 'post', get_the_ID())))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
+                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
                                 </span>
                             </button>
                         </a>
