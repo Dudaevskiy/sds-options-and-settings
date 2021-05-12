@@ -25,6 +25,7 @@ $email_users_publish_sdstudio_editor_tools = $redux['email_users_publish_posts_o
 
 
 
+
 if ($enable_disable_full_width_guthenberg_sds_options_and_settings == 1){
     /**
      * Отключаем отображение поста в полную ширину для Guthenberg
@@ -40,6 +41,47 @@ if ($enable_disable_full_width_guthenberg_sds_options_and_settings == 1){
 
 
 if ($enable_publish_posts_sds_options_and_settings == 1) {
+
+
+    /**
+     * Не публиковать записи и страницы если не установлены обложки
+     */
+    if ($redux['email_users_publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings'] == 1){
+
+        //требование обязательной установки миниатюры записи end
+        add_action('save_post', 'sdstudio_ed_tools_wph_require_featured_image', -1);
+
+        //требование обязательной установки миниатюры записи start
+        function sdstudio_ed_tools_wph_require_featured_image($post_id) {
+
+            // dd('qwdwd');
+
+
+            $post = get_post($post_id);
+
+            if($post->post_type == 'post' && $post->post_status == 'publish' && !has_post_thumbnail($post_id) || $post->post_type == 'page' && $post->post_status == 'publish' && !has_post_thumbnail($post_id)) {
+
+                // if ($post->post_type !== 'post' || $post->post_type !== 'page' ){
+                // return false;
+                // }
+                $post->post_status = 'draft';
+                // dd($post->post_status);
+                wp_update_post($post);
+
+                $message = '<p>Запись не опубликована, так как не была установлена миниатюра записи!</p><p><a href="' . admin_url('post.php?post=' .
+                        $post_id . '&action=edit') . '">Вернуться назад и установить 
+        миниатюру</a></p>';
+                wp_die($message, 'Ошибка - отсутствует миниатюра!');
+            }
+        }
+
+    }
+
+
+
+
+
+
     if ($publish_posts_only_select_users_enable_publish_posts_sds_options_and_settings == 1 && !empty($email_users_publish_sdstudio_editor_tools)) {
 //        if (is_admin()){
 
