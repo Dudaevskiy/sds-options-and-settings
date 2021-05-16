@@ -327,7 +327,7 @@ class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\T
         if ($enable_posts_like_raiteng_sds_options_and_settings == 1){
             if($this->get_settings('param_name') === 'SET_2_LikeButton'){
                 $like_text = '';
-                if ( is_single() ) {
+//                if ( is_single() ) {
                     $nonce = wp_create_nonce( 'pt_like_it_nonce' );
                     $link = admin_url('admin-ajax.php?action=pt_like_it&post_id='.$post->ID.'&nonce='.$nonce);
                     $likes = get_post_meta( get_the_ID(), '_pt_likes', true );
@@ -339,7 +339,7 @@ class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\T
                         '</a>
                                     <span id="like-count-'.get_the_ID().'" class="like-count">' . $likes . '</span>
                                 </div>';
-                }
+//                }
     //            return $content . $like_text;
                 echo $like_text;
             }
@@ -347,6 +347,8 @@ class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\T
         /**
          * 3) Счетчик комментариев
          */
+//        global $post;
+//        var_dump($post->ID);
         if ($enable_commets_count_posts_like_raiteng_sds_options_and_settings == 1){
             if ($this->get_settings('param_name') === 'SET_3_CounterComments'){
                 global $post;
