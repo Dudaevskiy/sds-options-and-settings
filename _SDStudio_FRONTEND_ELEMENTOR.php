@@ -97,7 +97,7 @@ if ($enable_posts_counter_sds_options_and_settings == 1){
 if ($enable_posts_like_raiteng_sds_options_and_settings == 1){
     add_action( 'wp_enqueue_scripts', 'pt_like_it_scripts' );
     function pt_like_it_scripts() {
-        if( is_single() ) {
+//        if( is_single() ) {
 
     //        wp_enqueue_style( 'like-it', trailingslashit( plugin_dir_url( __FILE__ ) ).'_LikeButton/like-it.css' );
 
@@ -109,7 +109,7 @@ if ($enable_posts_like_raiteng_sds_options_and_settings == 1){
             wp_localize_script( 'like-it', 'likeit', array(
                 'ajax_url' => admin_url( 'admin-ajax.php' )
             ));
-        }
+//        }
     }
     add_action( 'wp_ajax_nopriv_pt_like_it', 'pt_like_it' );
     add_action( 'wp_ajax_pt_like_it', 'pt_like_it' );
