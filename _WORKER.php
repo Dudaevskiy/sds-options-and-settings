@@ -487,7 +487,7 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
  * Переадрисация при входе и выходе
  */
 $section = [
-    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
+    'title' => __( 'Переадрисация при входе и выходе, фиксы WP-RECALL, настройки поиска и другие фиксы для кабинета', 'login_redirects-page-posts-sds-options-and-settings' ),
     'id'    => 'login_redirects_page_sds_options_and_settings',
     'subsection' => false,
     'desc'  => __( 'Укажите ссылки на которые будет происходить переход как при входе, так и при выходе с сайта', 'sds-options-and-settings' ),
@@ -506,22 +506,56 @@ $section = [
             'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'false' ),
             'default'  => '',
         ],
+            [
+                //Link: https://docs.redux.io/core-fields/media.html
+                'id'       => 'login_redirects-exit-page-posts-sds-options-and-settings',
+                'title' => __( 'Переадрисация при выходе', 'login_redirects_exit-page-posts-sds-options-and-settings' ),
+                'type' => 'text',
+                'data' => array(
+    //                'login_redirects-sds-options-and-settings-login-url',
+                    'login_redirects-sds-options-and-settings-exit-url',
+                ),
+                'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'false' ),
+                'default'  => '/',
+    //            'default'  => array(
+    //                'text'=>'https://cdn.cacher.io/attachments/u/3aboiw1y8lm64/rFpFGFkRo8L94062hnUPRcXhqzd00jHS/500px-Wordpress-Logo.svg.png'
+    //            ),
+            ],
         [
-            //Link: https://docs.redux.io/core-fields/media.html
-            'id'       => 'login_redirects-exit-page-posts-sds-options-and-settings',
-            'title' => __( 'Переадрисация при выходе', 'login_redirects_exit-page-posts-sds-options-and-settings' ),
-            'type' => 'text',
-            'data' => array(
-//                'login_redirects-sds-options-and-settings-login-url',
-                'login_redirects-sds-options-and-settings-exit-url',
-            ),
-            'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'false' ),
-            'default'  => '/',
-//            'default'  => array(
-//                'text'=>'https://cdn.cacher.io/attachments/u/3aboiw1y8lm64/rFpFGFkRo8L94062hnUPRcXhqzd00jHS/500px-Wordpress-Logo.svg.png'
-//            ),
+            //Link: https://docs.redux.io/core-fields/switch.html
+
+            'id'       => 'enable_redirect_login_for_not_admin_editor_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Включить перенаправления для не Admin и Editor', 'redux-framework-demo'),
+//            'subtitle' => __('', 'redux-framework-demo'),
+            'desc'  => __( 'При активации, будет включена опция будет применено перенаправление для всех других пользователей кроме ролей Admin и Editor', 'sds-options-and-settings' ),
+            'default'  => false,
         ],
-        // WP RECALL
+            [
+                'id'       => 'login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings',
+                'title' => __( 'Переадрисация при входе для не администраторов и редакторов сайта', 'login_redirects_exit-page-posts-sds-options-and-settings' ),
+                'type' => 'text',
+                'required' => array('enable_redirect_login_for_not_admin_editor_sds-options-and-settings', '=', 'true' ),
+            ],
+
+            [
+                'id'       => 'redirect_on_dashboard_not_admin_editor_sds-options-and-settings',
+                'title' => __( 'Переадрисация из консоли сайта для не администраторов и редакторов сайта', 'login_redirects_exit-page-posts-sds-options-and-settings' ),
+                'type' => 'text',
+                'required' => array('enable_redirect_login_for_not_admin_editor_sds-options-and-settings', '=', 'true' ),
+            ],
+
+//            [
+//                'id'       => 'redirect_on_main_page_not_admin_editor_sds-options-and-settings',
+//                'title' => __( 'Переадрисация из главной страницы сайта для не администраторов и редакторов сайта', 'login_redirects_exit-page-posts-sds-options-and-settings' ),
+//                'type' => 'text',
+//                'required' => array('enable_redirect_login_for_not_admin_editor_sds-options-and-settings', '=', 'true' ),
+//            ],
+
+
+        /**
+         * WP RECALL
+         */
         [
             //Link: https://docs.redux.io/core-fields/switch.html
 
@@ -532,17 +566,7 @@ $section = [
             'desc'  => __( 'При активации опции, будет включена опция входа и выхода для плагина WP-RECALL.', 'sds-options-and-settings' ),
             'default'  => false,
         ],
-        [
-            //Link: https://docs.redux.io/core-fields/switch.html
 
-            'id'       => 'enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings',
-            'type'     => 'switch',
-            'title'    => __('WP-RECALL отключить админ панель для всех кроме администратора', 'redux-framework-demo'),
-//            'subtitle' => __('', 'redux-framework-demo'),
-            'desc'  => __( 'При активации опции, будет отключена полоса дамин анели для всех кроме даминистратора системы' ),
-            'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'true' ),
-            'default'  => false,
-        ],
         [
             //Link: https://docs.redux.io/core-fields/switch.html
 
@@ -558,6 +582,180 @@ $section = [
 
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
+/**
+ * Admin bar
+ */
+$SDStudio_ADMIN_disable_aggressive_update = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/AdminSpeedUp.md') );
+$section = [
+    'title' => __( 'Admin bar - панель администратора ', 'ADMIN_disable_aggressive_update-sds-options-and-settings' ),
+//    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
+    'id'    => 'ADMIN_BAR_update_options_and_settings',
+    'subsection' => false,
+    // Иконки брать здесь
+    // http://elusiveicons.com/icons/
+    'icon'  => 'el el-graph',
+    'desc'  => 'Полезные дополнения для панели администратора',
+//    'ajax_save' => false,
+    'fields' => [
+
+
+
+
+// Begin the section
+        [
+            'id' => 'enable_ADMINBAR_change_site-start',
+            'type' => 'section',
+            'title' => __('Сменить название сайта в админ панели', 'redux-framework-demo'),
+            'subtitle' => __('Опция отключаеет стандартное отображение имени сайта в пункте меню админ панели. И включает кастомный вывод данного пункта меню и место стаандартного названия сайта будет по умолчанию отображаться "Мой WordPress" или же то название которое введено в пункте форме. Для включения установите переключатель в положение "On". По умолчанию опция включена.', 'redux-framework-demo'),
+            'indent' => true
+        ],
+
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_ADMINBAR_change_site_name_in_panel-sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Включить', 'redux-framework-demo'),
+            'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция включена.', 'redux-framework-demo'),
+//            'desc'  => $SDStudio_ADMIN_disable_aggressive_update,
+//                'required' => array('enable_sweetalert2', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => true,
+        ],
+
+        'fields' => [
+            'id' => 'enable_ADMINBAR_change_site_name_in_panel_CUSTOM_NAME_SITE-sds-options-and-settings',
+            'title' => 'Введите имя сайта',
+            'desc' => 'Данное имя сайта будет отображаться в админ панели сайта, в случае если имя не будет ввведно. Будет отображаться "Мой WordPress"',
+            'type' => 'text',
+            'placeholder' => 'My Mega Site',
+            'required' => array('enable_ADMINBAR_change_site_name_in_panel-sds-options-and-settings', '=', 'true' ),
+        ],
+
+// End the section
+        [
+            'id'     => 'enable_ADMINBAR_change_site-end',
+            'type'   => 'section',
+            'indent' => false,
+        ],
+
+
+        /**
+         * SITE NAME
+         */
+        /**
+         * Скрытие всех пунктов меню под "Мой сайт" в самом левом углу админ бара для не зарегистрировавшихся пользователей
+         */
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+
+            'id'       => 'remove_left_admin_bar_button_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Удаление всех ссылок в "Мой сайт" для не зарегистрировавшихся пользователей', 'redux-framework-demo'),
+//            'subtitle' => __('', 'redux-framework-demo'),
+            'required' => array('enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings', '=', 'false' ),
+            'desc'  => __( 'При активации, скрытие всех удаление всех ссылок под кнопкой "Мой сайт" в самом левом углу админ бара для не зарегистрировавшихся пользователей', 'sds-options-and-settings' ),
+            'default'  => false,
+        ],
+
+        /**
+         * Отключене админ панели
+         */
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+
+            'id'       => 'enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Oтключить админ панель для всех кроме администратора', 'redux-framework-demo'),
+//            'subtitle' => __('', 'redux-framework-demo'),
+            'desc'  => __( 'При активации опции, будет отключена полоса дамин анели для всех кроме даминистратора системы' ),
+//            'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'true' ),
+            'default'  => false,
+        ],
+
+
+        // Лого WP
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_ADMINBAR_Disable_logo_wp_in_adminbar-sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Удалить из админ панели пункт с логотипом WordPress', 'redux-framework-demo'),
+            'subtitle' => __('Опция отключаеет стандартное отображение самого первого пункта меню с логотипом WordPress. Для включения установите переключатель в положение "On". По умолчанию опция включена.', 'redux-framework-demo'),
+            'default'  => true,
+        ],
+        // Профиль
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_ADMINBAR_custom_user-sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Включить кастомный вывод профиля текущего пользователя - "Аккаунт"', 'redux-framework-demo'),
+            'subtitle' => __('Опция отключаеет стандартное отображение самого крайнего пункта меню с профилем пользователя ( крайнее меню слева) И включает кастомный вывод данного пункта меню - что освобождает место на панели. Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+            'default'  => false,
+        ],
+
+
+        // Begin the section
+        [
+            'id' => 'ADMINBAR_Remove_plugins_menu_items_in_single-sfgtart-start',
+            'type' => 'section',
+            'title' => __('Отключение пунктов меню плагинов на записях и страницах сайта', 'redux-framework-demo'),
+            'subtitle' => __('Опция отключаеет отображение пунктов меню которые были созданы плагинами установленными на сайт. По умолчанию опция выключена.', 'redux-framework-demo'),
+            'indent' => true
+        ],
+
+
+        [
+            'id' => 'enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings',
+            'type' => 'switch',
+            'title' => __('Включить отключение пунктов созданных плагинами', 'redux-framework-demo'),
+            'subtitle' => __('По умолчанию опция выключена.', 'redux-framework-demo'),
+            'indent' => true
+        ],
+
+        // Clearfy
+        [
+            'id' => 'enable_ADMINBAR_Remove_plugins_menu_items_Clearfy-sds-options-and-settings',
+            'type' => 'switch',
+            'title' => __('Clearfy - Отключить пункт в меню', 'redux-framework-demo'),
+            'subtitle' => __('По умолчанию опция выключена.', 'redux-framework-demo'),
+            'required' => array('enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings', '=', 'true' ),
+            'indent' => true
+        ],
+        // Rank Math
+        [
+            'id' => 'enable_ADMINBAR_Remove_plugins_menu_items_rank-math-sds-options-and-settings',
+            'type' => 'switch',
+            'title' => __('Rank Math - Отключить пункт в меню', 'redux-framework-demo'),
+            'subtitle' => __('По умолчанию опция выключена.', 'redux-framework-demo'),
+            'required' => array('enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings', '=', 'true' ),
+            'indent' => true
+        ],
+        // Disqus
+        [
+            'id' => 'enable_ADMINBAR_Remove_plugins_menu_items_disqus-sds-options-and-settings',
+            'type' => 'switch',
+            'title' => __('Disqus - Отключить пункт в меню', 'redux-framework-demo'),
+            'subtitle' => __('По умолчанию опция выключена.', 'redux-framework-demo'),
+            'required' => array('enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings', '=', 'true' ),
+            'indent' => true
+        ],
+
+
+        // End the section
+        [
+            'id'     => 'ADMINBAR_Remove_plugins_menu_items_in_single-end',
+            'type'   => 'section',
+            'indent' => false,
+        ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
+
+
+
+
+
 
 
 /**
@@ -909,147 +1107,6 @@ target="_blank">данной статье</a>. <br><b>Внимание! лучш
         ],
 
     ];
-Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
-
-
-
-
-
-/**
- * Admin bar
- */
-$SDStudio_ADMIN_disable_aggressive_update = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/AdminSpeedUp.md') );
-$section = [
-    'title' => __( 'Admin bar - панель администратора ', 'ADMIN_disable_aggressive_update-sds-options-and-settings' ),
-//    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
-    'id'    => 'ADMIN_BAR_update_options_and_settings',
-    'subsection' => false,
-    // Иконки брать здесь
-    // http://elusiveicons.com/icons/
-    'icon'  => 'el el-graph',
-    'desc'  => 'Полезные дополнения для панели администратора',
-//    'ajax_save' => false,
-    'fields' => [
-
-
-
-
-// Begin the section
-[
-    'id' => 'enable_ADMINBAR_change_site-start',
-    'type' => 'section',
-    'title' => __('Сменить название сайта в админ панели', 'redux-framework-demo'),
-    'subtitle' => __('Опция отключаеет стандартное отображение имени сайта в пункте меню админ панели. И включает кастомный вывод данного пункта меню и место стаандартного названия сайта будет по умолчанию отображаться "Мой WordPress" или же то название которое введено в пункте форме. Для включения установите переключатель в положение "On". По умолчанию опция включена.', 'redux-framework-demo'),
-    'indent' => true
-],
-
-        [
-            //Link: https://docs.redux.io/core-fields/switch.html
-            'id'       => 'enable_ADMINBAR_change_site_name_in_panel-sds-options-and-settings',
-            'type'     => 'switch',
-            'title'    => __('Включить', 'redux-framework-demo'),
-            'subtitle' => __('Для включения установите переключатель в положение "On". По умолчанию опция включена.', 'redux-framework-demo'),
-//            'desc'  => $SDStudio_ADMIN_disable_aggressive_update,
-//                'required' => array('enable_sweetalert2', '=', 'true' ),
-            //                                'desc' => '<br><br>',
-            'default'  => true,
-        ],
-
-        'fields' => [
-            'id' => 'enable_ADMINBAR_change_site_name_in_panel_CUSTOM_NAME_SITE-sds-options-and-settings',
-            'title' => 'Введите имя сайта',
-            'desc' => 'Данное имя сайта будет отображаться в админ панели сайта, в случае если имя не будет ввведно. Будет отображаться "Мой WordPress"',
-            'type' => 'text',
-            'placeholder' => 'My Mega Site',
-            'required' => array('enable_ADMINBAR_change_site_name_in_panel-sds-options-and-settings', '=', 'true' ),
-        ],
-
-// End the section
-[
-    'id'     => 'enable_ADMINBAR_change_site-end',
-    'type'   => 'section',
-    'indent' => false,
-],
-
-
-        /**
-         * SITE NAME
-         */
-        // Лого WP
-        [
-            //Link: https://docs.redux.io/core-fields/switch.html
-            'id'       => 'enable_ADMINBAR_Disable_logo_wp_in_adminbar-sds-options-and-settings',
-            'type'     => 'switch',
-            'title'    => __('Удалить из админ панели пункт с логотипом WordPress', 'redux-framework-demo'),
-            'subtitle' => __('Опция отключаеет стандартное отображение самого первого пункта меню с логотипом WordPress. Для включения установите переключатель в положение "On". По умолчанию опция включена.', 'redux-framework-demo'),
-            'default'  => true,
-        ],
-        // Профиль
-        [
-            //Link: https://docs.redux.io/core-fields/switch.html
-            'id'       => 'enable_ADMINBAR_custom_user-sds-options-and-settings',
-            'type'     => 'switch',
-            'title'    => __('Включить кастомный вывод профиля текущего пользователя - "Аккаунт"', 'redux-framework-demo'),
-            'subtitle' => __('Опция отключаеет стандартное отображение самого крайнего пункта меню с профилем пользователя ( крайнее меню слева) И включает кастомный вывод данного пункта меню - что освобождает место на панели. Для включения установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-            'default'  => false,
-        ],
-
-
-        // Begin the section
-        [
-            'id' => 'ADMINBAR_Remove_plugins_menu_items_in_single-sfgtart-start',
-            'type' => 'section',
-            'title' => __('Отключение пунктов меню плагинов на записях и страницах сайта', 'redux-framework-demo'),
-            'subtitle' => __('Опция отключаеет отображение пунктов меню которые были созданы плагинами установленными на сайт. По умолчанию опция выключена.', 'redux-framework-demo'),
-            'indent' => true
-        ],
-
-
-                [
-                    'id' => 'enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings',
-                    'type' => 'switch',
-                    'title' => __('Включить отключение пунктов созданных плагинами', 'redux-framework-demo'),
-                    'subtitle' => __('По умолчанию опция выключена.', 'redux-framework-demo'),
-                    'indent' => true
-                ],
-
-        // Clearfy
-        [
-            'id' => 'enable_ADMINBAR_Remove_plugins_menu_items_Clearfy-sds-options-and-settings',
-            'type' => 'switch',
-            'title' => __('Clearfy - Отключить пункт в меню', 'redux-framework-demo'),
-            'subtitle' => __('По умолчанию опция выключена.', 'redux-framework-demo'),
-            'required' => array('enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings', '=', 'true' ),
-            'indent' => true
-        ],
-        // Rank Math
-        [
-            'id' => 'enable_ADMINBAR_Remove_plugins_menu_items_rank-math-sds-options-and-settings',
-            'type' => 'switch',
-            'title' => __('Rank Math - Отключить пункт в меню', 'redux-framework-demo'),
-            'subtitle' => __('По умолчанию опция выключена.', 'redux-framework-demo'),
-            'required' => array('enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings', '=', 'true' ),
-            'indent' => true
-        ],
-        // Disqus
-        [
-            'id' => 'enable_ADMINBAR_Remove_plugins_menu_items_disqus-sds-options-and-settings',
-            'type' => 'switch',
-            'title' => __('Disqus - Отключить пункт в меню', 'redux-framework-demo'),
-            'subtitle' => __('По умолчанию опция выключена.', 'redux-framework-demo'),
-            'required' => array('enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings', '=', 'true' ),
-            'indent' => true
-        ],
-
-
-    // End the section
-            [
-                'id'     => 'ADMINBAR_Remove_plugins_menu_items_in_single-end',
-                'type'   => 'section',
-                'indent' => false,
-            ],
-    ],
-];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 

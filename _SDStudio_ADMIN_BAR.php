@@ -140,6 +140,46 @@ function remove_the_logo() {
 }
 
 /**
+ * Скрытие
+ */
+global $remove_left_admin_bar_button_sds_options_and_settings;
+$remove_left_admin_bar_button_sds_options_and_settings = $redux['remove_left_admin_bar_button_sds-options-and-settings'];
+//    dd($remove_left_admin_bar_button_sds_options_and_settings);
+
+if ($remove_left_admin_bar_button_sds_options_and_settings == 1){
+
+    if (sdstudio_get_current_user_roles() == 'administrator' || sdstudio_get_current_user_roles() == 'editor') {
+        return false;
+    }
+
+    function wpse_260669_remove_new_content(){
+        global $wp_admin_bar;
+        $wp_admin_bar->remove_menu( 'future' );
+        $wp_admin_bar->remove_menu( 'drafts' );
+        $wp_admin_bar->remove_menu( 'duplicator-pro' );
+        $wp_admin_bar->remove_menu( 'plugins' );
+        $wp_admin_bar->remove_menu( 'media-libray' );
+        $wp_admin_bar->remove_menu( 'dashboard' );
+        $wp_admin_bar->remove_menu( 'root-default' );
+        $wp_admin_bar->remove_menu( 'site-name' );
+        $wp_admin_bar->remove_menu( 'wp-logo-external' );
+        $wp_admin_bar->remove_menu( 'wp-toolbar' );
+//        $wp_admin_bar->remove_menu( 'bar-site-name' );
+//        $wp_admin_bar->remove_menu( 'first-item' );
+    }
+
+    /**
+     * Удаление пунка меню "Мастерская"
+     */
+    add_action( 'wp_before_admin_bar_render', 'wpse_260669_remove_new_content' );
+    add_action( 'admin_menu', 'so_59866103_remove_menu_items', 999 );
+    function so_59866103_remove_menu_items(){
+        remove_menu_page( 'index.php' );
+    }
+}
+
+
+/**
  * Отключаем пункты в меню ПЛАГИНОВ
  */
 if ($redux['enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings']){

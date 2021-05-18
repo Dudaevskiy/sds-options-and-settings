@@ -311,7 +311,7 @@ view plain
 /* 
  * Make Visit Site links open in a new window: My Sites > Site Name > Visit Site 
  */  
-function my_site_links() {  
+function my_site_links() {
     global $wp_admin_bar;  
     foreach ( (array) $wp_admin_bar->user->blogs as $blog ) {  
         $menu_id  = 'blog-' . $blog->userblog_id;  
