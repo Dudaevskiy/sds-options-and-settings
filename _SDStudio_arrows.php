@@ -246,8 +246,6 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
             ?>
             <div id="sdstudio-editor-tools-next-prev-btns">
                 <?php
-                global $sitepress;
-                $current_lang = $sitepress->get_current_language();
 
                 if ($post_status == 'publish'){
 
