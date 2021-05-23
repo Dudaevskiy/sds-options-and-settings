@@ -800,6 +800,36 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 
 /**
+ * Активация загрузки файлов
+ */
+$section = [
+    'title' => __( 'Загрузка файлов', 'sds-options-and-settings' ),
+    'id'    => 'enable_upload_other_mmi_types_files_sds_options_and_settings',
+    'subsection' => false,
+    'desc'  => __( '(активация загрузки ранее не разрешенных типов файлов)', 'sds-options-and-settings' ),
+    // Иконки брать здесь
+    // http://elusiveicons.com/icons/
+    'icon'  => 'el el-file-new',
+    'fields' => [
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+
+            'id'       => 'svg_enable_upload_other_mmi_types_files_sds_options_and_settings',
+            'type'     => 'switch',
+            'title'    => __('SVG - Активировать загрузку файлов формата svg', 'sds-options-and-settings'),
+            'subtitle'    => '
+            Если после применения SVG не загружается, добавьте в начало SVG файла данную строку <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</code></pre>    
+            ',
+            'desc'     => __('После применения настройки, появится возможность загружать файлы формата SVG в медиатеку WordPress', 'sds-options-and-settings'),
+            'default'  => true,
+        ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
+
+
+/**
  * Настройки галереи и изображений
  */
 $section = [

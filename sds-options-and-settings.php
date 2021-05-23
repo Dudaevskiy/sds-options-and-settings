@@ -16,7 +16,7 @@
  * Plugin Name:       SDStudio addons, options and settings
  * Plugin URI:        https://techblog.sdstudio.top/blog
  * Description:       Set of useful additions, settings, improvements for your site from <a href="https://sdstudio.top"><strong>Serhii Dudchenko</strong></a>
- * Version:           2.2.4
+ * Version:           2.2.5
  * Author:            Serhii Dudchenko
  * Author URI:        https://sdstudio.top
  * License:           GPL-2.0+
@@ -116,6 +116,7 @@ function run_sds_options_and_settings() {
     }
 
     require_once plugin_dir_path( __FILE__ ) . '_Redux_Framework_Parser_POST_data.php';
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_ENABLE_UPLOAD_FILES.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_add_images_sizes.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_images_sizes.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_image_settings.php';
@@ -145,3 +146,73 @@ function run_sds_options_and_settings() {
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio____SCROLL_LAZY_LOADER.php';
 }
 run_sds_options_and_settings();
+
+
+
+
+
+
+
+/**
+ * SHORTCODES
+ */
+/**
+ * Name: Bloginfo Shortcode
+ * Description: Allows bloginfo() as a shortcode.
+ * Author URI: http://gm.zoomlab.it
+ *
+ * https://wordpress.stackexchange.com/questions/173871/how-to-display-the-site-name-in-a-wordpress-page-or-post
+ * [bloginfo info='name']
+ */
+
+add_shortcode('bloginfo', function($atts) {
+
+    $atts = shortcode_atts(array('filter'=>'', 'info'=>''), $atts, 'bloginfo');
+
+    if ($atts['info'] == 'link_site'){
+        $home_url = get_bloginfo('home');
+        $home_url_not_https = str_replace('https://','',$home_url);
+        $home_title = str_replace('http://','',$home_url_not_https);
+        $link = '<a href="'.$home_url.'">'.$home_title.'</a>';
+        return $link;
+    } else if ($atts['info'] == 'url_not_https'){
+
+        $home_url = get_bloginfo('home');
+        $home_url = str_replace('https://','',$home_url);
+        $home_url = str_replace('http://','',$home_url);
+        return $home_url;
+    } else {
+    $infos = array(
+        'name', 'description',
+        'wpurl', 'url', 'pingback_url',
+        'description', 'url', 'description',
+        'admin_email', 'charset', 'version', 'html_type', 'language',
+        'atom_url', 'rdf_url','rss_url', 'rss2_url',
+        'comments_atom_url', 'comments_rss2_url',
+    );
+
+    $filter = in_array(strtolower($atts['filter']), array('raw', 'display'), true)
+        ? strtolower($atts['filter'])
+        : 'display';
+
+    $return = in_array($atts['info'], $infos, true) ? get_bloginfo($atts['info'], $filter) : '';
+    return $return;
+    }
+});
+
+//$dev = do_shortcode("[bloginfo info='name']"); // Заголовок
+//$dev = do_shortcode("[bloginfo info='description']"); //Описание сайта
+//$dev = do_shortcode("[bloginfo info='home']"); // https://exemple.club
+//$dev = do_shortcode("[bloginfo info='url_not_https']"); //exemple.club
+//$dev = do_shortcode("[bloginfo info='link_site']"); // "<a href="https://exemple.club">exemple.club</a>"
+
+/**
+ * [current_year]
+ * @param $atts
+ * @return false|string
+ */
+function sdstudio_current_year( $atts ){
+    $date = getdate();
+    return $date['year'];
+}
+add_shortcode( 'current_year', 'sdstudio_current_year' );
