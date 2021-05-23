@@ -246,15 +246,14 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
             ?>
             <div id="sdstudio-editor-tools-next-prev-btns">
                 <?php
+                global $sitepress;
+                $current_lang = $sitepress->get_current_language();
 
                 if ($post_status == 'publish'){
-                    if ($post_type == 'post') {
-                        $PrevLink = '/?p=' . custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID());
-                        $NextLink = '/?p=' . custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID());
-                    } else if ($post_type == 'orig_post') {
+
                         $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())   );
                         $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())   );
-                    }
+
                 } else {
                     if ($post_type == 'post') {
                         // Для всех других статусов, делаем ссылку для просмотра
@@ -269,6 +268,14 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                 if (custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())){
                     ?>
                     <div class="alignleft sdstudio_PrevLink">
+                        <?php
+
+                    global $sitepress;
+                    if ($sitepress) {
+                        $current_lang = $sitepress->get_current_language();
+                        $PrevLink = '/'.$current_lang.$PrevLink;
+                    }
+                        ?>
                         <a href="<?php echo $PrevLink; ?>">
                             <button class="et" style="
                                 border: none;
@@ -307,6 +314,13 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                 if (custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())){
                     ?>
                     <div class="alignright sdstudio_NextLink">
+                        <?php
+
+                        if ($sitepress) {
+                            $current_lang = $sitepress->get_current_language();
+                            $NextLink = '/'.$current_lang.$NextLink;
+                        }
+                        ?>
                         <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()))?>">
                             <button class="et" style="
                                 text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
