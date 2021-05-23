@@ -7,8 +7,9 @@ $redux = get_option( 'redux_sds_options_and_settings' );
 global $sds_options_and_settings__enable_sweetalert2;
 $sds_options_and_settings__enable_sweetalert2 = $redux['enable_sweetalert2'];
 
+//dd($redux['enable_hot_key_login-page-posts-sds-options-and-settings']);
 //enable_sweetalert2
-if ($sds_options_and_settings__enable_sweetalert2 == 1 ) {
+if ($sds_options_and_settings__enable_sweetalert2 == 1 || $redux['enable_hot_key_login-page-posts-sds-options-and-settings'] == 1) {
 
     if (is_admin()){
         return;
