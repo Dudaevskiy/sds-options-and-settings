@@ -19,16 +19,8 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
     if ($enable_arrows_only_for_admin_pages_sds_options_and_settings == 1){
         include_once(ABSPATH . 'wp-includes/pluggable.php');
         if ( !current_user_can( 'administrator' ) ) {
-
             return false;
-//            add_action( 'admin_bar_menu', 'wpse17689_admin_bar_menu' );
         }
-//        function wpse17689_admin_bar_menu( $wp_admin_bar )
-//        {
-//
-//    //// MAGIC
-//
-//        }
     }
 
 
@@ -243,35 +235,58 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
             $prev_num = CURRENT_NUM_in_posts_get_adjacent_ID('prev', $type = $post_type);
             $next_num = CURRENT_NUM_in_posts_get_adjacent_ID('next', $type = $post_type);
             global $SDStudio_PostsLength;
+
             ?>
+
             <div id="sdstudio-editor-tools-next-prev-btns">
                 <?php
 
                 if ($post_status == 'publish'){
 
-                        $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())   );
-                        $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())   );
+                        $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID()));
+
+                    if ($PrevLink == false){
+                        $PrevLink = "#";
+                    }
+                        $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()));
+
+                    if ($NextLink == false){
+                        $NextLink = "#";
+                    }
 
                 } else {
                     if ($post_type == 'post') {
                         // Для всех других статусов, делаем ссылку для просмотра
-                        $PrevLink = '/?p='.custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID()).'&preview=true';
-                        $NextLink = '/?p='.custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()).'&preview=true';
+                        $PrevLink = custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID());
+                        if ($PrevLink !== "#"){
+                            $PrevLink = '/?p='.$PrevLink.'&preview=true';
+                        }
+
+                        $NextLink = custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID());
+                        if ($NextLink !== "#"){
+                            $NextLink = '/?p=' .$NextLink. '&preview=true';
+                        }
+
+
                     } else if ($post_type == 'orig_post') {
                         $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())   );
                         $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())   );
                     }
                 }
 
-                if (custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())){
+                    if ($PrevLink !== "#"){
                     ?>
                     <div class="alignleft sdstudio_PrevLink">
                         <?php
 
                     global $sitepress;
-                    if ($sitepress) {
+                    if ($sitepress && $post_status !== 'publish') {
                         $current_lang = $sitepress->get_current_language();
-                        $PrevLink = '/'.$current_lang.$PrevLink;
+                        $default_lang = $sitepress->get_default_language();
+
+                        if ($default_lang !== $current_lang){
+                            $PrevLink = '/'.$current_lang.$PrevLink;
+                        }
                     }
                         ?>
                         <a href="<?php echo $PrevLink; ?>">
@@ -306,19 +321,22 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                             </button>
                         </a>
                     </div>
-                    <?
+                    <?php
                 }
 
-                if (custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())){
-                    ?>
-                    <div class="alignright sdstudio_NextLink">
-                        <?php
 
-                        if ($sitepress) {
-                            $current_lang = $sitepress->get_current_language();
+
+                if ($NextLink !== "#"){
+                    global $sitepress;
+                    if ($sitepress && $post_status !== 'publish') {
+                        $current_lang = $sitepress->get_current_language();
+                        $default_lang = $sitepress->get_default_language();
+                        if ($default_lang !== $current_lang){
                             $NextLink = '/'.$current_lang.$NextLink;
                         }
-                        ?>
+                    }
+                    ?>
+                    <div class="alignright sdstudio_NextLink">
                         <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()))?>">
                             <button class="et" style="
                                 text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
@@ -470,14 +488,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                     }
                 </style>
             </div>
-
             <?php
-
-
         }
     }
-//    }
-//ddd(get_post_meta(9843));
-
-
 }
