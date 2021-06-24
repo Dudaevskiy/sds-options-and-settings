@@ -141,7 +141,13 @@ if ($enable_wp_recall_options_sds_options_and_settings == 0){
     $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];
     if (!empty($login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings) && $enable_redirect_login_for_not_admin_editor_sds_options_and_settings == 1) {
 //        dd(sdstudio_get_current_user_roles());
-        if (!current_user_can('administrator') || !current_user_can('editor')) {
+
+        if (current_user_can('administrator')){
+            return false;
+        }
+        if (current_user_can('editor')) {
+            return false;
+        }
             add_action('admin_head', 'dcwd_require_weight_field');
             function dcwd_require_weight_field()
             {
@@ -152,7 +158,7 @@ if ($enable_wp_recall_options_sds_options_and_settings == 0){
                     wp_redirect($login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings, 302);
                 }
             }
-        }
+//        }
     }
 
 //    /***
