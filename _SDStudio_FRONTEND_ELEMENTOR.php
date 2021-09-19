@@ -268,6 +268,10 @@ class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\T
             $variables['SET_4_ReadTime']          = '4) Время чтения';
         }
 
+        if ($enable_time_reading_sds_options_and_settings == 1){
+            $variables['SET_5_Excrept']          = '5) Краткое описание (если не заполнено в посте, генерируется из содержания)';
+        }
+
         $this->add_control(
             'param_name',
             [
@@ -381,6 +385,40 @@ class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\T
     //            return $totalreadingtime;
                 echo $totalreadingtime;
     //            echo $commentcount;
+            }
+        }
+
+
+        /**
+         * 5) Краткое описание (если не заполнено в посте, генерируется из содержания)
+         */
+        if ($enable_time_reading_sds_options_and_settings == 1){
+            if ($this->get_settings('param_name') === 'SET_5_Excrept'){
+                global $post;
+                $ID = $post->ID;
+                $PostType = get_post_type( $ID );
+                $post = get_post($ID);
+                $excerpt = $post->post_excerpt;
+
+                // Если нет краткого описания (descriptions) страницы
+                $return_excrept = '';
+                if ($excerpt == ""){
+                    remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+                    $content = get_the_content();
+                    $content = preg_replace('/<p class="ast-the-content-more-link">(.*)<\/p>/','',$content);
+                    $content = str_replace('&hellip;','',$content);
+
+
+                    $content = strip_tags($content);
+                    $content = substr($content, 0, 500);
+                    $content = substr($content, 0, strrpos($content, ' '));
+
+                    $return_excrept =  $content."… ";
+                } else {
+                    $return_excrept = $excerpt;
+                }
+
+                echo $return_excrept;
             }
         }
 

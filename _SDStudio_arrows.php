@@ -303,7 +303,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                                 ">
 
                                     <span style="text-align: left;min-width: 100%;display: block;margin-top: -13px;"">
-                                        <b><?php echo $prev_num?></b> из <?php echo $SDStudio_PostsLength?>
+                                        <b><?php echo $prev_num?></b> / <?php echo $SDStudio_PostsLength?>
                                     </span>
                                     <hr style="
                                         margin-top: -10px;
@@ -350,7 +350,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                                     max-width: 168px;
                                 ">
                                     <span style="text-align: right;min-width: 100%;display: block;margin-top: -13px;">
-                                        <b><?php echo $next_num?></b> из <?php echo $SDStudio_PostsLength?>
+                                        <b><?php echo $next_num?></b> / <?php echo $SDStudio_PostsLength?>
                                     </span>
 
                                     <hr style="
