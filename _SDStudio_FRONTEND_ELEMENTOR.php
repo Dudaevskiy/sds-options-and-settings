@@ -379,12 +379,13 @@ class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\T
                     $readingtime = 1;
                 }
 
+
                 if ($readingtime == 1) {
-                    $timer = __(" minute");
+                    $timer = __("Minute");
                 } else {
-                    $timer = __(" minutes");
+                    $timer = __("Minutes");
                 }
-                $totalreadingtime = $readingtime . $timer;
+                $totalreadingtime = $readingtime .' '. $timer;
 
     //            return $totalreadingtime;
                 echo $totalreadingtime;
