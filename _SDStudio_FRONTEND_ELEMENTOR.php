@@ -272,6 +272,10 @@ class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\T
             $variables['SET_5_Excrept']          = '5) Краткое описание (если не заполнено в посте, генерируется из содержания)';
         }
 
+        if ($enable_time_reading_sds_options_and_settings == 1){
+            $variables['SET_6_BlogTitle']          = '6) "Блог"/"Архив" правильное имя';
+        }
+
         $this->add_control(
             'param_name',
             [
@@ -419,6 +423,34 @@ class Elementor_SDStudio_OptAndSet_DynData extends \Elementor\Core\DynamicTags\T
                 }
 
                 echo $return_excrept;
+            }
+        }
+
+        //        $variables['SET_6_BlogTitle']          = '6) BLOG title';
+
+        /**
+         * 6) BLOG title
+         */
+        if ($enable_time_reading_sds_options_and_settings == 1){
+            if ($this->get_settings('param_name') === 'SET_6_BlogTitle'){
+                global $post;
+                $ID = $post->ID;
+
+                /**
+                 * Получаем страницу блога из опций сайта
+                 */
+                $posts_page_id = get_option( 'page_for_posts');
+                $posts_page = get_page( $posts_page_id);
+                $posts_page_title = $posts_page->post_title;
+                $posts_page_url = get_page_uri($posts_page_id  );
+
+                // Если страница архива отобразим его title
+                if (is_archive()) {
+                    echo single_cat_title();
+                } else {
+                    // Если страница блога то отобразим имя страницы
+                    echo $posts_page_title;
+                }
             }
         }
 
