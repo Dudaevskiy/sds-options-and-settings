@@ -16,7 +16,7 @@
  * Plugin Name:       SDStudio addons, options and settings
  * Plugin URI:        https://techblog.sdstudio.top/blog
  * Description:       Set of useful additions, settings, improvements for your site from <a href="https://sdstudio.top"><strong>Serhii Dudchenko</strong></a>
- * Version:           2.2.9
+ * Version:           2.2.10
  * Author:            Serhii Dudchenko
  * Author URI:        https://sdstudio.top
  * License:           GPL-2.0+
@@ -216,3 +216,22 @@ function sdstudio_current_year( $atts ){
     return $date['year'];
 }
 add_shortcode( 'current_year', 'sdstudio_current_year' );
+
+/*
+#wpml_main_page - указываем ссылку на главную в зависимости от языка
+https://bit.ly/3AQHdNf
+ */
+function lb_menu_anchors($items, $args) {
+        foreach ($items as $key => $item) {
+            global $sitepress;
+            if ($sitepress){
+                if ($item->url == "#wpml_main_page"){
+                    $item->url = icl_get_home_url();
+                    $item->title = '<i class="fa fa-home" aria-hidden="true"></i>';
+                }
+            }
+        }
+        return $items;
+}
+
+add_filter('wp_nav_menu_objects', 'lb_menu_anchors', 10, 2);
