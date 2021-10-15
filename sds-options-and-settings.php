@@ -144,6 +144,7 @@ function run_sds_options_and_settings() {
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio___Google_Tag.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio___JivoSite.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio____SCROLL_LAZY_LOADER.php';
+    require_once plugin_dir_path( __FILE__ ) . '_SDStudio___SHORTCODES_AUTOGEN_PAGES.php';
 }
 run_sds_options_and_settings();
 

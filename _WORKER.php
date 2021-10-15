@@ -1799,6 +1799,51 @@ $section = [
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
+
+
+/**
+ * Авто генерация страниц "Отказ от ответственности", "Политика конфединциальности", "Контакты"
+ */
+//$SDStudio_CSS_table_styles = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/CSS_table_styles.md') );
+//$image_this = $MarkDownImageFolder_sds_options_and_settings.'data-hendle.png';
+//dd($image_this);
+$section = [
+    'title' => __( 'Авто генерация страниц', 'sds-options-and-settings' ),
+//    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
+    'id'    => 'auto_gen_pages_shortcodes_sds-options-and-settings',
+    'subsection' => false,
+    // Иконки брать здесь
+    // http://elusiveicons.com/icons/
+    'icon'  => 'el el-file-edit',
+    'desc'  => 'Авто генерация страниц "Отказ от ответственности", "Политика конфединциальности", "Контакты"',
+    'fields' => [
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_auto_gen_pages_shortcodes_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Включить Авто генерацию страниц?', 'redux-framework-demo'),
+            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+            'default'  => false,
+            'desc'  => 'После того как функция будет активирована на сайте появится возможность использования шорт кодов для автоматической генерации страниц <br>[SDStudio_PAGE_AUTOGEN page="OTKAZ"] - "Отказ от ответственности"<br>[SDStudio_PAGE_AUTOGEN page="KONF"] - "Политика конфединциальности"<br>[SDStudio_PAGE_AUTOGEN page="KONTACTS"] - "Контакты"<br>',
+        ],
+
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'email_auto_gen_pages_shortcodes_sds-options-and-settings',
+            'type'     => 'text',
+//            'icon'  => 'el el-chevron-right',
+            'placeholder'  => 'info@domain.com',
+            'title'    => __('Вставьте Email который будет указан в авто генерируемых страницах (если он отличается от текущего домена).', 'redux-framework-demo'),
+            'subtitle' => '<b>Если Email не указан, будет использован адрес формата "info@ДОМЕН_ТЕКУЩЕГО_САЙТА"</b>',
+//            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+            'required' => array('enable_auto_gen_pages_shortcodes_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
 /**
  * Load my Google Adsense code.
  *
