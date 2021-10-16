@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> DISCLAIMER E DIVULGAZIONE </p>
+Tutte le informazioni sul sito {{%THIS_SITE%}} sono solo a scopo informativo. Sei l'unico responsabile della conformità a qualsiasi legge locale o internazionale applicabile. Il sito consiglia spesso prodotti che riteniamo utili ai nostri lettori. Potremmo ricevere commissioni di affiliazione dalla vendita di prodotti ottenuti tramite link di affiliazione.
+
+** Il sito {{%THIS_SITE%}} non sarà in nessun caso responsabile per danni, diretti o indiretti, che dovessero derivare dall'uso o dall'abuso delle informazioni qui pubblicate. Continuando, dichiari di aver letto e accettato la nostra <u> [disclaimer](%%sdstudio_autogen__OTKAZ_URL%%)</u> e la nostra <u> [Informativa sulla privacy](%%sdstudio_autogen__KONF_URL%%)</u>.**

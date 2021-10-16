@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> RENUNCIA Y DIVULGACIÓN </p>
+Toda la información del sitio {{%THIS_SITE%}} es solo para fines informativos. Usted es el único responsable del cumplimiento de las leyes locales o internacionales aplicables. El sitio recomienda con frecuencia productos que consideramos útiles para nuestros lectores. Podemos recibir comisiones de afiliados por las ventas de productos obtenidos a través de enlaces de afiliados.
+
+** El sitio {{%THIS_SITE%}} no será en ningún caso responsable de los daños, directos o indirectos, que puedan derivarse del uso o mal uso de la información aquí publicada. Al continuar, reconoce que ha leído y aceptado nuestro <u> [descargo de responsabilidad](%%sdstudio_autogen__OTKAZ_URL%%) </u> completo y nuestra <u> [Política de privacidad](%%sdstudio_autogen__KONF_URL%%)</u>.**

@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> ZASTRZEŻENIE I UJAWNIENIE </p>
+Wszystkie informacje w witrynie {{%THIS_SITE%}} służą wyłącznie celom informacyjnym. Ponosisz wyłączną odpowiedzialność za przestrzeganie wszelkich obowiązujących przepisów lokalnych lub międzynarodowych. Witryna często poleca produkty, które uważamy za przydatne naszym czytelnikom. Możemy otrzymywać prowizje partnerskie od sprzedaży produktów uzyskanych za pośrednictwem linków partnerskich.
+
+** Witryna {{%THIS_SITE%}} w żadnym wypadku nie ponosi odpowiedzialności za szkody, bezpośrednie lub pośrednie, które mogą wyniknąć z wykorzystania lub niewłaściwego wykorzystania informacji opublikowanych tutaj. Kontynuując, potwierdzasz, że przeczytałeś i zaakceptowałeś nasze pełne <u> [zastrzeżenie](%%sdstudio_autogen__OTKAZ_URL%%)</u> oraz naszą <u> [Politykę prywatności](%%sdstudio_autogen__KONF_URL%%)</u>.**

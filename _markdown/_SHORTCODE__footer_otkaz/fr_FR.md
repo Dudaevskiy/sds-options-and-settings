@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> AVIS DE NON-RESPONSABILITÉ ET DIVULGATION </p>
+Toutes les informations sur le site {{%THIS_SITE%}} sont à titre informatif uniquement. Vous êtes seul responsable du respect des lois locales ou internationales applicables. Le site recommande fréquemment des produits que nous trouvons utiles à nos lecteurs. Nous pouvons recevoir des commissions d'affiliation sur les ventes de produits obtenus via des liens d'affiliation.
+
+** Le site {{%THIS_SITE%}} ne pourra en aucun cas être tenu responsable des dommages, directs ou indirects, pouvant résulter de l'utilisation ou de la mauvaise utilisation des informations publiées ici. En continuant, vous reconnaissez avoir lu et accepté l'intégralité de notre <u> [avertissement](%%sdstudio_autogen__OTKAZ_URL%%)</u>, et notre <u> [Politique de confidentialité](%%sdstudio_autogen__KONF_URL%%)</u>.**

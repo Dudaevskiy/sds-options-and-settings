@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> ISENÇÃO DE RESPONSABILIDADE E DIVULGAÇÃO </p>
+Todas as informações no site {{%THIS_SITE%}} são apenas para fins informativos. Você é o único responsável pelo cumprimento de quaisquer leis locais ou internacionais aplicáveis. O site frequentemente recomenda produtos que consideramos úteis para nossos leitores. Podemos receber comissões de afiliados de vendas de produtos obtidos por meio de links de afiliados.
+
+** O site {{%THIS_SITE%}} não será, em hipótese alguma, responsável por danos, diretos ou indiretos, que possam decorrer do uso ou mau uso das informações aqui publicadas. Ao continuar, você reconhece que leu e aceitou nossa <u> [isenção de responsabilidade completa](%%sdstudio_autogen__OTKAZ_URL%%)</u> e nossa <u> [Política de Privacidade](%%sdstudio_autogen__KONF_URL%%)</u>. **

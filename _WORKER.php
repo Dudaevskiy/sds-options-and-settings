@@ -1824,7 +1824,7 @@ $section = [
             'title'    => __('Включить Авто генерацию страниц?', 'redux-framework-demo'),
             'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
             'default'  => false,
-            'desc'  => 'После того как функция будет активирована на сайте появится возможность использования шорт кодов для автоматической генерации страниц <br>[SDStudio_PAGE_AUTOGEN page="OTKAZ"] - "Отказ от ответственности"<br>[SDStudio_PAGE_AUTOGEN page="KONF"] - "Политика конфединциальности"<br>[SDStudio_PAGE_AUTOGEN page="KONTACTS"] - "Контакты"<br>',
+            'desc'  => 'После того как функция будет активирована на сайте появится возможность использования шорт кодов для автоматической генерации страниц <br>[SDStudio_PAGE_AUTOGEN page="OTKAZ"] - "Отказ от ответственности"<br>[SDStudio_PAGE_AUTOGEN page="KONF"] - "Политика конфединциальности"<br>[SDStudio_PAGE_AUTOGEN page="KONTACTS"] - "Контакты"<br><hr>[SDStudio_PAGE_AUTOGEN page="FOOTER_OTKAZ"] - Шорт код для вставки в футер сайта. Содержащий текст отказа от ответственности и прочее<br>[SDStudio_PAGE_AUTOGEN page="FOOTER_COPY"] - Шорт код для вставки в футер сайта. Содержащий копирайт, год и "Все права защищены"<br>',
         ],
 
         [

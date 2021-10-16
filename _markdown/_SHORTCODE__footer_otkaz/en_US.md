@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> DISCLAIMER AND DISCLOSURE </p>
+All information on the site {{%THIS_SITE%}} is for informational purposes only. You are solely responsible for complying with any applicable local or international laws. The site frequently recommends products that we find useful to our readers. We may receive affiliate commissions from sales of products obtained through affiliate links.
+
+** The site {{%THIS_SITE%}} will under no circumstances be liable for damages, direct or indirect, that may arise from the use or misuse of the information published here. By continuing, you acknowledge that you have read and accepted our complete <u> [disclaimer](%%sdstudio_autogen__OTKAZ_URL%%)</u>, and our <u> [Privacy Policy](%%sdstudio_autogen__KONF_URL%%)</u>. **

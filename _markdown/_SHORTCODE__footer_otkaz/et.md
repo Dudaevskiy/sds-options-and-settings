@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> TÄHELEPANU JA AVALIKUSTAMINE </p>
+Kogu teave saidil {{%THIS_SITE%}} on ainult informatiivsel eesmärgil. Te vastutate ainuisikuliselt kohalike või rahvusvaheliste seaduste järgimise eest. Sait soovitab sageli tooteid, mis on meie lugejatele kasulikud. Võime saada sidusettevõtte vahendustasusid sidusettevõtte linkide kaudu saadud toodete müügist.
+
+** Sait {{%THIS_SITE%}} ei vastuta mingil juhul otseste ega kaudsete kahjude eest, mis võivad tuleneda siin avaldatud teabe kasutamisest või väärkasutusest. Jätkates kinnitate, et olete lugenud ja nõustunud meie täieliku <u> [vastutusest loobumisega](%%sdstudio_autogen__OTKAZ_URL%%) </u> ja meie <u>[privaatsuspoliitikaga](%%sdstudio_autogen__KONF_URL%%)</u>. **

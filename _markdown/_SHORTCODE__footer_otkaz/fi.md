@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> VASTUUVAPAUSLAUSEKE JA ILMOITUS </p>
+Kaikki sivuston {{%THIS_SITE%}} tiedot on tarkoitettu vain tiedoksi. Olet yksin vastuussa sovellettavien paikallisten tai kansainvälisten lakien noudattamisesta. Sivusto suosittelee usein tuotteita, jotka ovat mielestämme hyödyllisiä lukijoillemme. Saatamme saada kumppanipalkkioita kumppanilinkkien kautta hankittujen tuotteiden myynnistä.
+
+** Sivusto {{%THIS_SITE%}} ei ole missään olosuhteissa vastuussa suorista tai epäsuorista vahingoista, jotka voivat johtua täällä julkaistujen tietojen käytöstä tai väärinkäytöstä. Jatkamalla vahvistat, että olet lukenut ja hyväksynyt täydelliset <u> [vastuuvapauslauseke](%%sdstudio_autogen__OTKAZ_URL%%)</u> ja <u> [tietosuojakäytäntömme](%%sdstudio_autogen__KONF_URL%%)</u>.**

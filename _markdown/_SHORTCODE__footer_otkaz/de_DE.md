@@ -1,0 +1,4 @@
+<p class = "rascrutie_footer"> HAFTUNGSAUSSCHLUSS UND OFFENLEGUNG </p>
+Alle Informationen auf der Website {{%THIS_SITE%}} dienen nur zu Informationszwecken. Sie sind allein verantwortlich für die Einhaltung aller geltenden lokalen oder internationalen Gesetze. Die Website empfiehlt unseren Lesern häufig Produkte, die wir für nützlich halten. Wir können Affiliate-Provisionen aus dem Verkauf von Produkten erhalten, die über Affiliate-Links erworben wurden.
+
+** Die Website {{%THIS_SITE%}} haftet unter keinen Umständen für Schäden, die direkt oder indirekt aus der Nutzung oder dem Missbrauch der hier veröffentlichten Informationen entstehen. Indem Sie fortfahren, bestätigen Sie, dass Sie unseren vollständigen <u> [Haftungsausschluss](%%sdstudio_autogen__OTKAZ_URL%%) </u> und unsere <u> [Datenschutzerklärung gelesen und akzeptiert haben](%%sdstudio_autogen__KONF_URL%%)</u>.**
