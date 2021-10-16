@@ -1,1 +1,1 @@
-© %%Y%% - %%SITE_TITLE%%. Kõik õigused kaitstud.
+© %%Y%% - %%SITE_TITLE%% | Kõik õigused kaitstud.

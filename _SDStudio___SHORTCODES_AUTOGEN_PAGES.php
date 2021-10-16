@@ -122,10 +122,10 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
      *
      */
     function SDStudio_PAGE_AUTOGEN_title_updater( $title, $id = null ) {
-    
+
         // В начале получим текущую локаль
         $current_lang = get_locale(); // "ru_RU"
-    
+
         // Получение строки между значениями
         /**
          * @param $string
@@ -146,35 +146,32 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
                 return substr($string, $ini, $len);
             }
         }
-    
+
         if ( ! is_admin() ) {
-            if(is_singular(array('page'))){
-                if(in_the_loop()){
-                    $page_id = get_the_ID();
-                    // Получаем контент
-                    $get_content = get_post($page_id);
-    
-    
-                    if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="OTKAZ"') !== false) {
-                        $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
-                    }
-    
-                    if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="KONF"') !== false) {
-                        $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/'.$current_lang.'.md');
-                    }
-    
-                    if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="KONTACTS"') !== false) {
-                        $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
-                    }
-    
-                    // Имя страницы
-                        $page_name = get_string_between($file_get, '[name_page]', '[/name_page]');
-                        return $page_name;
-    
+            if ( !empty( wp_get_associated_nav_menu_items( $id ) ) && is_singular( 'page' ) ) {
+                $page_id = get_the_ID();
+                // Получаем контент
+                $get_content = get_post($page_id);
+
+
+                if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="OTKAZ"') !== false) {
+                    $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
                 }
+
+                if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="KONF"') !== false) {
+                    $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/'.$current_lang.'.md');
+                }
+
+                if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="KONTACTS"') !== false) {
+                    $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
+                }
+
+                // Имя страницы
+                $page_name = get_string_between($file_get, '[name_page]', '[/name_page]');
+                return $page_name;
             }
         }
-    
+
         return $title;
     }
     add_filter( 'the_title', 'SDStudio_PAGE_AUTOGEN_title_updater', 10, 2 );

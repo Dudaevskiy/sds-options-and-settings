@@ -1,1 +1,1 @@
-© %%Y%% - %%SITE_TITLE%%. Alle Rechte vorbehalten.
+© %%Y%% - %%SITE_TITLE%% | Alle Rechte vorbehalten.

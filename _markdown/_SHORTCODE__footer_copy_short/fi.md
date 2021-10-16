@@ -1,1 +1,1 @@
-© %%Y%% - %%SITE_TITLE%%. Kaikki oikeudet pidätetään.
+© %%Y%% - %%SITE_TITLE%% | Kaikki oikeudet pidätetään.
