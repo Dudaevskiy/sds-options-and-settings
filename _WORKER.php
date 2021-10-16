@@ -1840,6 +1840,48 @@ $section = [
             //                                'desc' => '<br><br>',
             'default'  => false,
         ],
+
+        /**
+         * Линки на страницы
+         */
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'OTKAZ_SLUG_auto_gen_pages_shortcodes_sds-options-and-settings',
+            'type'     => 'text',
+            'placeholder'  => '/otkaz_page_slug/',
+            'title'    => __('Относительная ссылка - страницы для [SDStudio_PAGE_AUTOGEN page="OTKAZ"] шорткода', 'redux-framework-demo'),
+            'subtitle'  => 'Для меню иcпользуйте:<br>%%sdstudio_autogen__OTKAZ_TITLE%%<br>%%sdstudio_autogen__OTKAZ_URL%%',
+            'desc' => 'Вставьте относительную ссылку на страницу в которой вставлен шорт код. Ссылка на данную страницу будет отображена место `%%sdstudio_autogen__OTKAZ%%` (с учетом WPML переводов, но слаг у всех страницы переводов должен быть одинаковым)',
+            'required' => array('enable_auto_gen_pages_shortcodes_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'KONF_SLUG_auto_gen_pages_shortcodes_sds-options-and-settings',
+            'type'     => 'text',
+            'placeholder'  => '/privacy-policy/',
+            'title'    => __('Относительная ссылка - страницы для [SDStudio_PAGE_AUTOGEN page="KONF"] шорткода', 'redux-framework-demo'),
+            'subtitle'  => 'Для меню иcпользуйте:<br>%%sdstudio_autogen__KONF_TITLE%%<br>%%sdstudio_autogen__KONF_URL%%',
+            'desc' => 'Вставьте относительную ссылку на страницу в которой вставлен шорт код. Ссылка на данную страницу будет отображена место `%%sdstudio_autogen__KONF%%` (с учетом WPML переводов, но слаг у всех страницы переводов должен быть одинаковым)',
+            'required' => array('enable_auto_gen_pages_shortcodes_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+
+        [
+
+            'id'       => 'KONTACTS_SLUG_auto_gen_pages_shortcodes_sds-options-and-settings',
+            'type'     => 'text',
+            'placeholder'  => '/contacts_page_slug/',
+            'title'    => __('Относительная ссылка - страницы для [SDStudio_PAGE_AUTOGEN page="KONTACTS"] шорткода', 'redux-framework-demo'),
+            'subtitle'  => 'Для меню иcпользуйте:<br>%%sdstudio_autogen__KONTACTS_TITLE%%<br>%%sdstudio_autogen__KONTACTS_URL%%',
+            'desc' => 'Вставьте относительную ссылку на страницу в которой вставлен шорт код. Ссылка на данную страницу будет отображена место `%%sdstudio_autogen__KONTACTS%%` (с учетом WPML переводов, но слаг у всех страницы переводов должен быть одинаковым)',
+            'required' => array('enable_auto_gen_pages_shortcodes_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
     ],
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
