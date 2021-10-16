@@ -54,12 +54,15 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
     
         if ($page_shortcode == "OTKAZ"){
             $HTML = $MarkdownParser->parse(file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/'.$current_lang.'.md'));
+            $HTML = $HTML.'<style>li.bf-breadcrumb-item.bf-breadcrumb-end {display: none !important;}</style>';
         }
         if ($page_shortcode == "KONTACTS"){
             $HTML = $MarkdownParser->parse(file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md'));
+            $HTML = $HTML.'<style>li.bf-breadcrumb-item.bf-breadcrumb-end {display: none !important;}</style>';
         }
         if ($page_shortcode == "KONF"){
             $HTML = $MarkdownParser->parse(file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/'.$current_lang.'.md'));
+            $HTML = $HTML.'<style>li.bf-breadcrumb-item.bf-breadcrumb-end {display: none !important;}</style>';
         }
 
         if ($page_shortcode == "FOOTER_OTKAZ"){
@@ -102,7 +105,7 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
     
         // И готовый HTML
         $HTML = str_replace('{{%THIS_SITE%}}','<a href="'.$url_this_site.'">'.$url_this_site.'</a>',$HTML);
-        $HTML = $HTML.'<style>li.bf-breadcrumb-item.bf-breadcrumb-end {display: none !important;}</style>';
+
     
     
     
