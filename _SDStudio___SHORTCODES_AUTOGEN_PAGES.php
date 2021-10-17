@@ -123,6 +123,9 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
      */
     function SDStudio_PAGE_AUTOGEN_title_updater( $title, $id = null ) {
 
+//		if (!empty( wp_get_associated_nav_menu_items( $id ))) {
+//			return $title;
+//		}
         // В начале получим текущую локаль
         $current_lang = get_locale(); // "ru_RU"
 
@@ -147,8 +150,11 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
             }
         }
 
-        if ( ! is_admin() ) {
-            if ( !empty( wp_get_associated_nav_menu_items( $id ) ) && is_singular( 'page' ) ) {
+
+
+        if ( !is_admin() ) {
+            //if ( !empty( wp_get_associated_nav_menu_items( $id ) ) && is_singular( 'page' ) && in_the_loop()) {
+            if (  is_singular( 'page' ) && in_the_loop() ) {
                 $page_id = get_the_ID();
                 // Получаем контент
                 $get_content = get_post($page_id);
@@ -169,12 +175,36 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
                 // Имя страницы
                 $page_name = get_string_between($file_get, '[name_page]', '[/name_page]');
                 return $page_name;
+
+            } else {
+                return $title;
             }
         }
 
         return $title;
     }
     add_filter( 'the_title', 'SDStudio_PAGE_AUTOGEN_title_updater', 10, 2 );
+
+    /**
+     * И удаляем обработку title в пунктах меню
+     **/
+    function wpse309151_remove_title_filter_nav_menu( $nav_menu, $args ) {
+        // we are working with menu, so remove the title filter
+        remove_filter( 'the_title', 'SDStudio_PAGE_AUTOGEN_title_updater', 10, 2 );
+        return $nav_menu;
+    }
+    // this filter fires just before the nav menu item creation process
+    add_filter( 'pre_wp_nav_menu', 'wpse309151_remove_title_filter_nav_menu', 10, 2 );
+
+    function wpse309151_add_title_filter_non_menu( $items, $args ) {
+        // we are done working with menu, so add the title filter back
+        add_filter( 'the_title', 'SDStudio_PAGE_AUTOGEN_title_updater', 10, 2 );
+        return $items;
+    }
+    // this filter fires after nav menu item creation is done
+    add_filter( 'wp_nav_menu_items', 'wpse309151_add_title_filter_non_menu', 10, 2 );
+
+
 
 
 
