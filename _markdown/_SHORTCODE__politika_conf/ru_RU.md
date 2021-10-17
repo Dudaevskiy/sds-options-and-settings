@@ -1,43 +1,43 @@
-[name_page] Политика Конфиденциальности сайта [/name_page]
+[name_page] Personvernerklæring for nettsted [/name_page]
 
-Администрация сайта {{%THIS_SITE%}} обязуется сохранять вашу конфиденциальность в Интернете. Мы уделяем большое значение охране предоставленных вами данных. Наша политика конфиденциальности основана на требованиях [Общего регламента о защите персональных данных Европейского Союза (GDPR). ](https://ec.europa.eu/info/law/law-topic/data-protection_en)Цели, в которых мы собираем персональные данные: улучшение работы нашего сервиса, осуществление контактов с посетителями данного сайта, новостная рассылка по электронной почте, предоставление информации, которую запрашивал пользователь, осуществление услуг, связанных с направлением деятельности данного сайта, а так же для указанных ниже действий.
+Nettstedsadministrasjonen {{%THIS_SITE%}} forplikter seg til å opprettholde personvernet ditt på Internett. Vi legger stor vekt på beskyttelsen av dataene du gir. Personvernerklæringen vår er basert på kravene i [European Union General Data Protection Regulation (GDPR).](https://ec.europa.eu/info/law/law-topic/data-protection_en) Formål som vi samler inn personopplysninger for: å forbedre tjenesten vår, kontakte besøkende på dette nettstedet, nyhetsbrev på e-post, gi informasjon forespurt av brukeren, levering av tjenester knyttet til aktivitetsområdet på dette nettstedet, samt for handlingene som er angitt nedenfor.
 
-**Сбор и использование персональных данных**
+** Innsamling og bruk av personopplysninger **
 
-Мы собираем и используем ваши персональные данные только в случае вашего добровольного согласия. При согласии с этим вы разрешаете нам собирать и использовать следующие данные: имя и фамилия, личные фотографии, данные аккаунтов в социальных сетях. Сбор и обработка ваших данных проводится соответствии с законами, действующими на территории Европейского Союза и в государстве Украина.
+Vi samler inn og bruker personopplysningene dine bare i tilfelle frivillig samtykke. Hvis du godtar dette, gir du oss fullmakt til å samle inn og bruke følgende data: navn og etternavn, personlige bilder, data om kontoer i sosiale nettverk. Innsamlingen og behandlingen av dataene dine utføres i samsvar med gjeldende lover på EU -territoriet og i Ukraina.
 
-**Хранение данных, изменение и удаление**
+** Datalagring, endring og sletting **
 
-Пользователь, предоставивший свои персональные данные сайту {{%THIS_SITE%}} имеет право на их изменение и удаление, а так же на отзыв своего согласия с их использованием. 
+Brukeren som ga personopplysningene sine til nettstedet {{%THIS_SITE%}} har rett til å endre og slette dem, samt trekke tilbake sitt samtykke til bruk.
 
-**Использование технических данных при посещении сайта**
+** Bruk av tekniske data når du besøker nettstedet **
 
-При посещении вами сайта {{%THIS_SITE%}} в базе данных сохраняются записи о вашем IP адресе, времени посещения, настройках браузера, операционной системе, а также другая техническая информация необходимая для корректного отображения содержимого сайта. По этим данным нам невозможно идентифицировать личность посетителя.
+Når du besøker nettstedet {{%THIS_SITE%}}, lagrer databasen registreringer av IP -adressen din, besøkstid, nettleserinnstillinger, operativsystem, samt annen teknisk informasjon som er nødvendig for riktig visning av nettstedets innhold. Fra disse dataene er det umulig for oss å identifisere identiteten til den besøkende.
 
-**Предоставление информации детьми**
+** Gi informasjon fra barn **
 
-Если Вы являетесь родителем или опекуном, и вы знаете, что ваши дети предоставили нам свои личные данные без Вашего согласия, свяжитесь с нами: {{%EMAIL%}}. На нашем сервисе запрещено оставлять личные данные несовершеннолетних без согласия родителей или опекунов.
+Hvis du er forelder eller foresatte og vet at barna dine har gitt oss personopplysningene sine uten ditt samtykke, kan du kontakte oss: {{%EMAIL%}}. Det er forbudt å legge igjen personopplysninger om mindreårige i vår tjeneste uten samtykke fra foreldre eller foresatte.
 
-**Использование cookies**
+** Bruk av informasjonskapsler **
 
-Для корректного отображения содержимого и для удобства использования сайта {{%THIS_SITE%}} мы используем cookie файлы. Это небольшие файлы, которые хранятся на вашем устройстве. Они помогают сайту запомнить информацию о вас, например на каком языке вы просматриваете сайт и какие страницы вы уже открывали, эта информация будет полезна при следующем посещении. 
+For riktig visning av innholdet og for enkelhets skyld å bruke nettstedet {{%THIS_SITE%}} bruker vi informasjonskapsler. Dette er små filer som er lagret på enheten din. De hjelper nettstedet med å huske informasjon om deg, for eksempel på hvilket språk du ser på nettstedet og hvilke sider du allerede har åpnet, denne informasjonen vil være nyttig neste gang du besøker.
 
-**Использование персональных данных другими сервисами**
+** Bruk av personopplysninger fra andre tjenester **
 
-На этом сайте используются сторонние интернет-сервисы, осуществляющие независимый от нас сбор информации: Google Analytics , Google AdSense, Yandex.Metrica, Disqus.com, Facebook.com. Собранные ими данные могут предоставляться другим службам внутри этих организаций, они могут использовать данные для персонализации рекламы своей собственной рекламной сети.  Вы можете прочитать пользовательские соглашения этих организаций на их сайтах. Там же вы можете отказаться от сбора ими персональных данных, к примеру блокировщик [Google Analytics находится тут](https://tools.google.com/dlpage/gaoptout?hl=ru), [блокировщик Яндекс Метрики тут](https://yandex.ru/support/metrika/general/opt-out.html).
+Dette nettstedet bruker tredjeparts internettjenester som samler informasjon uavhengig av oss: Google Analytics, Google AdSense, Yandex.Metrica, Disqus.com, Facebook.com. Dataene de samler inn kan deles med andre tjenester i disse organisasjonene, og de kan bruke dataene til å tilpasse annonsene til sitt eget annonsenettverk. Du kan lese brukeravtalene til disse organisasjonene på nettstedene deres. Der kan du også nekte å samle inn personopplysninger fra dem, for eksempel [Google Analytics ligger her](https://tools.google.com/dlpage/gaoptout?hl=ru), [Yandex Metrica -blokkering er her]( https://yandex.ru/support/metrika/general/opt-out.html).
 
-**Ссылки на другие сайты**
+** Lenker til andre nettsteder **
 
-Наш сайт {{%THIS_SITE%}} может содержать ссылки на другие сайты, которые не управляются нами. Мы не несем ответственность за их содержание. Мы рекомендуем вам ознакомиться с политикой конфиденциальности каждого сайта, который вы посещаете, если она там есть.
+Nettstedet vårt {{%THIS_SITE%}} kan inneholde lenker til andre nettsteder som ikke drives av oss. Vi er ikke ansvarlige for innholdet deres. Vi anbefaler at du leser personvernerklæringen for hvert nettsted du besøker, hvis det er aktuelt.
 
-**Изменения в политике конфиденциальности**
+** Endringer i personvernerklæringen **
 
-Наш сайт {{%THIS_SITE%}} может обновлять нашу политику конфиденциальности время от времени. Мы сообщаем о любых изменениях, разместив новую политику конфиденциальности на этой странице. Мы отслеживаем изменения законодательства, касающегося персональных данных в Европейском Союзе и в государстве Украина. Если вы оставили персональные данные у нас, то мы оповестим вас об изменении в политике конфиденциальности. Если ваши персональные данные были введены не корректно, то мы не сможем с вами связаться.
+Nettstedet vårt {{%THIS_SITE%}} kan oppdatere personvernreglene våre fra tid til annen. Vi vil kommunisere eventuelle endringer ved å legge ut en ny personvernerklæring på denne siden. Vi overvåker endringer i lovgivningen angående personopplysninger i EU og i Ukraina. Hvis du har etterlatt personopplysninger hos oss, vil vi varsle deg om endringen i personvernerklæringen. Hvis personopplysningene dine ble angitt feil, vil vi ikke kunne kontakte deg.
 
-**Обратная связь, заключительные положения**
+** Tilbakemelding, sluttbestemmelser **
 
-Связаться с администрацией сайта {{%THIS_SITE%}} по вопросам, связанным с политикой конфиденциальности можно по адресу: {{%EMAIL%}}, либо с помощью контактной формы указанной в соответствующем разделе данного сайта. Если вы не согласны с данной политикой конфиденциальности, вы не можете пользоваться услугами сайта {{%THIS_SITE%}}, в этом случае вы должны воздержаться от посещения нашего сайта.
+Du kan kontakte administrasjonen av nettstedet {{%THIS_SITE%}} angående spørsmål knyttet til personvernreglene på adressen: {{%EMAIL%}}, eller ved å bruke kontaktskjemaet som er angitt i den aktuelle delen av dette nettstedet. Hvis du ikke godtar denne personvernerklæringen, kan du ikke bruke tjenestene på nettstedet {{%THIS_SITE%}}. I så fall bør du avstå fra å besøke nettstedet vårt.
 
-**Сайт {{%THIS_SITE%}} ни при каких обстоятельствах не несет ответственности за убытки, прямые или косвенные, которые могут возникнуть в результате использования или неправильного использования, опубликованной здесь информации.**
+** Nettstedet {{%THIS_SITE%}} er under ingen omstendigheter ansvarlig for skader, direkte eller indirekte, som kan oppstå ved bruk eller misbruk av informasjonen som er publisert her. **
 
-__Используя этот веб-сайт, вы заявляете о своем согласии с данным дисклеймером.__  
+__ Ved å bruke dette nettstedet, betyr du at du godtar denne ansvarsfraskrivelsen .__

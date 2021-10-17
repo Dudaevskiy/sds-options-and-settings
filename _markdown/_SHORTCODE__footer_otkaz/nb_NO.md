@@ -1,0 +1,4 @@
+<p class="rascrutie_footer"> ANSVARSFRASKRIVELSE OG OPPLYSNINGER </p>
+All informasjon på nettstedet {{%THIS_SITE%}} er kun til informasjonsformål. Du er eneansvarlig for å overholde gjeldende lokale eller internasjonale lover. Nettstedet anbefaler ofte produkter som vi finner nyttige for våre lesere. Vi kan motta tilknyttede provisjoner fra salg av produkter som er innhentet via tilknyttede lenker.
+
+** Nettstedet {{%THIS_SITE%}} er under ingen omstendigheter ansvarlig for skader, direkte eller indirekte, som kan oppstå ved bruk eller misbruk av informasjonen som er publisert her. Ved å fortsette, erkjenner du at du har lest og godtatt vår fullstendige <u>[ansvarsfraskrivelse](%%sdstudio_autogen__OTKAZ_URL%%)</u>, og vår <u>[Personvernpolicy](%%sdstudio_autogen__KONF_URL%%)</u>. **
