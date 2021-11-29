@@ -90,7 +90,7 @@ if (!empty($enable_hot_key_login) && $enable_hot_key_login == 1) {
                                 // console.log(data);
                                 link = data;
                                 if (link == '') {
-                                    window.open('/wp-login', '_blank');
+                                    window.open('/wp-login.php', '_blank');
                                     <?php
                                     // И закрываем попап окно после перехода на страницу входа
                                     ?>
@@ -104,7 +104,7 @@ if (!empty($enable_hot_key_login) && $enable_hot_key_login == 1) {
                                 }
                             },
                             error: function (errorThrown) {
-                                window.open('/wp-login', '_blank');
+                                window.open('/wp-login.php', '_blank');
                             }
                         });
                     });
