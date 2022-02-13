@@ -24,6 +24,12 @@ global $email_users_publish_sdstudio_editor_tools;
 $email_users_publish_sdstudio_editor_tools = $redux['email_users_publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings'];
 
 
+// Emails
+global $enable_editposts_relfollow_posts_sds_options_and_settings;
+$enable_editposts_relfollow_posts_sds_options_and_settings = $redux['enable_editposts_relfollow_posts_sds-options-and-settings'];
+
+
+
 
 
 if ($enable_disable_full_width_guthenberg_sds_options_and_settings == 1){
@@ -156,6 +162,157 @@ if ($enable_publish_posts_sds_options_and_settings == 1) {
 
 }
 
+/**
+ * Rel follow
+ */
+if ($enable_editposts_relfollow_posts_sds_options_and_settings == 1){
+    /**
+     * Add a 'Add rel="follow" to link' checkbox to the WordPress link editor
+     *
+     * @see https://danielbachhuber.com/tip/rel-follow-link-modal/
+     */
+    if (!function_exists('sdstudio_add_relfollow_in_link')){
+        add_action( 'after_wp_tiny_mce', 'sdstudio_add_relfollow_in_link');
+        function sdstudio_add_relfollow_in_link(){
+            ?>
+            <script>
+                // Отключаем nofollow если отмечен follow
+                jQuery(document).on('click', 'input#wp-link-follow', function() {
+                    if( jQuery(this).is(':checked'))  //  or  this.checked
+                    {
+                        jQuery('input#wp-link-nofollow').attr("disabled", true);
+                    } else {
+                        jQuery('input#wp-link-nofollow').removeAttr("disabled");
+                    }
+                });
 
 
+                // Отключаем follow если отмечен nofollow
+                jQuery(document).on('click', 'input#wp-link-nofollow', function() {
+                    if( jQuery(this).is(':checked'))  //  or  this.checked
+                    {
+                        jQuery('input#wp-link-follow').attr("disabled", true);
+                    } else {
+                        jQuery('input#wp-link-follow').removeAttr("disabled");
+                    }
+                });
+
+
+
+                var originalWpLink;
+                // Ensure both TinyMCE, underscores and wpLink are initialized
+                if ( typeof tinymce !== 'undefined' && typeof _ !== 'undefined' && typeof wpLink !== 'undefined' ) {
+                    // Ensure the #link-options div is present, because it's where we're appending our checkbox.
+                    if ( tinymce.$('#link-options').length ) {
+                        // Append our checkbox HTML to the #link-options div, which is already present in the DOM.
+                        tinymce.$('#link-options').append(<?php echo json_encode( '<div class="link-follow"><label><span></span><input type="checkbox" id="wp-link-follow" /> Добавить  <code style="color:green">rel="follow"</code></label></div>' ); ?>);
+                        // Clone the original wpLink object so we retain access to some functions.
+                        originalWpLink = _.clone( wpLink );
+                        wpLink.addRelfollow = tinymce.$('#wp-link-follow');
+                        // Override the original wpLink object to include our custom functions.
+                        wpLink = _.extend( wpLink, {
+                            /**
+                             * Fetch attributes for the generated link based on
+                             * the link editor form properties.
+                             *
+                             * In this case, we're calling the original getAttrs()
+                             * function, and then including our own behavior.
+                             */
+                            getAttrs: function() {
+                                console.log('1️⃣');
+                                var attrs = originalWpLink.getAttrs();
+
+                                if (!jQuery('input#wp-link-sponsored').is(":checked")){
+                                    attrs.rel = '';
+                                }
+
+                                attrs.rel = wpLink.addRelfollow.prop( 'checked' ) ? 'follow' : '';
+
+                                if (jQuery('input#wp-link-nofollow').is(":checked")){
+                                    attrs.rel = 'nofollow'
+                                }
+
+                                if (jQuery('input#wp-link-sponsored').is(":checked")){
+                                    attrs.rel = attrs.rel+' sponsored'
+                                }
+
+                                console.log(attrs);
+                                return attrs;
+                            },
+                            /**
+                             * Build the link's HTML based on attrs when inserting
+                             * into the text editor.
+                             *
+                             * In this case, we're completely overriding the existing
+                             * function.
+                             */
+                            buildHtml: function( attrs ) {
+                                console.log('2️⃣');
+                                var html = '<a href="' + attrs.href + '"';
+
+                                if ( attrs.target ) {
+                                    html += ' target="' + attrs.target + '"';
+                                }
+                                if ( attrs.rel ) {
+                                    html += ' rel="' + attrs.rel + '"';
+                                }
+                                return html + '>';
+                            },
+                            /**
+                             * Set the value of our checkbox based on the presence
+                             * of the rel='follow' link attribute.
+                             *
+                             * In this case, we're calling the original mceRefresh()
+                             * function, then including our own behavior
+                             */
+                            mceRefresh: function( searchStr, text ) {
+                                console.log('2️⃣');
+                                originalWpLink.mceRefresh( searchStr, text );
+                                var editor = window.tinymce.get( window.wpActiveEditor )
+                                if ( typeof editor !== 'undefined' && ! editor.isHidden() ) {
+                                    var linkNode = editor.dom.getParent( editor.selection.getNode(), 'a[href]' );
+                                    if ( linkNode ) {
+                                        wpLink.addRelfollow.prop( 'checked', 'follow' === editor.dom.getAttrib( linkNode, 'rel' ) );
+                                        if (jQuery(linkNode).attr('rel') === 'follow noopener'
+                                            || jQuery(linkNode).attr('rel') === 'follow noopener sponsored'
+                                            || jQuery(linkNode).attr('rel') === 'follow sponsored'){
+                                            jQuery('input#wp-link-follow').prop('checked', true);
+                                            // Отключаем nofollow
+                                            jQuery('input#wp-link-follow').removeAttr("disabled");
+                                            jQuery('input#wp-link-nofollow').attr("disabled", true);
+                                        }
+
+                                        // if (jQuery(linkNode).attr('rel') === 'nofollow noopener'
+                                        //     || jQuery(linkNode).attr('rel') === 'nofollow noopener sponsored'
+                                        //     || jQuery(linkNode).attr('rel') === 'nofollow sponsored'){
+                                        //     // Отключаем follow
+                                        //     jQuery('input#wp-link-nofollow').removeAttr("disabled");
+                                        //     jQuery('input#wp-link-follow').attr("disabled", true);
+                                        // }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            </script>
+            <style>
+                #wp-link #link-options .link-follow {
+                    padding: 3px 0 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                #wp-link #link-options .link-follow label span {
+                    width: 83px;
+                }
+
+                .has-text-field #wp-link .query-results {
+                    top: 223px;
+                }
+            </style>
+            <?php
+        }
+    }
+}
 

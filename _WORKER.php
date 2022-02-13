@@ -1301,30 +1301,38 @@ $section = [
                 //                                'desc' => '<br><br>',
                 'default'  => false,
             ],
-                [
-                    //Link: https://docs.redux.io/core-fields/switch.html
-                    'id'       => 'email_users_publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings',
-                    'type'     => 'text',
-                    'icon'  => 'el el-chevron-right',
-                    'title'    => __('Укажите email пользователей которым разрешена публикация записей, через запятую', 'redux-framework-demo'),
-    //                'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-                    //            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
-                    'required' => array('publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings', '=', 'true' ),
-                    //                                'desc' => '<br><br>',
-                    'default'  => false,
-                ],
-
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'email_users_publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings',
+                'type'     => 'text',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Укажите email пользователей которым разрешена публикация записей, через запятую', 'redux-framework-demo'),
+//                'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                //            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+                'required' => array('publish_posts_only_select_users_enable_publish_posts_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
+            [
+                //Link: https://docs.redux.io/core-fields/switch.html
+                'id'       => 'not_publish_posts_if_not_thumb_image_sds-options-and-settings',
+                'type'     => 'switch',
+                'icon'  => 'el el-chevron-right',
+                'title'    => __('Не публиковать записи и страницы если не установлены обложки', 'redux-framework-demo'),
+                'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+                //            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
+                'required' => array('enable_publish_posts_sds-options-and-settings', '=', 'true' ),
+                //                                'desc' => '<br><br>',
+                'default'  => false,
+            ],
         [
             //Link: https://docs.redux.io/core-fields/switch.html
-            'id'       => 'not_publish_posts_if_not_thumb_image_sds-options-and-settings',
+            'id'       => 'enable_editposts_relfollow_posts_sds-options-and-settings',
             'type'     => 'switch',
             'icon'  => 'el el-chevron-right',
-            'title'    => __('Не публиковать записи и страницы если не установлены обложки', 'redux-framework-demo'),
+            'title'    => __('Активировать rel="follow" для редактора ссылок в классическом редакторе', 'redux-framework-demo'),
             'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-            //            'desc'  => __('Активация опции добавляет в интерфейс сайта стралки для пред идущей и следующей записи', 'redux-framework-demo'),
-            'required' => array('enable_publish_posts_sds-options-and-settings', '=', 'true' ),
-            //                                'desc' => '<br><br>',
-            'default'  => false,
+            'default'  => true,
         ],
     ],
 ];
