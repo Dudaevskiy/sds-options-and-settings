@@ -159,6 +159,11 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
                 // Получаем контент
                 $get_content = get_post($page_id);
 
+                // Если в контенте страницы нет шорткода значит выходим, и не обрабатываем страницу дальше
+                if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN') == false) {
+                    return $title;
+                }
+
 
                 if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="OTKAZ"') !== false) {
                     $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
