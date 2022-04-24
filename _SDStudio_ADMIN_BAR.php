@@ -77,9 +77,28 @@ function add_links_to_admin_bar($admin_bar) {
             'meta'   => false
         );
         $admin_bar->add_node( $args );
+
+        // Оригинальные посты
+        $args = array(
+            'parent' => 'site-name',
+            'id'     => 'orig_posts',
+            'title'  => '<span class="ab-icon dashicons-editor-table" style="float: left;display: contents;"></span> Orig Posts',
+            'href'   => esc_url('/wp-admin/edit.php?post_type=orig_post'),
+            'meta'   => false
+        );
+        $admin_bar->add_node( $args );
     }
 
 
+
+    $args = array(
+        'parent' => 'site-name',
+        'id'     => 'all_posts',
+        'title'  => '<span class="ab-icon dashicons-admin-post" style="float: left;display: contents;"></span> Все записи',
+        'href'   => esc_url('/wp-admin/edit.php' ),
+        'meta'   => false
+    );
+    $admin_bar->add_node( $args );
 
     $args = array(
         'parent' => 'site-name',
@@ -97,10 +116,10 @@ function add_links_to_admin_bar($admin_bar) {
         'href'   => esc_url('/wp-admin/edit.php?post_status=future&post_type=post' ),
         'meta'   => false
     );
+
     $admin_bar->add_node( $args );
     //<div class="wp-menu-image dashicons-before dashicons-admin-media"><br></div>
 }
-
 /**********************************
  *  2020-05-25 правки админ бара
  *

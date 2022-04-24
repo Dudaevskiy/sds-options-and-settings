@@ -13,3 +13,24 @@ div#sdstudio-editor-tools-next-prev-btns button.et {
 body[class*="generatepress"] div#sdstudio-editor-tools-next-prev-btns button.et{
     top: -17px;
 }
+
+
+ul#wp-admin-bar-site-name-default span.ab-icon:before {
+    padding: 0px;
+    top: 4px !important;
+}
+
+@media screen and (max-width: 783px) {
+    ul#wp-admin-bar-site-name-default span.ab-icon {
+        font-size:17px !important;
+    }
+
+    ul#wp-admin-bar-site-name-default span.ab-icon:before {
+        padding: 0px;
+        top: 4px !important;
+        line-height: 1.6;
+    }
+    ul#wp-admin-bar-site-name-default li a{
+        height: 1em !important;
+    }
+}
