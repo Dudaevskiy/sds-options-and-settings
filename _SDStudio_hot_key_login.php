@@ -141,6 +141,13 @@ if (!empty($enable_hot_key_login) && $enable_hot_key_login == 1) {
                         });
                         return false;
                     }
+
+                    // Google Console
+                    else if (e.ctrlKey && e.shiftKey && e.which == 52) {
+                        //https://search.google.com/search-console?resource_id=https://android.inform.click/
+                        let link_google_console = 'https://search.google.com/search-console?resource_id='+window.location.protocol+'//'+window.location.host;
+                        window.open(link_google_console, '_blank');
+                    }
                 };
                 <?php
                 /*END Горячие клавиши для WordPress*/
