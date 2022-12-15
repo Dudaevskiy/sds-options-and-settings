@@ -148,6 +148,21 @@ if (!empty($enable_hot_key_login) && $enable_hot_key_login == 1) {
                         let link_google_console = 'https://search.google.com/search-console?resource_id='+window.location.protocol+'//'+window.location.host;
                         window.open(link_google_console, '_blank');
                     }
+
+
+                    // Google PageSpeed Insights (Ctrl+Shift+5)
+                    else if (e.ctrlKey && e.shiftKey && e.which == 53) {
+                        //https://search.google.com/search-console?resource_id=https://android.inform.click/
+                        let link_google_console = 'https://pagespeed.web.dev/report?utm_source=psi&utm_medium=redirect&url='+window.location.href;
+                        window.open(link_google_console, '_blank');
+                    }
+
+                    // webpagetest (Ctrl+Shift+6)
+                    else if (e.ctrlKey && e.shiftKey && e.which == 54) {
+                        //https://search.google.com/search-console?resource_id=https://android.inform.click/
+                        let link_google_console = 'https://www.webpagetest.org/?url='+window.location.href;
+                        window.open(link_google_console, '_blank');
+                    }
                 };
                 <?php
                 /*END Горячие клавиши для WordPress*/

@@ -11,11 +11,12 @@ global $sds_options_and_settings__enable_sweetalert2_for_AddToAny_REDUX;
 $sds_options_and_settings__enable_sweetalert2_for_AddToAny_REDUX = $redux;
 
 global $enable_sweetalert2_for_AddToAny_activate_social;
+$enable_enable_sweetalert2 = $redux['enable_sweetalert2'];
 $enable_sweetalert2_for_AddToAny_activate_social = $redux['enable_sweetalert2_for_AddToAny_activate_social'];
 //dd($sds_options_and_settings__enable_sweetalert2_for_AddToAny);
 
 
-if ($sds_options_and_settings__enable_sweetalert2_for_AddToAny == 1){
+if ($enable_enable_sweetalert2 == 1 && $sds_options_and_settings__enable_sweetalert2_for_AddToAny == 1){
 
     if (is_admin()){
         return;
