@@ -1894,6 +1894,61 @@ $section = [
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
+
+
+
+
+/**
+ * Ускорение сайта
+ */
+//$SDStudio_CSS_table_styles = $Hot_Keys = $MarkdownParser->parse( file_get_contents(dirname(__FILE__) . '/_markdown/CSS_table_styles.md') );
+//$image_this = $MarkDownImageFolder_sds_options_and_settings.'data-hendle.png';
+//dd($image_this);
+$section = [
+    'title' => __( 'Ускорение сайта', 'sds-options-and-settings' ),
+//    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
+    'id'    => 'pagespeed_sds-options-and-settings',
+    'subsection' => false,
+    // Иконки брать здесь
+    // http://elusiveicons.com/icons/
+    'icon'  => 'el el-fast-forward',
+    'desc'  => 'Опции для ускорения работы сайта',
+    'fields' => [
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_js_inlineinpage_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Включить встраивание jQuery на страницах сайта?', 'redux-framework-demo'),
+            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+            'default'  => false,
+            //                                'desc' => '<br><br>',
+//                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+//            'desc'  => __('После применения опции, все ваши скрипты будут иметь data-handle атрибут, содержащий дескриптор скрипта, как показано на скриншоте ниже.', 'redux-framework-demo') ,
+        ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_webfonts_swap_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('Включить swap для веб шрифтов?', 'redux-framework-demo'),
+            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+            'default'  => false,
+            //                                'desc' => '<br><br>',
+    //                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+    //            'desc'  => __('После применения опции, все ваши скрипты будут иметь data-handle атрибут, содержащий дескриптор скрипта, как показано на скриншоте ниже.', 'redux-framework-demo') ,
+        ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'print_SWAP_bs_icons_SDStudio_swap_sds-options-and-settings',
+            'type'     => 'switch',
+            'title'    => __('PUBLISHER - Включить swap для веб шрифтов - bs_icons, FontAwesome?', 'redux-framework-demo'),
+            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+            'default'  => false,
+            'required' => array('enable_webfonts_swap_sds-options-and-settings', '=', 'true' ),
+        ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
 /**
  * Load my Google Adsense code.
  *
