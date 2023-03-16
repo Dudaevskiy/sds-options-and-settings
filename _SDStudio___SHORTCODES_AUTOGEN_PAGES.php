@@ -17,7 +17,7 @@ $email_auto_gen_pages_shortcodes_sds_options_and_settings = $redux['email_auto_g
 
 
 if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
-    
+
     /**
      * SHORTCODES
      */
@@ -29,9 +29,9 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
      * https://wordpress.stackexchange.com/questions/173871/how-to-display-the-site-name-in-a-wordpress-page-or-post
      * [bloginfo info='name']
      */
-    
+
     add_shortcode('SDStudio_PAGE_AUTOGEN', function($attributes) {
-    
+
         $page_shortcode = $attributes['page'];
 
         // Получение строки между значениями
@@ -45,25 +45,25 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
                 return substr($string, $ini, $len);
             }
         }
-    
+
         // Email для страниц
         global $email_auto_gen_pages_shortcodes_sds_options_and_settings;
         $email = $email_auto_gen_pages_shortcodes_sds_options_and_settings;
         if (empty($email)){
             $email = 'info@'.$_SERVER['HTTP_HOST']; // "info@domain.com"
         }
-    
+
         // Ссылка на главную страницу сайта
         $protocol = is_ssl() === TRUE ? 'https' : 'http';
         $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
-    
+
         // В начале получим текущую локаль
         $current_lang = get_locale(); // "ru_RU"
-    
+
         // MarkDown
         require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
         $MarkdownParser = new \cebe\markdown\Markdown();
-    
+
         if ($page_shortcode == "OTKAZ"){
             $HTML = $MarkdownParser->parse(file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/'.$current_lang.'.md'));
             $HTML = $HTML.'<style>li.bf-breadcrumb-item.bf-breadcrumb-end {display: none !important;}</style>';
@@ -271,17 +271,17 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
             $HTML .= '</div>';
             }
         }
-    
+
         $HTML = str_replace('{{%EMAIL%}}','<a href="mailto:'.$email.'">'.$email.'</a>',$HTML);
         $HTML = str_replace('{{%THIS_SITE%}}','<a href="'.$url_this_site.'">'.$url_this_site.'</a>',$HTML);
-    
+
 
         // Удаляем имя страницы
         $HTML = preg_replace('/\[name_page(.+?)name_page\]/','',$HTML);
-    
+
         // И готовый HTML
         $HTML = str_replace('{{%THIS_SITE%}}','<a href="'.$url_this_site.'">'.$url_this_site.'</a>',$HTML);
-    
+
         return $HTML;
     });
 
@@ -483,6 +483,8 @@ if (!is_admin()){
          */
             $buffer = str_replace("font-face{font-family:'FontAwesome';","font-face{font-family:'FontAwesome';font-display: swap !important;",$buffer);
             $buffer = str_replace('font-face{font-family:"bs-icons";','font-face{font-family:"bs-icons";font-display: swap !important;',$buffer);
+            // Fixes https://community.cloudflare.com/t/how-to-reduce-fontawesome-webfont-load-time-using-cloudflare/228056
+            $buffer = str_replace('?v=4.7.0','',$buffer);
 
 
     //    dd($buffer);
