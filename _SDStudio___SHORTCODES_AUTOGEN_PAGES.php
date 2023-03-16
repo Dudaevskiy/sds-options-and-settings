@@ -90,6 +90,7 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
         }
 
         if ($page_shortcode == "HTML_SITEMAP"){
+            if (!is_admin()){
             $RAW_MD = $MarkdownParser->parse(file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md'));
             $text_page = get_string_between($RAW_MD, '[text_page]', '[/text_page]');
             $title_post = get_string_between($RAW_MD, '[title_post]', '[/title_post]');
@@ -268,6 +269,7 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
             $HTML .= '</div>';
 
             $HTML .= '</div>';
+            }
         }
     
         $HTML = str_replace('{{%EMAIL%}}','<a href="mailto:'.$email.'">'.$email.'</a>',$HTML);
