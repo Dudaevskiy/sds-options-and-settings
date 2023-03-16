@@ -160,7 +160,8 @@ if (!empty($enable_hot_key_login) && $enable_hot_key_login == 1) {
                     // webpagetest (Ctrl+Shift+6)
                     else if (e.ctrlKey && e.shiftKey && e.which == 54) {
                         //https://search.google.com/search-console?resource_id=https://android.inform.click/
-                        let link_google_console = 'https://www.webpagetest.org/?url='+window.location.href;
+                        // let link_google_console = 'https://www.webpagetest.org/?url='+window.location.href;
+                        let link_google_console = 'https://gtmetrix.com/?url='+window.location.href;
                         window.open(link_google_console, '_blank');
                     }
                 };

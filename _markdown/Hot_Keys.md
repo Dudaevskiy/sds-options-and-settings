@@ -10,4 +10,4 @@
 
 **Ctrl+Shift+5** - PageSpeed Insights
 
-**Ctrl+Shift+6** - WebPageTest
+**Ctrl+Shift+6** - gtmetrix.com
