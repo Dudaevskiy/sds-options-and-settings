@@ -16,7 +16,7 @@
  * Plugin Name:       SDStudio addons, options and settings
  * Plugin URI:        https://techblog.sdstudio.top/blog
  * Description:       Set of useful additions, settings, improvements for your site from <a href="https://sdstudio.top"><strong>Serhii Dudchenko</strong></a>
- * Version:           2.2.28
+ * Version:           2.2.29
  * Author:            Serhii Dudchenko
  * Author URI:        https://sdstudio.top
  * License:           GPL-2.0+
@@ -117,7 +117,7 @@ function run_sds_options_and_settings() {
 
     require_once plugin_dir_path( __FILE__ ) . '_Redux_Framework_Parser_POST_data.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio__PAGE_SPEED_FIXEs.php';
-    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_ENABLE_UPLOAD_FILES.php';
+//    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_ENABLE_UPLOAD_FILES.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_add_images_sizes.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_images_sizes.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_image_settings.php';

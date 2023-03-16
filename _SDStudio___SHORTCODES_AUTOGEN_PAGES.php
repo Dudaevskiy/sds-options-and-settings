@@ -33,6 +33,18 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
     add_shortcode('SDStudio_PAGE_AUTOGEN', function($attributes) {
     
         $page_shortcode = $attributes['page'];
+
+        // Получение строки между значениями
+        if (!function_exists('get_string_between')){
+            function get_string_between($string, $start, $end){
+                $string = ' ' . $string;
+                $ini = strpos($string, $start);
+                if ($ini == 0) return '';
+                $ini += strlen($start);
+                $len = strpos($string, $end, $ini) - $ini;
+                return substr($string, $ini, $len);
+            }
+        }
     
         // Email для страниц
         global $email_auto_gen_pages_shortcodes_sds_options_and_settings;
@@ -76,38 +88,197 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
             $current_site_title = get_bloginfo('name');
             $HTML = str_replace('%%SITE_TITLE%%',$current_site_title,$HTML);
         }
+
+        if ($page_shortcode == "HTML_SITEMAP"){
+            $RAW_MD = $MarkdownParser->parse(file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md'));
+            $text_page = get_string_between($RAW_MD, '[text_page]', '[/text_page]');
+            $title_post = get_string_between($RAW_MD, '[title_post]', '[/title_post]');
+            $title_categories = get_string_between($RAW_MD, '[title_categories]', '[/title_categories]');
+
+
+            $HTML = $text_page.'<br>';
+            $HTML = $HTML.'<style>li.bf-breadcrumb-item.bf-breadcrumb-end {display: none !important;}</style>';
+
+            $url_end = '';
+            global $sitepress;
+            if ($sitepress) {
+                $sdstudio_current_post_lang = apply_filters( 'wpml_post_language_details', NULL, get_the_id() )["language_code"];
+                $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL );
+                if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL){
+                    $url_end =  '/'.$sdstudio_current_post_lang;
+                }
+            }
+
+            $HTML = str_replace('{{%THIS_SITE%}}','<a href="'.$url_this_site.$url_end.'" >'.$url_this_site.$url_end.'</a>',$HTML);
+
+
+            $HTML .= '<div class="rank-math-html-sitemap">';
+
+            /***
+             * POSTS
+             */
+            $HTML .= '<div class="rank-math-html-sitemap__section rank-math-html-sitemap__section--post-type rank-math-html-sitemap__section--post">';
+            $HTML .= '    <h2 class="rank-math-html-sitemap__title">'.$title_post.'</h2>';
+            $HTML .= '<ul class="rank-math-html-sitemap__list">';
+
+            $query = new WP_Query( array(
+                'post_type' => 'post',
+                'post_status' => 'publish',
+                'posts_per_page' => -1,
+                'order' => 'ASC',
+                'orderby' => 'date',
+//                'fields' => 'ids'
+            ));
+
+
+            /**
+             * Получаем ID постов которые нужно исключить из вывода
+             */
+            $redux = get_option( 'redux_sds_options_and_settings' );
+            $HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS = $redux['HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS__auto_gen_pages_shortcodes_sds-options-and-settings'];
+            $HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS = str_replace(' ','',$HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS);
+
+            $term_exclude = null;
+            $term_add_in_exclude_posts = [];
+
+            global $sitepress;
+            if (strpos($HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS, ',') !== false){
+                $term_exclude = explode(',',$HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS);
+                /***
+                 * Добавляем переводы
+                 */
+                foreach ($term_exclude as $term){
+                    // Получаем переводы категории
+                    $element_type = 'post_post';
+                    $trid = $sitepress->get_element_trid((int)$term, $element_type);
+                    $translation_terms = $sitepress->get_element_translations($trid, $element_type);
+
+                    if ($translation_terms){
+                        foreach ($translation_terms as $add_translation_excludes){
+                            $term_add_in_exclude_posts[] = $add_translation_excludes->element_id;
+                        }
+                    } else {
+                        $term_add_in_exclude_posts[] = $term;
+                    }
+                }
+
+
+
+            } else if ($HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS && $HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS !== ""){
+                $term_add_in_exclude_posts[] = $HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS;
+            }
+
+
+            foreach ($query->posts as $post){
+//                <span class="rank-math-html-sitemap__date">'.$post->post_date.'</span>
+                if ($term_add_in_exclude_posts && !in_array($post->ID,$term_add_in_exclude_posts ) || $HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS == "") {
+                    $HTML .= '          <li class="rank-math-html-sitemap__item">
+                                  <a href="' . get_permalink($post->ID) . '" data_ind="' . $post->ID . '" class="rank-math-html-sitemap__link" target="_blank">' . $post->post_title . '</a>
+                                </li>';
+                }
+            }
+
+            $HTML .= '</ul>';
+            $HTML .= '</div>';
+
+            /***
+             * CATEGORIES
+             */
+            $HTML .= '<div class="rank-math-html-sitemap__section rank-math-html-sitemap__section--taxonomy rank-math-html-sitemap__section--category">';
+            $HTML .= '    <h2 class="rank-math-html-sitemap__title">'.$title_categories.'</h2>';
+            $HTML .= '<ul class="rank-math-html-sitemap__list">';
+
+
+
+
+            $args = [
+//            'show_option_all'    => 'Усі',
+                'orderby' => 'count',
+                'order' => 'DESC',
+                'hide_empty' => 0,
+                'selected' => isset($_REQUEST['wp_dropdown_categories']) ? $_REQUEST['wp_dropdown_categories'] : '',
+                'hierarchical' => 1,
+                'name' => 'wp_dropdown_categories',
+                'taxonomy' => 'category',
+                'hide_if_empty' => true,
+                // Запрещаем вывод всего списка категорий в HTML документа
+                'echo' => false,
+                'value_field' => array('term_id', 'description', 'parent')
+            ];
+
+            $all_get_terms = wp_dropdown_categories($args);
+            $all_get_terms = preg_replace("/<select(.+?)>/","", $all_get_terms);
+            $all_get_terms = preg_replace("/<\/select>/","", $all_get_terms);
+            $all_get_terms = explode("\n", $all_get_terms);
+
+
+            /**
+             * Получаем ID категорий которіе нужно исключить из вівода
+             */
+            $redux = get_option( 'redux_sds_options_and_settings' );
+            $HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS = $redux['HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS__auto_gen_pages_shortcodes_sds-options-and-settings'];
+            $HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS = str_replace(' ','',$HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS);
+
+            $term_exclude = null;
+            $term_add_in_exclude = [];
+
+            global $sitepress;
+            if (strpos($HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS, ',') !== false){
+                $term_exclude = explode(',',$HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS);
+                /***
+                 * Добавляем переводы
+                 */
+                foreach ($term_exclude as $term){
+                    // Получаем переводы категории
+                    $element_type = 'tax_category';
+                    $trid = $sitepress->get_element_trid((int)$term, $element_type);
+                    $translation_terms = $sitepress->get_element_translations($trid, $element_type);
+
+                    if ($translation_terms){
+                        foreach ($translation_terms as $add_translation_excludes){
+                            $term_add_in_exclude[] = $add_translation_excludes->element_id;
+                        }
+                    } else {
+                        $term_add_in_exclude[] = $term;
+                    }
+                }
+
+
+
+            } else if ($HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS && $HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS !== ""){
+                $term_add_in_exclude[] = $HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS;
+            }
+                foreach ($all_get_terms as $get_term) {
+                    if ($get_term !== "")  {
+                        $id_term = explode('value="', $get_term)[1];
+                        $id_term = explode('">', $id_term)[0];
+
+                        $title_term = explode('</option>', $get_term)[0];
+                        $title_term = explode('">', $title_term)[1];
+
+                        if ($term_add_in_exclude && !in_array($id_term,$term_add_in_exclude ) || $HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS == ""){
+                            $HTML .= '          <li class="rank-math-html-sitemap__item">
+                                          <a href="' . get_term_link((int)$id_term, 'category') . '" class="rank-math-html-sitemap__link"  data_ind="' . $id_term . '" target="_blank">' . $title_term . '</a>
+                                          
+                                        </li>';
+                        }
+                    }
+                }
+            $HTML .= '</ul>';
+            $HTML .= '</div>';
+
+            $HTML .= '</div>';
+        }
     
         $HTML = str_replace('{{%EMAIL%}}','<a href="mailto:'.$email.'">'.$email.'</a>',$HTML);
         $HTML = str_replace('{{%THIS_SITE%}}','<a href="'.$url_this_site.'">'.$url_this_site.'</a>',$HTML);
     
-        // Получение строки между значениями
-        /**
-         * @param $string
-         * @param $start
-         * @param $end
-         * @return false|string
-         *
-         * $fullstring = 'this is my [tag]dog[/tag]';
-         * $parsed = get_string_between($fullstring, '[tag]', '[/tag]');
-         */
-        if (!function_exists('get_string_between')){
-            function get_string_between($string, $start, $end){
-                $string = ' ' . $string;
-                $ini = strpos($string, $start);
-                if ($ini == 0) return '';
-                $ini += strlen($start);
-                $len = strpos($string, $end, $ini) - $ini;
-                return substr($string, $ini, $len);
-            }
-        }
+
         // Удаляем имя страницы
         $HTML = preg_replace('/\[name_page(.+?)name_page\]/','',$HTML);
     
         // И готовый HTML
         $HTML = str_replace('{{%THIS_SITE%}}','<a href="'.$url_this_site.'">'.$url_this_site.'</a>',$HTML);
-
-    
-    
     
         return $HTML;
     });
@@ -175,6 +346,10 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
 
                 if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="KONTACTS"') !== false) {
                     $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
+                }
+
+                if (strpos($get_content->post_content, 'SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"') !== false) {
+                    $file_get = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
                 }
 
                 // Имя страницы
@@ -259,6 +434,7 @@ if (!is_admin()){
         $new_link_KONF = $redux['KONF_SLUG_auto_gen_pages_shortcodes_sds-options-and-settings'];
         $new_link_OTKAZ = $redux['OTKAZ_SLUG_auto_gen_pages_shortcodes_sds-options-and-settings'];
         $new_link_KONTACTS = $redux['KONTACTS_SLUG_auto_gen_pages_shortcodes_sds-options-and-settings'];
+        $new_link_HTML_SITEMAP = $redux['HTML_SITEMAP_SLUG_auto_gen_pages_shortcodes_sds-options-and-settings'];
 
 
 
@@ -274,10 +450,14 @@ if (!is_admin()){
             $buffer = str_replace(array('https://%%sdstudio_autogen__KONF_URL%%','http://%%sdstudio_autogen__KONF_URL%%','%%sdstudio_autogen__KONF_URL%%'),'/'.ICL_LANGUAGE_CODE.$new_link_KONF,$buffer);
             $buffer = str_replace(array('https://%%sdstudio_autogen__OTKAZ_URL%%','http://%%sdstudio_autogen__OTKAZ_URL%%','%%sdstudio_autogen__OTKAZ_URL%%'),'/'.ICL_LANGUAGE_CODE.$new_link_OTKAZ,$buffer);
             $buffer = str_replace(array('https://%%sdstudio_autogen__KONTACTS_URL%%','http://%%sdstudio_autogen__KONTACTS_URL%%','%%sdstudio_autogen__KONTACTS_URL%%'),'/'.ICL_LANGUAGE_CODE.$new_link_KONTACTS,$buffer);
+
+            $buffer = str_replace(array('https://%%sdstudio_autogen__HTML_SITEMAP_URL%%','http://%%sdstudio_autogen__HTML_SITEMAP_URL%%','%%sdstudio_autogen__HTML_SITEMAP_URL%%'),'/'.ICL_LANGUAGE_CODE.$new_link_HTML_SITEMAP,$buffer);
         } else {
             $buffer = str_replace(array('https://%%sdstudio_autogen__KONF_URL%%','http://%%sdstudio_autogen__KONF_URL%%','%%sdstudio_autogen__KONF_URL%%'),$new_link_KONF,$buffer);
             $buffer = str_replace(array('https://%%sdstudio_autogen__OTKAZ_URL%%','http://%%sdstudio_autogen__OTKAZ_URL%%','%%sdstudio_autogen__OTKAZ_URL%%'),$new_link_KONF,$buffer);
             $buffer = str_replace(array('https://%%sdstudio_autogen__KONTACTS_URL%%','http://%%sdstudio_autogen__KONTACTS_URL%%','%%sdstudio_autogen__KONTACTS_URL%%'),$new_link_KONTACTS,$buffer);
+
+            $buffer = str_replace(array('https://%%sdstudio_autogen__HTML_SITEMAP_URL%%','http://%%sdstudio_autogen__HTML_SITEMAP_URL%%','%%sdstudio_autogen__HTML_SITEMAP_URL%%'),$new_link_HTML_SITEMAP,$buffer);
         }
             // KONF
             $file_get_KONF = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/'.$current_lang.'.md');
@@ -291,6 +471,16 @@ if (!is_admin()){
             $file_get_KONTACTS = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
             $new_name_KONTACTS = get_string_between($file_get_KONTACTS, '[name_page]', '[/name_page]');
             $buffer = str_replace('%%sdstudio_autogen__KONTACTS_TITLE%%',$new_name_KONTACTS,$buffer);
+            // HTML_SITEMAP
+            $file_get_HTML_SITEMAP = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
+            $new_name_HTML_SITEMAP = get_string_between($file_get_HTML_SITEMAP, '[name_page]', '[/name_page]');
+            $buffer = str_replace('%%sdstudio_autogen__HTML_SITEMAP_TITLE%%',$new_name_HTML_SITEMAP,$buffer);
+
+        /***
+         * PageSpeed Fixes
+         */
+            $buffer = str_replace("font-face{font-family:'FontAwesome';","font-face{font-family:'FontAwesome';font-display: swap !important;",$buffer);
+            $buffer = str_replace('font-face{font-family:"bs-icons";','font-face{font-family:"bs-icons";font-display: swap !important;',$buffer);
 
 
     //    dd($buffer);
@@ -362,6 +552,29 @@ if (!is_admin()){
                 $page_name = get_string_between($file_get_KONTACTS, '[name_page]', '[/name_page]');
                 $content = $page_name;
             }
+
+            //HTML_SITEMAP
+            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+                $file_get_HTML_SITEMAP = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
+                $page_name = get_string_between($file_get_HTML_SITEMAP, '[name_page]', '[/name_page]');
+
+                // Ссылка на главную страницу сайта
+                $protocol = is_ssl() === TRUE ? 'https' : 'http';
+                $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
+
+                $url_end = '';
+                global $sitepress;
+                if ($sitepress) {
+                    $sdstudio_current_post_lang = apply_filters( 'wpml_post_language_details', NULL, get_the_id() )["language_code"];
+                    $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL );
+                    if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL){
+                        $url_end =  '/'.$sdstudio_current_post_lang;
+                    }
+                }
+
+
+                $content = $page_name.' - '.$url_this_site.$url_end;
+            }
         }
         return $content;
     });
@@ -400,6 +613,10 @@ if (!is_admin()){
                 $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
             }
 
+            //HTML_SITEMAP
+            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
+            }
 
             // Получение строки между значениями
             /**
@@ -423,9 +640,26 @@ if (!is_admin()){
             }
             // Удаляем имя страницы
             $HTML = preg_replace('/\[name_page(.+?)name_page\]/','',$HTML);
+            //HTML_SITEMAP
+            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+                $HTML =  get_string_between($HTML, '[text_page]', '[/text_page]');
+
+                $url_end = '';
+                global $sitepress;
+                if ($sitepress) {
+                    $sdstudio_current_post_lang = apply_filters( 'wpml_post_language_details', NULL, get_the_id() )["language_code"];
+                    $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL );
+                    if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL){
+                        $url_end =  '/'.$sdstudio_current_post_lang;
+                    }
+                }
+
+                $HTML = str_replace('{{%THIS_SITE%}}',$url_this_site.$url_end,$HTML);
+            }
             $HTML = str_replace('{{%EMAIL%}}',$email,$HTML);
             $HTML = str_replace('{{%THIS_SITE%}}',$url_this_site,$HTML);
             $HTML = str_replace(array('*','_','#'),'',$HTML);
+
             $HTML = mb_substr($HTML, 0, 200);
             $description = $HTML.'...';
         }

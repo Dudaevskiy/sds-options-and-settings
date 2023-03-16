@@ -1,0 +1,4 @@
+[name_page] Mappa del sito HTML [/name_page] 
+[text_page] Questa pagina contiene tutti i link ai record pubblicati e alle sezioni del nostro sito {{%THIS_SITE%}}. Abbiamo creato questa sitemap per aiutarti a trovare facilmente le informazioni che ti interessano e navigare nel sito. Buona lettura e ricerca di successo! [/text_page] 
+[title_post] Voci [/title_post] 
+[title_categories] Categorie [/title_categories]

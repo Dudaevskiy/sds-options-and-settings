@@ -799,33 +799,33 @@ $section = [
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 
-/**
- * Активация загрузки файлов
- */
-$section = [
-    'title' => __( 'Загрузка файлов', 'sds-options-and-settings' ),
-    'id'    => 'enable_upload_other_mmi_types_files_sds_options_and_settings',
-    'subsection' => false,
-    'desc'  => __( '(активация загрузки ранее не разрешенных типов файлов)', 'sds-options-and-settings' ),
-    // Иконки брать здесь
-    // http://elusiveicons.com/icons/
-    'icon'  => 'el el-file-new',
-    'fields' => [
-        [
-            //Link: https://docs.redux.io/core-fields/switch.html
-
-            'id'       => 'svg_enable_upload_other_mmi_types_files_sds_options_and_settings',
-            'type'     => 'switch',
-            'title'    => __('SVG - Активировать загрузку файлов формата svg', 'sds-options-and-settings'),
-            'subtitle'    => '
-            Если после применения SVG не загружается, добавьте в начало SVG файла данную строку <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</code></pre>    
-            ',
-            'desc'     => __('После применения настройки, появится возможность загружать файлы формата SVG в медиатеку WordPress', 'sds-options-and-settings'),
-            'default'  => true,
-        ],
-    ],
-];
-Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+///**
+// * Активация загрузки файлов
+// */
+//$section = [
+//    'title' => __( 'Загрузка файлов', 'sds-options-and-settings' ),
+//    'id'    => 'enable_upload_other_mmi_types_files_sds_options_and_settings',
+//    'subsection' => false,
+//    'desc'  => __( '(активация загрузки ранее не разрешенных типов файлов)', 'sds-options-and-settings' ),
+//    // Иконки брать здесь
+//    // http://elusiveicons.com/icons/
+//    'icon'  => 'el el-file-new',
+//    'fields' => [
+//        [
+//            //Link: https://docs.redux.io/core-fields/switch.html
+//
+//            'id'       => 'svg_enable_upload_other_mmi_types_files_sds_options_and_settings',
+//            'type'     => 'switch',
+//            'title'    => __('SVG - Активировать загрузку файлов формата svg', 'sds-options-and-settings'),
+//            'subtitle'    => '
+//            Если после применения SVG не загружается, добавьте в начало SVG файла данную строку <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</code></pre>
+//            ',
+//            'desc'     => __('После применения настройки, появится возможность загружать файлы формата SVG в медиатеку WordPress', 'sds-options-and-settings'),
+//            'default'  => true,
+//        ],
+//    ],
+//];
+//Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 
 
@@ -1334,6 +1334,15 @@ $section = [
             'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
             'default'  => true,
         ],
+        [
+            //Link: https://docs.redux.io/core-fields/switch.html
+            'id'       => 'enable_editposts_rankmatch_keywords_posts_sds-options-and-settings',
+            'type'     => 'switch',
+            'icon'  => 'el el-chevron-right',
+            'title'    => __('Активировать Rank Match ключевые слова для отображения в мета полях записей', 'redux-framework-demo'),
+            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+            'default'  => false,
+        ],
     ],
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
@@ -1832,7 +1841,7 @@ $section = [
             'title'    => __('Включить Авто генерацию страниц?', 'redux-framework-demo'),
             'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
             'default'  => false,
-            'desc'  => 'После того как функция будет активирована на сайте появится возможность использования шорт кодов для автоматической генерации страниц <br>[SDStudio_PAGE_AUTOGEN page="OTKAZ"] - "Отказ от ответственности"<br>[SDStudio_PAGE_AUTOGEN page="KONF"] - "Политика конфединциальности"<br>[SDStudio_PAGE_AUTOGEN page="KONTACTS"] - "Контакты"<br><hr>[SDStudio_PAGE_AUTOGEN page="FOOTER_OTKAZ"] - Шорт код для вставки в футер сайта. Содержащий текст отказа от ответственности и прочее<br>[SDStudio_PAGE_AUTOGEN page="FOOTER_COPY"] - Шорт код для вставки в футер сайта. Содержащий копирайт, год и "Все права защищены"<br>',
+            'desc'  => 'После того как функция будет активирована на сайте появится возможность использования шорт кодов для автоматической генерации страниц <br>[SDStudio_PAGE_AUTOGEN page="OTKAZ"] - "Отказ от ответственности"<br>[SDStudio_PAGE_AUTOGEN page="KONF"] - "Политика конфединциальности"<br>[SDStudio_PAGE_AUTOGEN page="KONTACTS"] - "Контакты"<br>[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"] - "HTML карта сайта"<br><hr>[SDStudio_PAGE_AUTOGEN page="FOOTER_OTKAZ"] - Шорт код для вставки в футер сайта. Содержащий текст отказа от ответственности и прочее<br>[SDStudio_PAGE_AUTOGEN page="FOOTER_COPY"] - Шорт код для вставки в футер сайта. Содержащий копирайт, год и "Все права защищены"<br>',
         ],
 
         [
@@ -1890,6 +1899,43 @@ $section = [
             //                                'desc' => '<br><br>',
             'default'  => false,
         ],
+
+        [
+
+            'id'       => 'HTML_SITEMAP_SLUG_auto_gen_pages_shortcodes_sds-options-and-settings',
+            'type'     => 'text',
+            'placeholder'  => '/html_sitemap/',
+            'title'    => __('Относительная ссылка - страницы для [SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"] шорткода', 'redux-framework-demo'),
+            'subtitle'  => 'Для меню иcпользуйте:<br>%%sdstudio_autogen__HTML_SITEMAP_TITLE%%<br>%%sdstudio_autogen__HTML_SITEMAP_URL%%',
+            'desc' => 'Вставьте относительную ссылку на страницу в которой вставлен шорт код. Ссылка на данную страницу будет отображена место `%%sdstudio_autogen__HTML_SITEMAP%%` (с учетом WPML переводов, но слаг у всех страницы переводов должен быть одинаковым)',
+            'required' => array('enable_auto_gen_pages_shortcodes_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+        [
+
+            'id'       => 'HTML_SITEMAP_SLUG_EXCLUDE_ID_POSTS__auto_gen_pages_shortcodes_sds-options-and-settings',
+            'type'     => 'text',
+            'placeholder'  => '156,123',
+            'title'    => __('&nbsp;&nbsp;&nbsp;Укажите ID записей которые будут удалены из HTML карты сайта', 'redux-framework-demo'),
+//            'subtitle'  => 'Для меню иcпользуйте:<br>%%sdstudio_autogen__HTML_SITEMAP_TITLE%%<br>%%sdstudio_autogen__HTML_SITEMAP_URL%%',
+            'desc' => 'Здесь указываются через запятую ID записей которые будут исключены из вывода на странице HTML карты сайта. Достаточно указать ID на одном языке, остальные языковые версии постов так же будут скрыты',
+            'required' => array('enable_auto_gen_pages_shortcodes_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
+        [
+
+            'id'       => 'HTML_SITEMAP_SLUG_EXCLUDE_ID_TERMS__auto_gen_pages_shortcodes_sds-options-and-settings',
+            'type'     => 'text',
+            'placeholder'  => '156,123',
+            'title'    => __('&nbsp;&nbsp;&nbsp;Укажите ID категорий которые будут удалены из HTML карты сайта', 'redux-framework-demo'),
+//            'subtitle'  => 'Для меню иcпользуйте:<br>%%sdstudio_autogen__HTML_SITEMAP_TITLE%%<br>%%sdstudio_autogen__HTML_SITEMAP_URL%%',
+            'desc' => 'Здесь указываются через запятую ID категорий которые будут исключены из вывода на странице HTML карты сайта. Достаточно указать ID на одном языке, остальные языковые версии категорий так же будут скрыты',
+            'required' => array('enable_auto_gen_pages_shortcodes_sds-options-and-settings', '=', 'true' ),
+            //                                'desc' => '<br><br>',
+            'default'  => false,
+        ],
     ],
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
@@ -1925,26 +1971,26 @@ $section = [
 //                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
 //            'desc'  => __('После применения опции, все ваши скрипты будут иметь data-handle атрибут, содержащий дескриптор скрипта, как показано на скриншоте ниже.', 'redux-framework-demo') ,
         ],
-        [
-            //Link: https://docs.redux.io/core-fields/switch.html
-            'id'       => 'enable_webfonts_swap_sds-options-and-settings',
-            'type'     => 'switch',
-            'title'    => __('Включить swap для веб шрифтов?', 'redux-framework-demo'),
-            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-            'default'  => false,
-            //                                'desc' => '<br><br>',
-    //                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
-    //            'desc'  => __('После применения опции, все ваши скрипты будут иметь data-handle атрибут, содержащий дескриптор скрипта, как показано на скриншоте ниже.', 'redux-framework-demo') ,
-        ],
-        [
-            //Link: https://docs.redux.io/core-fields/switch.html
-            'id'       => 'print_SWAP_bs_icons_SDStudio_swap_sds-options-and-settings',
-            'type'     => 'switch',
-            'title'    => __('PUBLISHER - Включить swap для веб шрифтов - bs_icons, FontAwesome?', 'redux-framework-demo'),
-            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-            'default'  => false,
-            'required' => array('enable_webfonts_swap_sds-options-and-settings', '=', 'true' ),
-        ],
+//        [
+//            //Link: https://docs.redux.io/core-fields/switch.html
+//            'id'       => 'enable_webfonts_swap_sds-options-and-settings',
+//            'type'     => 'switch',
+//            'title'    => __('Включить swap для веб шрифтов?', 'redux-framework-demo'),
+//            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+//            'default'  => false,
+//            //                                'desc' => '<br><br>',
+//    //                'required' => array('enable_table_CSS_add_design-sds-options-and-settings', '=', 'true' ),
+//    //            'desc'  => __('После применения опции, все ваши скрипты будут иметь data-handle атрибут, содержащий дескриптор скрипта, как показано на скриншоте ниже.', 'redux-framework-demo') ,
+//        ],
+//        [
+//            //Link: https://docs.redux.io/core-fields/switch.html
+//            'id'       => 'print_SWAP_bs_icons_SDStudio_swap_sds-options-and-settings',
+//            'type'     => 'switch',
+//            'title'    => __('PUBLISHER - Включить swap для веб шрифтов - bs_icons, FontAwesome?', 'redux-framework-demo'),
+//            'subtitle' => __('Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+//            'default'  => false,
+//            'required' => array('enable_webfonts_swap_sds-options-and-settings', '=', 'true' ),
+//        ],
     ],
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );

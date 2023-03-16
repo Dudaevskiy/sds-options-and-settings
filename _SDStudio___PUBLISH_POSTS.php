@@ -28,7 +28,17 @@ $email_users_publish_sdstudio_editor_tools = $redux['email_users_publish_posts_o
 global $enable_editposts_relfollow_posts_sds_options_and_settings;
 $enable_editposts_relfollow_posts_sds_options_and_settings = $redux['enable_editposts_relfollow_posts_sds-options-and-settings'];
 
+// RankMatch KeyWords
+global $enable_editposts_rankmatch_keywords_posts_sds;
+$enable_editposts_rankmatch_keywords_posts_sds = $redux['enable_editposts_rankmatch_keywords_posts_sds-options-and-settings'];
 
+if ($enable_editposts_rankmatch_keywords_posts_sds == 1){
+    /**
+    /**
+     * Add <meta name="keywords" content="focus keywords">.
+     */
+    add_filter( 'rank_math/frontend/show_keywords', '__return_true');
+}
 
 
 

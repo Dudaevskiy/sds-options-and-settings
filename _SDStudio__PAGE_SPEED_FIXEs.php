@@ -55,54 +55,76 @@ if ($_SDStudio__PAGE_SPEED_FIXEs == 1 ) {
 }
 
 
-
-if ($_enable_SWAP_bs_icons_SDStudio == 1 ) {
-//    ddd(get_template_directory_uri());
-//    /**
-//     * Встраиваем jQuery в тело страницы
-//     */
-//    add_action( 'wp_head', 'print_SWAP_bs_icons_SDStudio',1 );
-//    function print_SWAP_bs_icons_SDStudio(){
-//        echo '<!-- Publisher bs-icons SDStudio START -->';
-//        echo '<style>';
-//        echo '@font-face {';
-//        echo 'font-family: "bs-icons";';
-//        echo 'src:url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.eot");';
-//        echo 'src:url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.eot?#iefix") format("embedded-opentype"),url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.woff") format("woff"),url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.ttf") format("truetype"),url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.svg#bs-icons") format("svg");';
-//        echo 'font-weight: normal;';
-//        echo 'font-style: normal;';
-//        echo 'font-display: swap !important;';
-//        echo '}';
-//        echo '</style>';
-//        echo '<!-- Publisher bs-icons SDStudio END -->';
+//
+//if ($_enable_SWAP_bs_icons_SDStudio == 1 ) {
+//
+//    // Fast Google Fonts loading
+//    add_action( 'wp_head', 'add_google_fonts_preload', 1 );
+//    function add_google_fonts_preload() {
+//        ?>
+<!--        <link rel="preconnect"-->
+<!--              href="https://fonts.gstatic.com"-->
+<!--              crossorigin />-->
+<!--        <link rel="preload"-->
+<!--              as="style"-->
+<!--              href="//fonts.googleapis.com/css?family=Lato%3Aregular%2C700&display=swap" />-->
+<!--        <link rel="stylesheet"-->
+<!--              href="//fonts.googleapis.com/css?family=Lato%3Aregular%2C700&display=swap"-->
+<!--              media="print"-->
+<!--              onload="this.media='all'" />-->
+<!--        <link rel="stylesheet"-->
+<!--              href="//fonts.googleapis.com/css?family=Lato%3Aregular%2C700&display=swap" />-->
+<!--        --><?php
 //    }
-
-    /**
-     * Встраиваем jQuery в тело страницы
-     * https://gamesradar.inform.click/wp-content/themes/publisher/includes/libs/better-framework/assets/fonts/fontawesome-webfont.woff2?v=4.7.0
-     */
-//    add_action( 'wp_head', 'print_SWAP_PUBLISHER_FontAwesome_SDStudio',1 );
-    function print_SWAP_PUBLISHER_FontAwesome_SDStudio(){
-//        echo '<!-- Publisher FontAwesome SDStudio START --><style>body { background-color: #f00; }</style>';
-        ?>
-        <style>
-        body { background-color: #f00; }
-        </style>
-        <?php
-//        echo '<style>';
-
-//        echo '@font-face {';
-//        echo 'font-family: "FontAwesome" !important;';
-//        echo 'src: url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.eot?v=4.7.0\'); !important;';
-//        echo 'src: url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0\') format(\'embedded-opentype\'),url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.woff2?v=4.7.0\') format(\'woff2\'),url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.woff?v=4.7.0\') format(\'woff\'),url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.ttf?v=4.7.0\') format(\'truetype\'),url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular\') format(\'svg\'); !important;';
-//        echo 'font-weight: normal;';
-//        echo 'font-style: normal;';
-
-//        echo 'font-display: swap !important;';
-//        echo '}';
-
-
-//        echo '</style>';
-//        echo '<!-- Publisher FontAwesome SDStudio END -->';
-    }
-}
+//
+//
+//
+//////    ddd(get_template_directory_uri());
+//////    /**
+//////     * Встраиваем jQuery в тело страницы
+//////     */
+//////    add_action( 'wp_head', 'print_SWAP_bs_icons_SDStudio',1 );
+//////    function print_SWAP_bs_icons_SDStudio(){
+//////        echo '<!-- Publisher bs-icons SDStudio START -->';
+//////        echo '<style>';
+//////        echo '@font-face {';
+//////        echo 'font-family: "bs-icons";';
+//////        echo 'src:url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.eot");';
+//////        echo 'src:url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.eot?#iefix") format("embedded-opentype"),url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.woff") format("woff"),url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.ttf") format("truetype"),url("'.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/bs-icons.svg#bs-icons") format("svg");';
+//////        echo 'font-weight: normal;';
+//////        echo 'font-style: normal;';
+//////        echo 'font-display: swap !important;';
+//////        echo '}';
+//////        echo '</style>';
+//////        echo '<!-- Publisher bs-icons SDStudio END -->';
+//////    }
+////
+////    /**
+////     * Встраиваем jQuery в тело страницы
+////     * https://gamesradar.inform.click/wp-content/themes/publisher/includes/libs/better-framework/assets/fonts/fontawesome-webfont.woff2?v=4.7.0
+////     */
+//////    add_action( 'wp_head', 'print_SWAP_PUBLISHER_FontAwesome_SDStudio',1 );
+////    function print_SWAP_PUBLISHER_FontAwesome_SDStudio(){
+//////        echo '<!-- Publisher FontAwesome SDStudio START --><style>body { background-color: #f00; }</style>';
+////        ?>
+<!--        <style>-->
+<!--        body { background-color: #f00; }-->
+<!--        </style>-->
+<?php
+//////        echo '<style>';
+////
+//////        echo '@font-face {';
+//////        echo 'font-family: "FontAwesome" !important;';
+//////        echo 'src: url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.eot?v=4.7.0\'); !important;';
+//////        echo 'src: url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0\') format(\'embedded-opentype\'),url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.woff2?v=4.7.0\') format(\'woff2\'),url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.woff?v=4.7.0\') format(\'woff\'),url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.ttf?v=4.7.0\') format(\'truetype\'),url(\''.get_template_directory_uri().'/includes/libs/better-framework/assets/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular\') format(\'svg\'); !important;';
+//////        echo 'font-weight: normal;';
+//////        echo 'font-style: normal;';
+////
+//////        echo 'font-display: swap !important;';
+//////        echo '}';
+////
+////
+//////        echo '</style>';
+//////        echo '<!-- Publisher FontAwesome SDStudio END -->';
+////    }
+//}
