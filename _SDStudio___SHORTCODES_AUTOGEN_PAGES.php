@@ -197,7 +197,7 @@ if ($enable_auto_gen_pages_shortcodes_sds_options_and_settings == 1) {
                 'orderby' => 'count',
                 'order' => 'DESC',
                 'hide_empty' => 0,
-                'selected' => isset($_REQUEST['wp_dropdown_categories']) ? $_REQUEST['wp_dropdown_categories'] : '',
+//                'selected' => isset($_REQUEST['wp_dropdown_categories']) ? $_REQUEST['wp_dropdown_categories'] : '',
                 'hierarchical' => 1,
                 'name' => 'wp_dropdown_categories',
                 'taxonomy' => 'category',
