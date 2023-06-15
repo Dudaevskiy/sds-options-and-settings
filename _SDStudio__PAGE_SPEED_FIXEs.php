@@ -2,10 +2,10 @@
 $redux = get_option( 'redux_sds_options_and_settings' );
 global $_SDStudio__PAGE_SPEED_FIXEs;
 $_SDStudio__PAGE_SPEED_FIXEs = $redux['enable_js_inlineinpage_sds-options-and-settings'];
-global $_enable_webfonts_swap;
-$_enable_webfonts_swap = $redux['enable_webfonts_swap_sds-options-and-settings'];
-global $_enable_SWAP_bs_icons_SDStudio;
-$_enable_SWAP_bs_icons_SDStudio = $redux['print_SWAP_bs_icons_SDStudio_swap_sds-options-and-settings'];
+//global $_enable_webfonts_swap;
+//$_enable_webfonts_swap = $redux['enable_webfonts_swap_sds-options-and-settings'];
+//global $_enable_SWAP_bs_icons_SDStudio;
+//$_enable_SWAP_bs_icons_SDStudio = $redux['print_SWAP_bs_icons_SDStudio_swap_sds-options-and-settings'];
 
 
 
