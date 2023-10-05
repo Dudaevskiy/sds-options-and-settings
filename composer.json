@@ -1,6 +1,6 @@
 {
   "require": {
-    "composer/installers": "*",
+    "composer/installers": "^2.2",
     "reduxframework/redux-framework-4" : "^4.0",
     "cebe/markdown": "^1.2"
   },
@@ -25,5 +25,10 @@
         }
       }
     }
-  ]
+  ],
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  }
 }
