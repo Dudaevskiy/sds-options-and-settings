@@ -7,6 +7,12 @@
  */
 
 function sdstudio_get_images_sizes(){
+
+    if (!is_admin()){
+        return false;
+    }
+
+
 //    global $_wp_additional_image_sizes;
 //
 //    $sizes = array();
@@ -107,5 +113,7 @@ function sdstudio_get_images_sizes(){
 
     if (is_admin()){
         return $sdstudio_data_return;
+    } else {
+        return false;
     }
 }

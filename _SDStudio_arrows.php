@@ -89,8 +89,8 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
             function custom_posttype_get_adjacent_ID($direction = 'prev', $type, $current) {
                 // Получаем статус поста
                 $post_id = get_the_ID();
-                $post_data = get_postdata($post_id);
-                $post_status = $post_data['post_status'];
+                $post_data = get_post($post_id);
+                $post_status = $post_data->post_status;
 
                 // Get all posts with this custom post type
                 $query = array(
@@ -162,8 +162,8 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
 //                dd($type);
                 // Получаем статус поста
                 $post_id = get_the_ID();
-                $post_data = get_postdata($post_id);
-                $post_status = $post_data['post_status'];
+                $post_data = get_post($post_id);
+                $post_status = $post_data->post_status;
 
 
 
@@ -227,10 +227,9 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
 
             // Получаем статус поста
             $post_id = get_the_ID();
-            $post_data = get_postdata($post_id);
-            $post_type = $post_data['post_type'];
-//            dd($post_type);
-            $post_status = $post_data['post_status'];
+            $post_data = get_post($post_id);
+            $post_type = $post_data->post_type;
+            $post_status = $post_data->post_status;
 
             $prev_num = CURRENT_NUM_in_posts_get_adjacent_ID('prev', $type = $post_type);
             $next_num = CURRENT_NUM_in_posts_get_adjacent_ID('next', $type = $post_type);

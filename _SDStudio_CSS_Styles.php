@@ -16,8 +16,14 @@ if ($sds_enable_table_CSS_add_design_sds_options_and_settings == 1 ){
             return;
         }
 
+//            wp_register_style('sdstudio_table_css', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . '_SDStudio_CSS_Styles/sdstudio_table_css.css');
+//            wp_enqueue_style('sdstudio_table_css');
+
+        function sdstudio_enqueue_styles() {
             wp_register_style('sdstudio_table_css', SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL . '_SDStudio_CSS_Styles/sdstudio_table_css.css');
             wp_enqueue_style('sdstudio_table_css');
+        }
+        add_action('wp_enqueue_scripts', 'sdstudio_enqueue_styles');
 
             /**
              * JS

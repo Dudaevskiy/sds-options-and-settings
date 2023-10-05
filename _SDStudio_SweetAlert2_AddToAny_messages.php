@@ -65,7 +65,7 @@ function cbr_addtoany_and_sweetalert_share_addtoany(){
     }
 
 
-    $FullContent_Share_Popup;
+    $FullContent_Share_Popup = '';
     $FullContent_Share_Popup .= '<div id="SDSTudioSO_AddToAnyBlock" style="display: none" data-title="'.$SDSTudioSO_AddToAnyTitle .'">';
     $FullContent_Share_Popup .= '<div id="SDSTudioSO_AddToAnyBlock_for_SweetAlert2">';
     $FullContent_Share_Popup .= '<div class="a2a_kit a2a_kit_size_32 a2a_default_style">';

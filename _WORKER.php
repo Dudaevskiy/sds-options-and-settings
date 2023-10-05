@@ -500,9 +500,9 @@ $section = [
             'id'       => 'login_redirects-login-page-posts-sds-options-and-settings',
             'title' => __( 'Переадрисация при входе', 'login_redirects_login-page-posts-sds-options-and-settings' ),
             'type' => 'text',
-            'data' => array(
-                'login_redirects-sds-options-and-settings-login-url',
-            ),
+//            'data' => array(
+//                'login_redirects-sds-options-and-settings-login-url',
+//            ),
             'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'false' ),
             'default'  => '',
         ],
@@ -511,10 +511,11 @@ $section = [
                 'id'       => 'login_redirects-exit-page-posts-sds-options-and-settings',
                 'title' => __( 'Переадрисация при выходе', 'login_redirects_exit-page-posts-sds-options-and-settings' ),
                 'type' => 'text',
-                'data' => array(
-    //                'login_redirects-sds-options-and-settings-login-url',
-                    'login_redirects-sds-options-and-settings-exit-url',
-                ),
+                'data' => 'login_redirects-sds-options-and-settings-exit-url',
+//                'data' => array(
+//    //                'login_redirects-sds-options-and-settings-login-url',
+//                    'login_redirects-sds-options-and-settings-exit-url',
+//                ),
                 'required' => array('enable_wp_recall_options_sds-options-and-settings', '=', 'false' ),
                 'default'  => '/',
     //            'default'  => array(
@@ -788,9 +789,10 @@ $section = [
             'subtitle' => __('Укажите ссылку страницы входа, если она отличается от <code> /wp-admin</code>', 'redux-framework-demo'),
             'type' => 'text',
             'placeholder' => '/my-custom-login-page-link',
-            'data' => array(
-                'custom_url_login-sds-options-and-settings-login-url',
-            ),
+            'data' => 'custom_url_login-sds-options-and-settings-login-url',
+//            'data' => array(
+//                'custom_url_login-sds-options-and-settings-login-url',
+//            ),
             'default'  => '',
         ],
     ],
@@ -890,9 +892,9 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 /**
  * Размеры изображений
  */
-if (is_admin()){
-    $sdstudio_get_img_sizes = sdstudio_get_images_sizes();
-}
+
+$sdstudio_get_img_sizes = sdstudio_get_images_sizes();
+
 $section = [
     'title' => __( 'Размеры зарегистрированных изображений + добавление размеров ', 'images_sizes-sds-options-and-settings' ),
 //    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
