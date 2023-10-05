@@ -492,7 +492,12 @@ if (!is_admin()){
     }
 
     function sdstudio_replacer_for_autogenpages_buffer_start() { ob_start("sdstudio_replacer_for_autogenpages_callback"); }
-    function sdstudio_replacer_for_autogenpages_buffer_end() { ob_end_flush(); }
+//    function sdstudio_replacer_for_autogenpages_buffer_end() { ob_end_flush(); }
+    function sdstudio_replacer_for_autogenpages_buffer_end() {
+        if (ob_get_length()) {
+            ob_end_flush();
+        }
+    }
 
     add_action('after_setup_theme', 'sdstudio_replacer_for_autogenpages_buffer_start');
     add_action('shutdown', 'sdstudio_replacer_for_autogenpages_buffer_end');

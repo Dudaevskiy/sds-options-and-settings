@@ -86,7 +86,8 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
              * https://bit.ly/3eAYFeZ
              * custom_posttype_get_adjacent_ID('prev', 'project', get_the_ID());
              */
-            function custom_posttype_get_adjacent_ID($direction = 'prev', $type, $current) {
+//            function custom_posttype_get_adjacent_ID($direction = 'prev', $type, $current) {
+            function custom_posttype_get_adjacent_ID($type, $current, $direction = 'prev'){
                 // Получаем статус поста
                 $post_id = get_the_ID();
                 $post_data = get_post($post_id);
@@ -242,12 +243,12 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
 
                 if ($post_status == 'publish'){
 
-                        $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID()));
+                        $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev' ));
 
                     if ($PrevLink == false){
                         $PrevLink = "#";
                     }
-                        $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()));
+                        $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next'));
 
                     if ($NextLink == false){
                         $NextLink = "#";
@@ -256,20 +257,20 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                 } else {
                     if ($post_type == 'post') {
                         // Для всех других статусов, делаем ссылку для просмотра
-                        $PrevLink = custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID());
+                        $PrevLink = custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev');
                         if ($PrevLink !== "#"){
                             $PrevLink = '/?p='.$PrevLink.'&preview=true';
                         }
 
-                        $NextLink = custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID());
+                        $NextLink = custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next');
                         if ($NextLink !== "#"){
                             $NextLink = '/?p=' .$NextLink. '&preview=true';
                         }
 
 
                     } else if ($post_type == 'orig_post') {
-                        $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())   );
-                        $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())   );
+                        $PrevLink = get_the_permalink( custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev')   );
+                        $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next')   );
                     }
                 }
 
@@ -312,10 +313,10 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                                         line-height: 1.3;
                                         font-size: 14px;
                                     ">
-                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID()))?></b>
+                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev'))?></b>
                                     </div>
 
-                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID('prev', $post_type, get_the_ID())))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
+                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev')))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
                                 </span>
                             </button>
                         </a>
@@ -336,7 +337,7 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                     }
                     ?>
                     <div class="alignright sdstudio_NextLink">
-                        <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()))?>">
+                        <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next'))?>">
                             <button class="et" style="
                                 text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
                                 border: none;
@@ -360,10 +361,10 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                                         line-height: 1.3;
                                         font-size: 14px;
                                     ">
-                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID()))?></b>
+                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next'))?></b>
                                     </div>
 
-                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID('next', $post_type, get_the_ID())))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
+                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next')))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
                                 </span>
                             </button>
                         </a>
