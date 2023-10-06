@@ -273,51 +273,117 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
                         $NextLink = get_the_permalink( custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next')   );
                     }
                 }
+//
+//                    if ($PrevLink !== "#"){
+//                    ?>
+<!--                    <div class="alignleft sdstudio_PrevLink">-->
+<!--                        --><?php
+//
+//                    global $sitepress;
+//                    if ($sitepress && $post_status !== 'publish') {
+//                        $current_lang = $sitepress->get_current_language();
+//                        $default_lang = $sitepress->get_default_language();
+//
+//                        if ($default_lang !== $current_lang){
+//                            $PrevLink = '/'.$current_lang.$PrevLink;
+//                        }
+//                    }
+//                        ?>
+<!--                        <a href="--><?php //echo $PrevLink; ?><!--">-->
+<!--                            <button class="et" style="-->
+<!--                                border: none;-->
+<!--                                text-shadow: 2px 2px 4px rgba(0,0,0,0.6);-->
+<!--                                background-color: transparent !important;-->
+<!--                            ">-->
+<!--                                                            «-->
+<!--                                <span class="et-right-bottom" style="-->
+<!--                                    border: none;-->
+<!--                                    background-color: white;-->
+<!--                                    max-width: 168px;-->
+<!--                                ">-->
+<!---->
+<!--                                    <span style="text-align: left;min-width: 100%;display: block;margin-top: -13px;"">-->
+<!--                                        <b>--><?php //echo $prev_num?><!--</b> / --><?php //echo $SDStudio_PostsLength?>
+<!--                                    </span>-->
+<!--                                    <hr style="-->
+<!--                                        margin-top: -10px;-->
+<!--                                        margin-bottom: 7px;-->
+<!--                                    ">-->
+<!--                                    <div style="-->
+<!--                                        line-height: 1.3;-->
+<!--                                        font-size: 14px;-->
+<!--                                    ">-->
+<!--                                        <b>--><?php //echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev'))?><!--</b>-->
+<!--                                    </div>-->
+<!---->
+<!--                                    <img src="--><?php //echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev')))[0]?><!--" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">-->
+<!--                                </span>-->
+<!--                            </button>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                    --><?php
+//                }
 
-                    if ($PrevLink !== "#"){
+                if ($PrevLink !== "#") {
+                    // Отримання даних для попереднього посту
+                    $prev_post_id = custom_posttype_get_adjacent_ID($post_type, get_the_ID(), 'prev');
+                    if ($prev_post_id) {
+                        $prev_title = get_the_title($prev_post_id);
+                        $prev_thumbnail_id = get_post_thumbnail_id($prev_post_id);
+                        if ($prev_thumbnail_id) {
+                            $prev_thumbnail_url = wp_get_attachment_image_src($prev_thumbnail_id)[0];
+                        }
+                    } else {
+                        $prev_title = '';
+                        $prev_thumbnail_url = '';
+                    }
+
+                    // Виведення кнопки
                     ?>
                     <div class="alignleft sdstudio_PrevLink">
                         <?php
+                        global $sitepress;
+                        if ($sitepress && $post_status !== 'publish') {
+                            $current_lang = $sitepress->get_current_language();
+                            $default_lang = $sitepress->get_default_language();
 
-                    global $sitepress;
-                    if ($sitepress && $post_status !== 'publish') {
-                        $current_lang = $sitepress->get_current_language();
-                        $default_lang = $sitepress->get_default_language();
-
-                        if ($default_lang !== $current_lang){
-                            $PrevLink = '/'.$current_lang.$PrevLink;
+                            if ($default_lang !== $current_lang) {
+                                $PrevLink = '/' . $current_lang . $PrevLink;
+                            }
                         }
-                    }
                         ?>
                         <a href="<?php echo $PrevLink; ?>">
                             <button class="et" style="
-                                border: none;
-                                text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-                                background-color: transparent !important;
-                            ">
-                                                            «
+                border: none;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+                background-color: transparent !important;
+            ">
+                                «
                                 <span class="et-right-bottom" style="
-                                    border: none;
-                                    background-color: white;
-                                    max-width: 168px;
-                                ">
+                    border: none;
+                    background-color: white;
+                    max-width: 168px;
+                ">
+                    <span style="text-align: left;min-width: 100%;display: block;margin-top: -13px;">
+                        <b><?php echo $prev_num ?></b> / <?php echo $SDStudio_PostsLength ?>
+                    </span>
+                    <hr style="margin-top: -10px;margin-bottom: 7px;">
+                    <div style="line-height: 1.3;font-size: 14px;">
+                        <b><?php echo $prev_title; ?></b>
+                    </div>
 
-                                    <span style="text-align: left;min-width: 100%;display: block;margin-top: -13px;"">
-                                        <b><?php echo $prev_num?></b> / <?php echo $SDStudio_PostsLength?>
-                                    </span>
-                                    <hr style="
-                                        margin-top: -10px;
-                                        margin-bottom: 7px;
-                                    ">
-                                    <div style="
-                                        line-height: 1.3;
-                                        font-size: 14px;
-                                    ">
-                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev'))?></b>
-                                    </div>
+                    <?php
+                    $prev_thumbnail_array = wp_get_attachment_image_src($prev_thumbnail_id);
+                    if ($prev_thumbnail_array) {
+                        $prev_thumbnail_url = $prev_thumbnail_array[0];
+                    } else {
+                        $prev_thumbnail_url = false;
+                    }
 
-                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'prev')))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
-                                </span>
+                    if ($prev_thumbnail_url): ?>
+                        <img src="<?php echo $prev_thumbnail_url; ?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
+                    <?php endif; ?>
+                </span>
                             </button>
                         </a>
                     </div>
@@ -326,52 +392,93 @@ if ($enable_arrows_pages_sds_options_and_settings == 1){
 
 
 
-                if ($NextLink !== "#"){
+
+//                if ($NextLink !== "#"){
+//                    global $sitepress;
+//                    if ($sitepress && $post_status !== 'publish') {
+//                        $current_lang = $sitepress->get_current_language();
+//                        $default_lang = $sitepress->get_default_language();
+//                        if ($default_lang !== $current_lang){
+//                            $NextLink = '/'.$current_lang.$NextLink;
+//                        }
+//                    }
+//                    ?>
+<!--                    <div class="alignright sdstudio_NextLink">-->
+<!--                        <a href="--><?php //echo $NextLink; ?><!--" title="--><?php //echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next'))?><!--">-->
+<!--                            <button class="et" style="-->
+<!--                                text-shadow: 2px 2px 4px rgba(0,0,0,0.6);-->
+<!--                                border: none;-->
+<!--                                background-color: transparent !important;-->
+<!--                            ">-->
+<!--                                &raquo;-->
+<!--                                <span class="et-left-bottom" style="-->
+<!--                                    border: none;-->
+<!--                                    background-color: white;-->
+<!--                                    max-width: 168px;-->
+<!--                                ">-->
+<!--                                    <span style="text-align: right;min-width: 100%;display: block;margin-top: -13px;">-->
+<!--                                        <b>--><?php //echo $next_num?><!--</b> / --><?php //echo $SDStudio_PostsLength?>
+<!--                                    </span>-->
+<!---->
+<!--                                    <hr style="-->
+<!--                                        margin-top: -10px;-->
+<!--                                        margin-bottom: 7px;-->
+<!--                                    ">-->
+<!--                                    <div style="-->
+<!--                                        line-height: 1.3;-->
+<!--                                        font-size: 14px;-->
+<!--                                    ">-->
+<!--                                        <b>--><?php //echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next'))?><!--</b>-->
+<!--                                    </div>-->
+<!---->
+<!--                                    <img src="--><?php //echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next')))[0]?><!--" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">-->
+<!--                                </span>-->
+<!--                            </button>-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                --><?php
+//                }
+
+                if ($NextLink !== "#") {
                     global $sitepress;
                     if ($sitepress && $post_status !== 'publish') {
                         $current_lang = $sitepress->get_current_language();
                         $default_lang = $sitepress->get_default_language();
-                        if ($default_lang !== $current_lang){
-                            $NextLink = '/'.$current_lang.$NextLink;
+                        if ($default_lang !== $current_lang) {
+                            $NextLink = '/' . $current_lang . $NextLink;
                         }
                     }
+                    $next_id = custom_posttype_get_adjacent_ID($post_type, get_the_ID(), 'next');
+                    $next_title = $next_id ? get_the_title($next_id) : '';
+                    $next_thumbnail_id = $next_id ? get_post_thumbnail_id($next_id) : false;
+                    $next_thumbnail_array = $next_thumbnail_id ? wp_get_attachment_image_src($next_thumbnail_id) : false;
+                    $next_thumbnail_url = $next_thumbnail_array ? $next_thumbnail_array[0] : '';
+
                     ?>
+
                     <div class="alignright sdstudio_NextLink">
-                        <a href="<?php echo $NextLink; ?>" title="<?php echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next'))?>">
-                            <button class="et" style="
-                                text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-                                border: none;
-                                background-color: transparent !important;
-                            ">
+                        <a href="<?php echo esc_url($NextLink); ?>" title="<?php echo esc_attr($next_title); ?>">
+                            <button class="et" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.6); border: none; background-color: transparent !important;">
                                 &raquo;
-                                <span class="et-left-bottom" style="
-                                    border: none;
-                                    background-color: white;
-                                    max-width: 168px;
-                                ">
-                                    <span style="text-align: right;min-width: 100%;display: block;margin-top: -13px;">
-                                        <b><?php echo $next_num?></b> / <?php echo $SDStudio_PostsLength?>
-                                    </span>
-
-                                    <hr style="
-                                        margin-top: -10px;
-                                        margin-bottom: 7px;
-                                    ">
-                                    <div style="
-                                        line-height: 1.3;
-                                        font-size: 14px;
-                                    ">
-                                        <b><?php echo get_the_title(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next'))?></b>
-                                    </div>
-
-                                    <img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id(custom_posttype_get_adjacent_ID($post_type, get_the_ID(),'next')))[0]?>" class="SDStudio-edit-img-image" style="max-width:150px;padding-top: 6px;">
-                                </span>
+                                <span class="et-left-bottom" style="border: none; background-color: white; max-width: 168px;">
+                    <span style="text-align: right; min-width: 100%; display: block; margin-top: -13px;">
+                        <b><?php echo $next_num; ?></b> / <?php echo $SDStudio_PostsLength; ?>
+                    </span>
+                    <hr style="margin-top: -10px; margin-bottom: 7px;">
+                    <div style="line-height: 1.3; font-size: 14px;">
+                        <b><?php echo $next_title; ?></b>
+                    </div>
+                    <?php if ($next_thumbnail_url): ?>
+                        <img src="<?php echo esc_url($next_thumbnail_url); ?>" class="SDStudio-edit-img-image" style="max-width: 150px; padding-top: 6px;">
+                    <?php endif; ?>
+                </span>
                             </button>
                         </a>
                     </div>
-                <?php
+                    <?php
                 }
-?>
+
+                ?>
                 <style>
 
                     div#sdstudio-editor-tools-next-prev-btns{
