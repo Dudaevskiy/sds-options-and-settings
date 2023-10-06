@@ -589,8 +589,101 @@ if (!is_admin()){
     });
 
 
+//    add_filter( 'rank_math/frontend/description', function( $description ) {
+//        global $post;
+//        if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false) {
+//
+//            // В начале получим текущую локаль
+//            $current_lang = get_locale(); // "ru_RU"
+//
+//            // Email для страниц
+//            global $email_auto_gen_pages_shortcodes_sds_options_and_settings;
+//            $email = $email_auto_gen_pages_shortcodes_sds_options_and_settings;
+//            if (empty($email)){
+//                $email = 'info@'.$_SERVER['HTTP_HOST']; // "info@domain.com"
+//            }
+//
+//            // Ссылка на главную страницу сайта
+//            $protocol = is_ssl() === TRUE ? 'https' : 'http';
+//            $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
+//
+//            //KONTACTS
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONTACTS"]') !== false) {
+//                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
+//            }
+//
+//            //KONF
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONF"]') !== false) {
+//                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/' . $current_lang . '.md');
+//            }
+//
+//            //OTKAZ
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="OTKAZ"]') !== false) {
+//                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
+//            }
+//
+//            //HTML_SITEMAP
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+//                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
+//            }
+//
+//            // Получение строки между значениями
+//            /**
+//             * @param $string
+//             * @param $start
+//             * @param $end
+//             * @return false|string
+//             *
+//             * $fullstring = 'this is my [tag]dog[/tag]';
+//             * $parsed = get_string_between($fullstring, '[tag]', '[/tag]');
+//             */
+//            if (!function_exists('get_string_between')){
+//                function get_string_between($string, $start, $end){
+//                    $string = ' ' . $string;
+//                    $ini = strpos($string, $start);
+//                    if ($ini == 0) return '';
+//                    $ini += strlen($start);
+//                    $len = strpos($string, $end, $ini) - $ini;
+//                    return substr($string, $ini, $len);
+//                }
+//            }
+//            // Удаляем имя страницы
+//            $HTML = preg_replace('/\[name_page(.+?)name_page\]/','',$HTML);
+//            //HTML_SITEMAP
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+//                $HTML =  get_string_between($HTML, '[text_page]', '[/text_page]');
+//
+//                $url_end = '';
+//                global $sitepress;
+//                if ($sitepress) {
+//                    $sdstudio_current_post_lang = apply_filters( 'wpml_post_language_details', NULL, get_the_id() )["language_code"];
+//                    $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL );
+//                    if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL){
+//                        $url_end =  '/'.$sdstudio_current_post_lang;
+//                    }
+//                }
+//
+//                $HTML = str_replace('{{%THIS_SITE%}}',$url_this_site.$url_end,$HTML);
+//            }
+//            $HTML = str_replace('{{%EMAIL%}}',$email,$HTML);
+//            $HTML = str_replace('{{%THIS_SITE%}}',$url_this_site,$HTML);
+//            $HTML = str_replace(array('*','_','#'),'',$HTML);
+//
+//            $HTML = mb_substr($HTML, 0, 200);
+//            $description = $HTML.'...';
+//        }
+//        return $description;
+//    });
+
+//}
+
+
     add_filter( 'rank_math/frontend/description', function( $description ) {
         global $post;
+
+        // Перевірка, чи існує $post
+        if (!$post) return $description;
+
         if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false) {
 
             // В начале получим текущую локаль
@@ -607,36 +700,24 @@ if (!is_admin()){
             $protocol = is_ssl() === TRUE ? 'https' : 'http';
             $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
 
-            //KONTACTS
+            // Перевірка на наявність різних шорткодів у контенті
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONTACTS"]') !== false) {
                 $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
             }
 
-            //KONF
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONF"]') !== false) {
                 $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/' . $current_lang . '.md');
             }
 
-            //OTKAZ
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="OTKAZ"]') !== false) {
                 $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
             }
 
-            //HTML_SITEMAP
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
                 $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
             }
 
-            // Получение строки между значениями
-            /**
-             * @param $string
-             * @param $start
-             * @param $end
-             * @return false|string
-             *
-             * $fullstring = 'this is my [tag]dog[/tag]';
-             * $parsed = get_string_between($fullstring, '[tag]', '[/tag]');
-             */
+            // Функція для отримання рядка між двома значеннями
             if (!function_exists('get_string_between')){
                 function get_string_between($string, $start, $end){
                     $string = ' ' . $string;
@@ -647,9 +728,10 @@ if (!is_admin()){
                     return substr($string, $ini, $len);
                 }
             }
+
             // Удаляем имя страницы
             $HTML = preg_replace('/\[name_page(.+?)name_page\]/','',$HTML);
-            //HTML_SITEMAP
+
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
                 $HTML =  get_string_between($HTML, '[text_page]', '[/text_page]');
 
@@ -675,6 +757,5 @@ if (!is_admin()){
         return $description;
     });
 
-//}
 
 }
