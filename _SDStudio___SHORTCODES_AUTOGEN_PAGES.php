@@ -512,22 +512,93 @@ if (!is_admin()){
      */
 //    dd(class_exists('RankMath'));
 //    add_filter( "rank_math/opengraph/facebook/og_title", function( $content ) {
+//    add_filter( "rank_math/frontend/title", function( $content ) {
+//        global $post;
+//        if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false){
+//
+//            // В начале получим текущую локаль
+//            $current_lang = get_locale(); // "ru_RU"
+//
+//            /**
+//             * @param $string
+//             * @param $start
+//             * @param $end
+//             * @return false|string
+//             *
+//             * $fullstring = 'this is my [tag]dog[/tag]';
+//             * $parsed = get_string_between($fullstring, '[tag]', '[/tag]');
+//             */
+//            if (!function_exists('get_string_between')) {
+//                function get_string_between($string, $start, $end)
+//                {
+//                    $string = ' ' . $string;
+//                    $ini = strpos($string, $start);
+//                    if ($ini == 0) return '';
+//                    $ini += strlen($start);
+//                    $len = strpos($string, $end, $ini) - $ini;
+//                    return substr($string, $ini, $len);
+//                }
+//            }
+//
+//
+//            //OTKAZ
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="OTKAZ"]') !== false) {
+//                $file_get_OTKAZ = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
+//                $page_name = get_string_between($file_get_OTKAZ, '[name_page]', '[/name_page]');
+//                $content = $page_name;
+//            }
+//
+//            //KONF
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONF"]') !== false) {
+//                $file_get_KONF = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/' . $current_lang . '.md');
+//                $page_name = get_string_between($file_get_KONF, '[name_page]', '[/name_page]');
+//                $content = $page_name;
+//            }
+//
+//            //KONTACTS
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONTACTS"]') !== false) {
+//                $file_get_KONTACTS = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
+//                $page_name = get_string_between($file_get_KONTACTS, '[name_page]', '[/name_page]');
+//                $content = $page_name;
+//            }
+//
+//            //HTML_SITEMAP
+//            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+//                $file_get_HTML_SITEMAP = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
+//                $page_name = get_string_between($file_get_HTML_SITEMAP, '[name_page]', '[/name_page]');
+//
+//                // Ссылка на главную страницу сайта
+//                $protocol = is_ssl() === TRUE ? 'https' : 'http';
+//                $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
+//
+//                $url_end = '';
+//                global $sitepress;
+//                if ($sitepress) {
+//                    $sdstudio_current_post_lang = apply_filters( 'wpml_post_language_details', NULL, get_the_id() )["language_code"];
+//                    $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL );
+//                    if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL){
+//                        $url_end =  '/'.$sdstudio_current_post_lang;
+//                    }
+//                }
+//
+//
+//                $content = $page_name.' - '.$url_this_site.$url_end;
+//            }
+//        }
+//        return $content;
+//    });
+
     add_filter( "rank_math/frontend/title", function( $content ) {
         global $post;
-        if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false){
+
+        // Додаємо перевірку на існування $post
+        if (!$post || !isset($post->post_content)) return $content;
+
+        if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false) {
 
             // В начале получим текущую локаль
             $current_lang = get_locale(); // "ru_RU"
 
-            /**
-             * @param $string
-             * @param $start
-             * @param $end
-             * @return false|string
-             *
-             * $fullstring = 'this is my [tag]dog[/tag]';
-             * $parsed = get_string_between($fullstring, '[tag]', '[/tag]');
-             */
             if (!function_exists('get_string_between')) {
                 function get_string_between($string, $start, $end)
                 {
@@ -540,29 +611,25 @@ if (!is_admin()){
                 }
             }
 
-
-            //OTKAZ
+            // Перевірки на наявність різних шорткодів у контенті
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="OTKAZ"]') !== false) {
                 $file_get_OTKAZ = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
                 $page_name = get_string_between($file_get_OTKAZ, '[name_page]', '[/name_page]');
                 $content = $page_name;
             }
 
-            //KONF
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONF"]') !== false) {
                 $file_get_KONF = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/' . $current_lang . '.md');
                 $page_name = get_string_between($file_get_KONF, '[name_page]', '[/name_page]');
                 $content = $page_name;
             }
 
-            //KONTACTS
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONTACTS"]') !== false) {
                 $file_get_KONTACTS = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
                 $page_name = get_string_between($file_get_KONTACTS, '[name_page]', '[/name_page]');
                 $content = $page_name;
             }
 
-            //HTML_SITEMAP
             if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
                 $file_get_HTML_SITEMAP = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
                 $page_name = get_string_between($file_get_HTML_SITEMAP, '[name_page]', '[/name_page]');
@@ -581,12 +648,14 @@ if (!is_admin()){
                     }
                 }
 
-
                 $content = $page_name.' - '.$url_this_site.$url_end;
             }
         }
+
         return $content;
     });
+
+
 
 
 //    add_filter( 'rank_math/frontend/description', function( $description ) {
