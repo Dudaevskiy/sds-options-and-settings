@@ -62,6 +62,23 @@ function add_links_to_admin_bar($admin_bar) {
     }
 
     /***
+     * Pretty Links
+     */
+    $pretty_Links_active = 'pretty-link/pretty-link.php';
+    if ( in_array( $pretty_Links_active , $pluginList ) ) {
+        $args = array(
+            'parent' => 'site-name',
+            'id'     => 'pretty_Links',
+            'class'     => 'icon-pretty-link',
+            'title'  => '<span class="ab-icon dashicons-star-filled"style="float: left;display: contents;"></span> Pretty Links - Переходы',
+            'href'   => esc_url('/wp-admin/edit.php?post_type=pretty-link&page=pretty-link-clicks'),
+            'meta'   => false
+        );
+        $admin_bar->add_node( $args );
+    }
+
+
+    /***
      * SDStudio Editor Tools
      */
     $sds_editor_tools_active = 'sds-editor-tools/sds-editor-tools.php';
