@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
+    'OomphInc\\ComposerInstallersExtender\\' => array($vendorDir . '/oomphinc/composer-installers-extender/src'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
 );

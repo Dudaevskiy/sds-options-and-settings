@@ -6,7 +6,7 @@
 // Подключаем в основном файле 
 // require_once plugin_dir_path( __FILE__ ) . '_WORKER.php';
 // Заменяем sds-options-and-settings на свой слаг с -
- require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+// require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 // Путь в корень плагина
 define( 'SDS_OPTIONS_AND_SETTINGS__PLUGIN_DIR' , plugin_dir_path(__FILE__) );
@@ -30,14 +30,7 @@ $SDStudio_site = '//sdstudio.top/';
 $SDStudio_linkedin_com = 'https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact_info%3BhWD%2Fwa9lSmWLHB9H6SsiWA%3D%3D';
 
 
-//https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js
-// Marcdown parser for php
-// traditional markdown and parse full text
-//$parser = new \cebe\markdown\Markdown();
-$MarkdownParser = new \cebe\markdown\Markdown();
-// Использование:
-// $markdown = '## Привет';
-// s($parser->parse($markdown));
+
 
 
 if ( !function_exists( 'run_prettify' ) && is_admin()){
@@ -49,16 +42,19 @@ if ( !function_exists( 'run_prettify' ) && is_admin()){
 	}
 }
 
-if (!class_exists('ReduxFramework') && file_exists(plugin_dir_path(__FILE__) . 'wp-content/plugins/redux-framework-4/ReduxCore/framework.php')) {
+if (!class_exists('Redux') && file_exists(plugin_dir_path(__FILE__) . 'wp-content/plugins/redux-framework/redux-core/framework.php')) {
 //==========================================
 //==========================================
 // Подключаем Redux
     // Redux Framework
+//    require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
     require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
-    require_once plugin_dir_path( __FILE__ ) . '/wp-content/plugins/redux-framework-4/ReduxCore/framework.php';
+    require_once plugin_dir_path( __FILE__ ) . '/wp-content/plugins/redux-framework/redux-core/framework.php';
 
-//Redux::setSection($opt_name__redux_sds_options_and_settings, array(    'title' => esc_html__('Section title', 'yourtextdomain') ,    'id' => esc_html__('section-unique-id', ' yourtextdomain') ,    'icon' => 'icon-name',    'fields' => array()));
+    //require_once plugin_dir_path( __FILE__ ) . '/wp-content/plugins/redux-framework/redux-core/framework.php';
+
+//Redux::setSection($opt_name__redux_sds_editor_tools, array(    'title' => esc_html__('Section title', 'yourtextdomain') ,    'id' => esc_html__('section-unique-id', ' yourtextdomain') ,    'icon' => 'icon-name',    'fields' => array()));
 
 //==========================================
 //==========================================
@@ -66,7 +62,14 @@ if (!class_exists('ReduxFramework') && file_exists(plugin_dir_path(__FILE__) . '
 if ( ! class_exists( 'Redux' ) ) {
     return null;
 }
-
+//https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js
+// Marcdown parser for php
+// traditional markdown and parse full text
+//$parser = new \cebe\markdown\Markdown();
+$MarkdownParser = new \cebe\markdown\Markdown();
+// Использование:
+// $markdown = '## Привет';
+// s($parser->parse($markdown));
 //-----------------------------------------
 // REMOVE DEMO and PROMO REDUX
 // START
@@ -891,44 +894,45 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 /**
  * Размеры изображений
+ * 📌 2024-01-13 DiSABLE
  */
 
-$sdstudio_get_img_sizes = sdstudio_get_images_sizes();
-
-$section = [
-    'title' => __( 'Размеры зарегистрированных изображений + добавление размеров ', 'images_sizes-sds-options-and-settings' ),
-//    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
-    'id'    => 'images_sizes_sds_options_and_settings',
-    'subsection' => false,
-    'desc'  => __( 'Здесь отображается список зарегистрированных на сайте эскизов изображений. Плюс можно активировать не достающие популярные варианты эскизов.', 'sds-options-and-settings' ),
-    // Иконки брать здесь
-    // http://elusiveicons.com/icons/
-    'icon'  => 'el el-picture',
-//    'ajax_save' => false,
-        'fields' => [
-            [
-                //Link: https://docs.redux.io/core-fields/switch.html
-
-                'id'       => 'enable_sdstudio_300_200_sds-options-and-settings',
-                'type'     => 'switch',
-                'title'    => __('Включить эскизы 300*200', 'redux-framework-demo'),
-                'subtitle' => __('Включите дополнительный размер эскизов 300 ширина X 200 высота. Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
-                'desc' => '<br><br>',
-                'default'  => false,
-//                'ajax_save' => false,
-
-            ],
-            [
-            // https://docs.redux.io/core-fields/info.html
-            'title' => __( 'Размеры зарегистрированных изображений', 'images_sizes-sds-options-and-settings' ),
-            'id'   => 'info_normal',
-            'type' => 'info',
-            'desc' => $sdstudio_get_img_sizes,
-            ]
-        ],
-        'ajax_save' => false,
-    ];
-Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+//$sdstudio_get_img_sizes = sdstudio_get_images_sizes();
+//
+//$section = [
+//    'title' => __( 'Размеры зарегистрированных изображений + добавление размеров ', 'images_sizes-sds-options-and-settings' ),
+////    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
+//    'id'    => 'images_sizes_sds_options_and_settings',
+//    'subsection' => false,
+//    'desc'  => __( 'Здесь отображается список зарегистрированных на сайте эскизов изображений. Плюс можно активировать не достающие популярные варианты эскизов.', 'sds-options-and-settings' ),
+//    // Иконки брать здесь
+//    // http://elusiveicons.com/icons/
+//    'icon'  => 'el el-picture',
+////    'ajax_save' => false,
+//        'fields' => [
+//            [
+//                //Link: https://docs.redux.io/core-fields/switch.html
+//
+//                'id'       => 'enable_sdstudio_300_200_sds-options-and-settings',
+//                'type'     => 'switch',
+//                'title'    => __('Включить эскизы 300*200', 'redux-framework-demo'),
+//                'subtitle' => __('Включите дополнительный размер эскизов 300 ширина X 200 высота. Для этого установите переключатель в положение "On". По умолчанию опция выключена.', 'redux-framework-demo'),
+//                'desc' => '<br><br>',
+//                'default'  => false,
+////                'ajax_save' => false,
+//
+//            ],
+//            [
+//            // https://docs.redux.io/core-fields/info.html
+//            'title' => __( 'Размеры зарегистрированных изображений', 'images_sizes-sds-options-and-settings' ),
+//            'id'   => 'info_normal',
+//            'type' => 'info',
+//            'desc' => $sdstudio_get_img_sizes,
+//            ]
+//        ],
+//        'ajax_save' => false,
+//    ];
+//Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
 
 /**

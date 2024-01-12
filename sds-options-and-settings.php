@@ -16,15 +16,15 @@
  * Plugin Name:       SDStudio addons, options and settings
  * Plugin URI:        https://techblog.sdstudio.top/blog
  * Description:       Set of useful additions, settings, improvements for your site from <a href="https://sdstudio.top"><strong>Serhii Dudchenko</strong></a>
- * Version:           2.2.45
+ * Version:           2.2.47
  * Author:            Serhii Dudchenko
  * Author URI:        https://sdstudio.top
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       sds-options-and-settings
  * Domain Path:       /languages
- * Requires PHP:      7.4
- * Tested up to PHP:  8.1
+ * Requires PHP:      8.2
+ * Tested up to PHP:  8.3
 
 GitHub Plugin URI: https://github.com/Dudaevskiy/sds-options-and-settings
 GitHub Branch: master
@@ -121,7 +121,7 @@ function run_sds_options_and_settings() {
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio__PAGE_SPEED_FIXEs.php';
 //    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_ENABLE_UPLOAD_FILES.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_add_images_sizes.php';
-    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_images_sizes.php';
+//    require_once plugin_dir_path( __FILE__ ) . '_SDStudio_images_sizes.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_image_settings.php';
     require_once plugin_dir_path( __FILE__ ) . '_WORKER.php';
     require_once plugin_dir_path( __FILE__ ) . '_SDStudio_FRONTEND_ELEMENTOR.php';

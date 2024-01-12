@@ -11,6 +11,10 @@ class ComposerStaticInitaeab035b30405965bfb41a44975ea7bd
         array (
             'cebe\\markdown\\' => 14,
         ),
+        'O' => 
+        array (
+            'OomphInc\\ComposerInstallersExtender\\' => 36,
+        ),
         'C' => 
         array (
             'Composer\\Installers\\' => 20,
@@ -21,6 +25,10 @@ class ComposerStaticInitaeab035b30405965bfb41a44975ea7bd
         'cebe\\markdown\\' => 
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
+        ),
+        'OomphInc\\ComposerInstallersExtender\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/oomphinc/composer-installers-extender/src',
         ),
         'Composer\\Installers\\' => 
         array (
