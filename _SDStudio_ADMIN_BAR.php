@@ -162,7 +162,7 @@ function remove_the_logo() {
     /**
      * Сменяем название сайта в дамин панели
      */
-    if ($redux['enable_ADMINBAR_change_site_name_in_panel-sds-options-and-settings'] == 1) {
+    if (isset($redux['enable_ADMINBAR_change_site_name_in_panel-sds-options-and-settings']) && $redux['enable_ADMINBAR_change_site_name_in_panel-sds-options-and-settings'] == 1) {
         if (!empty($redux['enable_ADMINBAR_change_site_name_in_panel_CUSTOM_NAME_SITE-sds-options-and-settings'])) {
             $newtitle = $redux['enable_ADMINBAR_change_site_name_in_panel_CUSTOM_NAME_SITE-sds-options-and-settings'];
         } else {
