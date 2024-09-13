@@ -218,7 +218,7 @@ if ($remove_left_admin_bar_button_sds_options_and_settings == 1){
 /**
  * Отключаем пункты в меню ПЛАГИНОВ
  */
-if ($redux['enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings']){
+if (isset($redux['enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-options-and-settings'])){
     add_action( 'wp_before_admin_bar_render', 'ADMINBAR_Remove_plugins_menu_items_in_single_sds_options_and_settings' );
     function ADMINBAR_Remove_plugins_menu_items_in_single_sds_options_and_settings()
     {

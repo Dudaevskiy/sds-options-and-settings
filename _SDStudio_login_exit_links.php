@@ -139,7 +139,7 @@ if ($enable_wp_recall_options_sds_options_and_settings == 0){
      * Редиректы из консоли для не Админов и Редакторов сайта
      */
     $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];
-    if (!empty($login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings) && $enable_redirect_login_for_not_admin_editor_sds_options_and_settings == 1) {
+    if (isset($login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings) && isset($enable_redirect_login_for_not_admin_editor_sds_options_and_settings) && $enable_redirect_login_for_not_admin_editor_sds_options_and_settings == 1) {
 //        dd(sdstudio_get_current_user_roles());
 
         if (current_user_can('administrator')){
