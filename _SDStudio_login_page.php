@@ -11,12 +11,18 @@ $redux = get_option( 'redux_sds_options_and_settings' );
 
 // URL - Logo
 global $logo_login_page;
-$logo_login_page = $redux['logo-login-page-posts-sds-options-and-settings']['url'];
+$logo_login_page = null;
+if (isset($redux['logo-login-page-posts-sds-options-and-settings']['url'])) {
+    $logo_login_page = $redux['logo-login-page-posts-sds-options-and-settings']['url'];
+}
 //dd($logo_login_page);
 
 // URL - Background
 global $background_login_page;
-$background_login_page = $redux['background-page-posts-sds-options-and-settings']['url'];
+$background_login_page = null;
+if (isset($redux['background-page-posts-sds-options-and-settings']['url'])) {
+    $background_login_page = $redux['background-page-posts-sds-options-and-settings']['url'];
+}
 //dd($background_login_page);
 
 //s($redux);
