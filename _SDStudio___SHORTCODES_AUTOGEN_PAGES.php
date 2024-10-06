@@ -543,156 +543,164 @@ if (!is_admin()){
 
     add_filter( "rank_math/frontend/title", function( $content ) {
         global $post;
+        if ($post instanceof WP_Post) {
 
-        // Додаємо перевірку на існування $post
-        if (!$post || !isset($post->post_content)) return $content;
+            // Додаємо перевірку на існування $post
+            if (!$post || !isset($post->post_content)) return $content;
 
-        if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false) {
+            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false) {
 
-            // В начале получим текущую локаль
-            $current_lang = get_locale(); // "ru_RU"
+                // В начале получим текущую локаль
+                $current_lang = get_locale(); // "ru_RU"
 
-            if (!function_exists('get_string_between')) {
-                function get_string_between($string, $start, $end)
-                {
-                    $string = ' ' . $string;
-                    $ini = strpos($string, $start);
-                    if ($ini == 0) return '';
-                    $ini += strlen($start);
-                    $len = strpos($string, $end, $ini) - $ini;
-                    return substr($string, $ini, $len);
-                }
-            }
-
-            // Перевірки на наявність різних шорткодів у контенті
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="OTKAZ"]') !== false) {
-                $file_get_OTKAZ = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
-                $page_name = get_string_between($file_get_OTKAZ, '[name_page]', '[/name_page]');
-                $content = $page_name;
-            }
-
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONF"]') !== false) {
-                $file_get_KONF = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/' . $current_lang . '.md');
-                $page_name = get_string_between($file_get_KONF, '[name_page]', '[/name_page]');
-                $content = $page_name;
-            }
-
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONTACTS"]') !== false) {
-                $file_get_KONTACTS = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
-                $page_name = get_string_between($file_get_KONTACTS, '[name_page]', '[/name_page]');
-                $content = $page_name;
-            }
-
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
-                $file_get_HTML_SITEMAP = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
-                $page_name = get_string_between($file_get_HTML_SITEMAP, '[name_page]', '[/name_page]');
-
-                // Ссылка на главную страницу сайта
-                $protocol = is_ssl() === TRUE ? 'https' : 'http';
-                $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
-
-                $url_end = '';
-                global $sitepress;
-                if ($sitepress) {
-                    $sdstudio_current_post_lang = apply_filters( 'wpml_post_language_details', NULL, get_the_id() )["language_code"];
-                    $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL );
-                    if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL){
-                        $url_end =  '/'.$sdstudio_current_post_lang;
+                if (!function_exists('get_string_between')) {
+                    function get_string_between($string, $start, $end)
+                    {
+                        $string = ' ' . $string;
+                        $ini = strpos($string, $start);
+                        if ($ini == 0) return '';
+                        $ini += strlen($start);
+                        $len = strpos($string, $end, $ini) - $ini;
+                        return substr($string, $ini, $len);
                     }
                 }
 
-                $content = $page_name.' - '.$url_this_site.$url_end;
-            }
-        }
+                // Перевірки на наявність різних шорткодів у контенті
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="OTKAZ"]') !== false) {
+                    $file_get_OTKAZ = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
+                    $page_name = get_string_between($file_get_OTKAZ, '[name_page]', '[/name_page]');
+                    $content = $page_name;
+                }
 
-        return $content;
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONF"]') !== false) {
+                    $file_get_KONF = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/' . $current_lang . '.md');
+                    $page_name = get_string_between($file_get_KONF, '[name_page]', '[/name_page]');
+                    $content = $page_name;
+                }
+
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONTACTS"]') !== false) {
+                    $file_get_KONTACTS = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/' . $current_lang . '.md');
+                    $page_name = get_string_between($file_get_KONTACTS, '[name_page]', '[/name_page]');
+                    $content = $page_name;
+                }
+
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+                    $file_get_HTML_SITEMAP = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/' . $current_lang . '.md');
+                    $page_name = get_string_between($file_get_HTML_SITEMAP, '[name_page]', '[/name_page]');
+
+                    // Ссылка на главную страницу сайта
+                    $protocol = is_ssl() === TRUE ? 'https' : 'http';
+                    $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
+
+                    $url_end = '';
+                    global $sitepress;
+                    if ($sitepress) {
+                        $sdstudio_current_post_lang = apply_filters('wpml_post_language_details', NULL, get_the_id())["language_code"];
+                        $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL);
+                        if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL) {
+                            $url_end = '/' . $sdstudio_current_post_lang;
+                        }
+                    }
+
+                    $content = $page_name . ' - ' . $url_this_site . $url_end;
+                }
+            }
+
+            return $content;
+        } else {
+            return $content;
+        }
     });
 
 
     add_filter( 'rank_math/frontend/description', function( $description ) {
         global $post;
-
-        $short_attrs = parse_sdstudio_shortcode_autogen($post->post_content);
-        if (isset($short_attrs['content']) && $short_attrs['content'] == 'false'){
-            return replace_variables($description).'...';
-        }
-
-        // Перевірка, чи існує $post
-        if (!$post) return $description;
-
-        if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false) {
-
-            // В начале получим текущую локаль
-            $current_lang = get_locale(); // "ru_RU"
-
-            // Email для страниц
-            global $email_auto_gen_pages_shortcodes_sds_options_and_settings;
-            $email = $email_auto_gen_pages_shortcodes_sds_options_and_settings;
-            if (empty($email)){
-                $email = 'info@'.$_SERVER['HTTP_HOST']; // "info@domain.com"
+        if ($post instanceof WP_Post) {
+            $short_attrs = parse_sdstudio_shortcode_autogen($post->post_content);
+            if (isset($short_attrs['content']) && $short_attrs['content'] == 'false') {
+                return replace_variables($description) . '...';
             }
 
-            // Ссылка на главную страницу сайта
-            $protocol = is_ssl() === TRUE ? 'https' : 'http';
-            $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
+            // Перевірка, чи існує $post
+            if (!$post) return $description;
 
-            $HTML = null;
-            // Перевірка на наявність різних шорткодів у контенті
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONTACTS"]') !== false) {
-                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/'.$current_lang.'.md');
-            }
+            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN') !== false) {
 
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONF"]') !== false) {
-                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/' . $current_lang . '.md');
-            }
+                // В начале получим текущую локаль
+                $current_lang = get_locale(); // "ru_RU"
 
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="OTKAZ"]') !== false) {
-                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
-            }
-
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
-                $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/'.$current_lang.'.md');
-            }
-
-            // Функція для отримання рядка між двома значеннями
-            if (!function_exists('get_string_between')){
-                function get_string_between($string, $start, $end){
-                    $string = ' ' . $string;
-                    $ini = strpos($string, $start);
-                    if ($ini == 0) return '';
-                    $ini += strlen($start);
-                    $len = strpos($string, $end, $ini) - $ini;
-                    return substr($string, $ini, $len);
+                // Email для страниц
+                global $email_auto_gen_pages_shortcodes_sds_options_and_settings;
+                $email = $email_auto_gen_pages_shortcodes_sds_options_and_settings;
+                if (empty($email)) {
+                    $email = 'info@' . $_SERVER['HTTP_HOST']; // "info@domain.com"
                 }
-            }
 
-            // Удаляем имя страницы
-            $HTML = preg_replace('/\[name_page(.+?)name_page\]/','',$HTML);
+                // Ссылка на главную страницу сайта
+                $protocol = is_ssl() === TRUE ? 'https' : 'http';
+                $url_this_site = $protocol . '://' . $_SERVER['HTTP_HOST']; // "https://domain.com"
 
-            if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
-                $HTML =  get_string_between($HTML, '[text_page]', '[/text_page]');
-                $url_end = '';
-                global $sitepress;
-                if ($sitepress) {
-                    $sdstudio_current_post_lang = apply_filters( 'wpml_post_language_details', NULL, get_the_id() )["language_code"];
-                    $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL );
-                    if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL){
-                        $url_end =  '/'.$sdstudio_current_post_lang;
+                $HTML = null;
+                // Перевірка на наявність різних шорткодів у контенті
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONTACTS"]') !== false) {
+                    $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__contacts/' . $current_lang . '.md');
+                }
+
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="KONF"]') !== false) {
+                    $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__politika_conf/' . $current_lang . '.md');
+                }
+
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="OTKAZ"]') !== false) {
+                    $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__otkaz_ot_otvetstvennosti/' . $current_lang . '.md');
+                }
+
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+                    $HTML = file_get_contents(dirname(__FILE__) . '/_markdown/_SHORTCODE__html_sitemap/' . $current_lang . '.md');
+                }
+
+                // Функція для отримання рядка між двома значеннями
+                if (!function_exists('get_string_between')) {
+                    function get_string_between($string, $start, $end)
+                    {
+                        $string = ' ' . $string;
+                        $ini = strpos($string, $start);
+                        if ($ini == 0) return '';
+                        $ini += strlen($start);
+                        $len = strpos($string, $end, $ini) - $ini;
+                        return substr($string, $ini, $len);
                     }
                 }
 
-                $HTML = str_replace('{{%THIS_SITE%}}',$url_this_site.$url_end,$HTML);
+                // Удаляем имя страницы
+                $HTML = preg_replace('/\[name_page(.+?)name_page\]/', '', $HTML);
+
+                if (strpos($post->post_content, '[SDStudio_PAGE_AUTOGEN page="HTML_SITEMAP"]') !== false) {
+                    $HTML = get_string_between($HTML, '[text_page]', '[/text_page]');
+                    $url_end = '';
+                    global $sitepress;
+                    if ($sitepress) {
+                        $sdstudio_current_post_lang = apply_filters('wpml_post_language_details', NULL, get_the_id())["language_code"];
+                        $LocaleCurentSiteLaguage_GLOBAL = apply_filters('wpml_default_language', NULL);
+                        if ($sdstudio_current_post_lang !== $LocaleCurentSiteLaguage_GLOBAL) {
+                            $url_end = '/' . $sdstudio_current_post_lang;
+                        }
+                    }
+
+                    $HTML = str_replace('{{%THIS_SITE%}}', $url_this_site . $url_end, $HTML);
+                }
+
+                $HTML = str_replace('{{%EMAIL%}}', $email, $HTML);
+                $HTML = str_replace('{{%THIS_SITE%}}', $url_this_site, $HTML);
+                $HTML = str_replace(array('*', '_', '#'), '', $HTML);
+
+                $HTML = mb_substr($HTML, 0, 200);
+
+                $description = $HTML . '...';
             }
-
-            $HTML = str_replace('{{%EMAIL%}}',$email,$HTML);
-            $HTML = str_replace('{{%THIS_SITE%}}',$url_this_site,$HTML);
-            $HTML = str_replace(array('*','_','#'),'',$HTML);
-
-            $HTML = mb_substr($HTML, 0, 200);
-
-            $description = $HTML.'...';
+            return $description;
+        } else {
+            return $description;
         }
-        return $description;
     });
 
 
