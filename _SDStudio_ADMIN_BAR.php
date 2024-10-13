@@ -228,13 +228,13 @@ if (isset($redux['enable_ADMINBAR_Remove_plugins_menu_items_in_single-sds-option
             return;
         }
 
-        if ($redux['enable_ADMINBAR_Remove_plugins_menu_items_Clearfy-sds-options-and-settings'] == 1){
+        if (isset($redux['enable_ADMINBAR_Remove_plugins_menu_items_Clearfy-sds-options-and-settings']) && $redux['enable_ADMINBAR_Remove_plugins_menu_items_Clearfy-sds-options-and-settings'] == 1){
             $wp_admin_bar->remove_node('clearfy-menu');
         }
-        if ($redux['enable_ADMINBAR_Remove_plugins_menu_items_rank-math-sds-options-and-settings'] == 1){
+        if (isset($redux['enable_ADMINBAR_Remove_plugins_menu_items_rank-math-sds-options-and-settings']) &&  $redux['enable_ADMINBAR_Remove_plugins_menu_items_rank-math-sds-options-and-settings'] == 1){
             $wp_admin_bar->remove_node('rank-math');
         }
-        if ($redux['enable_ADMINBAR_Remove_plugins_menu_items_disqus-sds-options-and-settings'] == 1){
+        if (isset($redux['enable_ADMINBAR_Remove_plugins_menu_items_disqus-sds-options-and-settings']) &&  $redux['enable_ADMINBAR_Remove_plugins_menu_items_disqus-sds-options-and-settings'] == 1){
             $wp_admin_bar->remove_node('disqus');
         }
 
