@@ -34,7 +34,15 @@ $enable_redirect_login_for_not_admin_editor_sds_options_and_settings = $redux['e
 
 // Включить перенаправление для не Admin и Editor - ссылка переадресации
 global $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings;
-$login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];// Включить перенаправление для не Admin и Editor - ссылка переадресации
+
+// Перевірка наявності ключа у масиві $redux
+if (isset($redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'])) {
+    $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];
+} else {
+    // Можна визначити значення за замовчуванням або виконати інші дії
+    $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = ''; // або інше значення
+}
+
 
 
 // Скрытие кнопки "Мой сайт" в самом левом углу админ бара для не зарегистрировавшихся пользователей
