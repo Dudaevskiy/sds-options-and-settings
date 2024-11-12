@@ -1686,6 +1686,41 @@ $section = [
 ];
 Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 
+/**
+ * Кастомна верифікація
+ */
+$section = [
+    'title' => __( 'Код разной верификации', 'arrows_pages_sds-options-and-settings' ),
+    'id'    => 'custom_verification_sds-options-and-settings',
+    'subsection' => false,
+    'icon'  => 'el el-view-mode',
+    'desc'  => 'Активировать опцию для кастомной верификации на сайте',
+    'fields' => [
+        [
+            'id'       => 'enable_custom_verification_tag_sds-options-and-settings',
+            'type'     => 'switch',
+            'icon'     => 'el el-chevron-right',
+            'title'    => __('Добавить кастомный код верефикаций?', 'redux-framework-demo'),
+            'subtitle' => "Добавляется кастомный код, придерживайтесь формата HTML",
+            'default'  => false,
+        ],
+        [
+            'id'          => 'custom_verification_code_sds-options-and-settings',
+            'type'        => 'textarea',
+            'icon'        => 'el el-chevron-right',
+            'placeholder' => '<meta name="google-site-verification" content="_bUyDz3jd5F_Pkb9Xg3jKGyhzeGHrbXZX" />',
+            'title'       => __('Кастомный код верификаций', 'redux-framework-demo'),
+            'subtitle'    => 'Вставьте код верификаций, який вам надав сервіс',
+            'desc'        => 'Например: &lt;meta name="google-site-verification" content="_bUyDz3jd5F_Pkb9Xg3jKGyhzeGHrbXZX" /&gt;',
+            'required'    => array('enable_custom_verification_tag_sds-options-and-settings', '=', 'true'),
+            'default'     => '',
+            'rows'        => 4,
+            'validate'    => 'html', // Дозволяємо HTML код
+        ],
+    ],
+];
+Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
+
 
 /**
 /**

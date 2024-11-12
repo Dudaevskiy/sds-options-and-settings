@@ -22,3 +22,36 @@ if ($enable_header_code_mailru_tag_sds_options_and_settings == 1 ) {
     }
     add_action( 'wp_head', 'SDStudio_add_MailRU_meta' );
 }
+
+
+/**
+ * REDUX - Отримання налаштувань
+ */
+$redux = get_option( 'redux_sds_options_and_settings' );
+
+$enable_custom_verification = $redux['enable_custom_verification_tag_sds-options-and-settings'];
+global $custom_verification_code;
+$custom_verification_code = $redux['custom_verification_code_sds-options-and-settings'];
+
+if ($enable_custom_verification == 1 && !empty($custom_verification_code)) {
+
+    function SDStudio_add_custom_verification_meta() {
+        global $custom_verification_code;
+
+        // Базова санітизація, зберігаючи HTML теги
+        $code = wp_kses($custom_verification_code, [
+            'meta' => [
+                'name' => [],
+                'content' => [],
+                'property' => [],
+            ]
+        ]);
+
+        echo "\n";
+        ?>
+        <!--   SDStudio Options and Setting - Custom Verification META     -->
+        <?php echo $code."\n\n"; ?>
+        <?php
+    }
+    add_action('wp_head', 'SDStudio_add_custom_verification_meta');
+}
