@@ -5,50 +5,93 @@
  * @_ВЫХОД_С_САЙТА
  *
  */
+//global $redux;
+//$redux = get_option( 'redux_sds_options_and_settings' );
+//
+//
+//global $sdstudio_url_login;
+//$sdstudio_url_login = $redux['login_redirects-login-page-posts-sds-options-and-settings'];
+////dd($sdstudio_url_login);
+//
+//global $sdstudio_url_exit;
+//$sdstudio_url_exit = $redux['login_redirects-exit-page-posts-sds-options-and-settings'];
+//
+//// Enable WP-RECALL
+//global $enable_wp_recall_options_sds_options_and_settings;
+//$enable_wp_recall_options_sds_options_and_settings = $redux['enable_wp_recall_options_sds-options-and-settings'];
+//
+//$enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds_options_and_settings = $redux['enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings'];
+//
+//$enable_wp_recall_replace_wp_login_on_wprecallpage_sds_options_and_settings = $redux['enable_wp_recall_replace_wp_login_on_wprecallpage_sds-options-and-settings'];
+////s($redux['enable_wp_recall_options_sds-options-and-settings']);
+////s($redux['enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings']);
+//
+//
+//
+//// Включить перенаправление для не Admin и Editor
+//global $enable_redirect_login_for_not_admin_editor_sds_options_and_settings;
+//$enable_redirect_login_for_not_admin_editor_sds_options_and_settings = $redux['enable_redirect_login_for_not_admin_editor_sds-options-and-settings'];
+//
+//// Включить перенаправление для не Admin и Editor - ссылка переадресации
+//global $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings;
+//
+//// Перевірка наявності ключа у масиві $redux
+//if (isset($redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'])) {
+//    $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];
+//} else {
+//    // Можна визначити значення за замовчуванням або виконати інші дії
+//    $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = ''; // або інше значення
+//}
+//
+//
+//
+//// Скрытие кнопки "Мой сайт" в самом левом углу админ бара для не зарегистрировавшихся пользователей
+//global $remove_left_admin_bar_button_sds_options_and_settings;
+//$remove_left_admin_bar_button_sds_options_and_settings = $redux['remove_left_admin_bar_button_sds-options-and-settings'];
+
 global $redux;
-$redux = get_option( 'redux_sds_options_and_settings' );
+$redux = get_option('redux_sds_options_and_settings');
 
-
+// Перевірка та присвоєння для кожної змінної
 global $sdstudio_url_login;
-$sdstudio_url_login = $redux['login_redirects-login-page-posts-sds-options-and-settings'];
-//dd($sdstudio_url_login);
+$sdstudio_url_login = isset($redux['login_redirects-login-page-posts-sds-options-and-settings'])
+    ? $redux['login_redirects-login-page-posts-sds-options-and-settings']
+    : ''; // Значення за замовчуванням
 
 global $sdstudio_url_exit;
-$sdstudio_url_exit = $redux['login_redirects-exit-page-posts-sds-options-and-settings'];
+$sdstudio_url_exit = isset($redux['login_redirects-exit-page-posts-sds-options-and-settings'])
+    ? $redux['login_redirects-exit-page-posts-sds-options-and-settings']
+    : ''; // Значення за замовчуванням
 
-// Enable WP-RECALL
 global $enable_wp_recall_options_sds_options_and_settings;
-$enable_wp_recall_options_sds_options_and_settings = $redux['enable_wp_recall_options_sds-options-and-settings'];
+$enable_wp_recall_options_sds_options_and_settings = isset($redux['enable_wp_recall_options_sds-options-and-settings'])
+    ? $redux['enable_wp_recall_options_sds-options-and-settings']
+    : ''; // Значення за замовчуванням
 
-$enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds_options_and_settings = $redux['enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings'];
+global $enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds_options_and_settings;
+$enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds_options_and_settings = isset($redux['enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings'])
+    ? $redux['enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings']
+    : ''; // Значення за замовчуванням
 
-$enable_wp_recall_replace_wp_login_on_wprecallpage_sds_options_and_settings = $redux['enable_wp_recall_replace_wp_login_on_wprecallpage_sds-options-and-settings'];
-//s($redux['enable_wp_recall_options_sds-options-and-settings']);
-//s($redux['enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings']);
+global $enable_wp_recall_replace_wp_login_on_wprecallpage_sds_options_and_settings;
+$enable_wp_recall_replace_wp_login_on_wprecallpage_sds_options_and_settings = isset($redux['enable_wp_recall_replace_wp_login_on_wprecallpage_sds-options-and-settings'])
+    ? $redux['enable_wp_recall_replace_wp_login_on_wprecallpage_sds-options-and-settings']
+    : ''; // Значення за замовчуванням
 
-
-
-// Включить перенаправление для не Admin и Editor
 global $enable_redirect_login_for_not_admin_editor_sds_options_and_settings;
-$enable_redirect_login_for_not_admin_editor_sds_options_and_settings = $redux['enable_redirect_login_for_not_admin_editor_sds-options-and-settings'];
+$enable_redirect_login_for_not_admin_editor_sds_options_and_settings = isset($redux['enable_redirect_login_for_not_admin_editor_sds-options-and-settings'])
+    ? $redux['enable_redirect_login_for_not_admin_editor_sds-options-and-settings']
+    : ''; // Значення за замовчуванням
 
-// Включить перенаправление для не Admin и Editor - ссылка переадресации
 global $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings;
+$login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = isset($redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'])
+    ? $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings']
+    : ''; // Значення за замовчуванням
 
-// Перевірка наявності ключа у масиві $redux
-if (isset($redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'])) {
-    $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];
-} else {
-    // Можна визначити значення за замовчуванням або виконати інші дії
-    $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = ''; // або інше значення
-}
-
-
-
-// Скрытие кнопки "Мой сайт" в самом левом углу админ бара для не зарегистрировавшихся пользователей
 global $remove_left_admin_bar_button_sds_options_and_settings;
-$remove_left_admin_bar_button_sds_options_and_settings = $redux['remove_left_admin_bar_button_sds-options-and-settings'];
-
+$remove_left_admin_bar_button_sds_options_and_settings = isset($redux['remove_left_admin_bar_button_sds-options-and-settings'])
+    ? $redux['remove_left_admin_bar_button_sds-options-and-settings']
+    : ''; // Значення за замовчуванням
 
 /**
  * Роль текущего пользователя
@@ -146,7 +189,14 @@ if ($enable_wp_recall_options_sds_options_and_settings == 0){
     /***
      * Редиректы из консоли для не Админов и Редакторов сайта
      */
-    $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];
+//    $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];
+    if (isset($redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'])) {
+        $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = $redux['login_redirects_not_admin_editor-exit-page-posts-sds-options-and-settings'];
+    } else {
+        $login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings = null; // Значення за замовчуванням
+    }
+
+
     if (isset($login_redirects_not_admin_editor_exit_page_posts_sds_options_and_settings) && isset($enable_redirect_login_for_not_admin_editor_sds_options_and_settings) && $enable_redirect_login_for_not_admin_editor_sds_options_and_settings == 1) {
 //        dd(sdstudio_get_current_user_roles());
 

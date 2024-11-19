@@ -7,11 +7,28 @@
 // require_once plugin_dir_path( __FILE__ ) . '_WORKER.php';
 // Заменяем sds-options-and-settings на свой слаг с -
 // require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
-
 // Путь в корень плагина
 define( 'SDS_OPTIONS_AND_SETTINGS__PLUGIN_DIR' , plugin_dir_path(__FILE__) );
 // URL плагина
 define( 'SDS_OPTIONS_AND_SETTINGS__PLUGIN_URL' , plugin_dir_url(__FILE__) );
+
+if (!is_admin()){
+    return false;
+}
+// Визначаємо текстовий домен як константу
+define('SDS_OPTIONS_AND_SETTINGS_TD', 'sds-options-and-settings');
+
+// Додаємо завантаження текстового домену
+add_action('init', function() {
+    load_plugin_textdomain(
+        SDS_OPTIONS_AND_SETTINGS_TD,
+        false,
+        dirname(plugin_basename(__FILE__)) . '/languages'
+    );
+});
+
+
+
 
 // Название плагина
 //$plugin_data = get_plugin_data( __FILE__ );
@@ -214,10 +231,10 @@ $args = [
     // Show the sections below the admin menu item or not.
     'allow_sub_menu'            => true,
 
-    'menu_title'                => esc_html__( $plugin_name_title_menu, 'sds-options-and-settings' ),
-//    'menu_title'                => esc_html__( 'SDStudio Updater Data Year Posts', 'sds-options-and-settings' ),
-    'page_title'                => esc_html__( $plugin_name, 'sds-options-and-settings' ),
-//    'page_title'                => esc_html__( 'SDStudio Updater Data Year Posts', 'sds-options-and-settings' ),
+    'menu_title'                => esc_html__( $plugin_name_title_menu, SDS_OPTIONS_AND_SETTINGS_TD ),
+//    'menu_title'                => esc_html__( 'SDStudio Updater Data Year Posts', SDS_OPTIONS_AND_SETTINGS_TD),
+    'page_title'                => esc_html__( $plugin_name, SDS_OPTIONS_AND_SETTINGS_TD ),
+//    'page_title'                => esc_html__( 'SDStudio Updater Data Year Posts', SDS_OPTIONS_AND_SETTINGS_TD),
 
     // Specify a custom URL to an icon.
 //    'menu_icon'                 => 'dashicons-welcome-widgets-menus',
@@ -330,19 +347,19 @@ $args = [
 $args['admin_bar_links'][] = [
     'id'    => 'redux-docs',
     'href'  => '//docs.reduxframework.com/',
-    'title' => esc_html__( 'Documentation', 'sds-options-and-settings' ),
+    'title' => esc_html__( 'Documentation', SDS_OPTIONS_AND_SETTINGS_TD),
 ];
 
 $args['admin_bar_links'][] = [
     'id'    => 'redux-support',
     'href'  => '//github.com/ReduxFramework/redux-framework/issues',
-    'title' => esc_html__( 'Support', 'sds-options-and-settings' ),
+    'title' => esc_html__( 'Support', SDS_OPTIONS_AND_SETTINGS_TD),
 ];
 
 $args['admin_bar_links'][] = [
     'id'    => 'redux-extensions',
     'href'  => 'reduxframework.com/extensions',
-    'title' => esc_html__( 'Extensions', 'sds-options-and-settings' ),
+    'title' => esc_html__( 'Extensions', SDS_OPTIONS_AND_SETTINGS_TD),
 ];
 
 // SOCIAL ICONS -> Setup custom links in the footer for quick links in your panel footer icons.
@@ -357,21 +374,21 @@ $args['share_icons'][] = [
 $args['share_icons'][] = [
 //    'url'   => 'https://www.facebook.com/WebSDStudio/',
     'url'   => $SDStudio_facebook_com,
-    'title' => esc_html__( 'Like us on Facebook', 'sds-options-and-settings' ),
+    'title' => esc_html__( 'Like us on Facebook', SDS_OPTIONS_AND_SETTINGS_TD),
     'target' => '_blank',
     'icon'  => 'el el-facebook',
 ];
 $args['share_icons'][] = [
 //    'url'   => '//sdstudio.top/',
     'url'   => $SDStudio_site,
-    'title' => esc_html__( 'Website', 'sds-options-and-settings' ),
+    'title' => esc_html__( 'Website', SDS_OPTIONS_AND_SETTINGS_TD),
     'target' => '_blank',
     'icon'  => 'el el-home',
 ];
 $args['share_icons'][] = [
 //    'url'   => 'https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact_info%3BhWD%2Fwa9lSmWLHB9H6SsiWA%3D%3D',
     'url'   => $SDStudio_linkedin_com,
-    'title' => esc_html__( 'FInd us on LinkedIn', 'sds-options-and-settings' ),
+    'title' => esc_html__( 'FInd us on LinkedIn', SDS_OPTIONS_AND_SETTINGS_TD),
     'target' => '_blank',
     'icon'  => 'el el-linkedin',
 ];
@@ -383,13 +400,13 @@ if ( ! isset( $args['global_variable'] ) || false !== $args['global_variable'] )
     } else {
         $v = str_replace( '-', '_', $args['opt_name'] );
     }
-//    $args['intro_text'] = '<p>' . sprintf( __( 'Did you know that Redux sets a global variable for you? To access any of your saved options from within your code you can use your global variable: $s', 'sds-options-and-settings' ) . '</p>', '<strong>' . $v . '</strong>' );
+//    $args['intro_text'] = '<p>' . sprintf( __( 'Did you know that Redux sets a global variable for you? To access any of your saved options from within your code you can use your global variable: $s', SDS_OPTIONS_AND_SETTINGS_TD) . '</p>', '<strong>' . $v . '</strong>' );
 } else {
-//    $args['intro_text'] = '<p>' . esc_html__( 'This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.', 'sds-options-and-settings' ) . '</p>';
+//    $args['intro_text'] = '<p>' . esc_html__( 'This text is displayed above the options panel. It isn\'t required, but more info is always better! The intro_text field accepts all HTML.', SDS_OPTIONS_AND_SETTINGS_TD) . '</p>';
 }
 
 // Add content after the form.
-//$args['footer_text'] = '<p>' . esc_html__( 'This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.', 'sds-options-and-settings' ) . '</p>';
+//$args['footer_text'] = '<p>' . esc_html__( 'This text is displayed below the options panel. It isn\'t required, but more info is always better! The footer_text field accepts all HTML.', SDS_OPTIONS_AND_SETTINGS_TD) . '</p>';
 
 Redux::set_args( $opt_name__redux_sds_options_and_settings, $args );
 
@@ -451,7 +468,7 @@ $section = [
     'title' => __( 'Страница входа', 'login-page-posts-sds-options-and-settings' ),
     'id'    => 'login_page_sds_options_and_settings',
     'subsection' => false,
-    'desc'  => __( 'Настройте страницу входа на сайт. Здесь Вы можете указать логотип Вашего сайта, фоновое изображение', 'sds-options-and-settings' ),
+    'desc'  => __( 'Настройте страницу входа на сайт. Здесь Вы можете указать логотип Вашего сайта, фоновое изображение', SDS_OPTIONS_AND_SETTINGS_TD),
     // Иконки брать здесь
     // http://elusiveicons.com/icons/
     'icon'  => 'el el-play-circle',
@@ -493,7 +510,7 @@ $section = [
     'title' => __( 'Переадрисация при входе и выходе, фиксы WP-RECALL, настройки поиска и другие фиксы для кабинета', 'login_redirects-page-posts-sds-options-and-settings' ),
     'id'    => 'login_redirects_page_sds_options_and_settings',
     'subsection' => false,
-    'desc'  => __( 'Укажите ссылки на которые будет происходить переход как при входе, так и при выходе с сайта', 'sds-options-and-settings' ),
+    'desc'  => __( 'Укажите ссылки на которые будет происходить переход как при входе, так и при выходе с сайта', SDS_OPTIONS_AND_SETTINGS_TD),
     // Иконки брать здесь
     // http://elusiveicons.com/icons/
     'icon'  => 'el el-return-key',
@@ -532,7 +549,7 @@ $section = [
             'type'     => 'switch',
             'title'    => __('Включить перенаправления для не Admin и Editor', 'redux-framework-demo'),
 //            'subtitle' => __('', 'redux-framework-demo'),
-            'desc'  => __( 'При активации, будет включена опция будет применено перенаправление для всех других пользователей кроме ролей Admin и Editor', 'sds-options-and-settings' ),
+            'desc'  => __( 'При активации, будет включена опция будет применено перенаправление для всех других пользователей кроме ролей Admin и Editor', SDS_OPTIONS_AND_SETTINGS_TD),
             'default'  => false,
         ],
             [
@@ -567,7 +584,7 @@ $section = [
             'type'     => 'switch',
             'title'    => __('WP-RECALL Включить обработку вода и выхода для плагина', 'redux-framework-demo'),
 //            'subtitle' => __('', 'redux-framework-demo'),
-            'desc'  => __( 'При активации опции, будет включена опция входа и выхода для плагина WP-RECALL.', 'sds-options-and-settings' ),
+            'desc'  => __( 'При активации опции, будет включена опция входа и выхода для плагина WP-RECALL.', SDS_OPTIONS_AND_SETTINGS_TD),
             'default'  => false,
         ],
 
@@ -658,7 +675,7 @@ $section = [
             'title'    => __('Удаление всех ссылок в "Мой сайт" для не зарегистрировавшихся пользователей', 'redux-framework-demo'),
 //            'subtitle' => __('', 'redux-framework-demo'),
             'required' => array('enable_wp_recall_options_disable_admin_panel_for_all_not_admin_sds-options-and-settings', '=', 'false' ),
-            'desc'  => __( 'При активации, скрытие всех удаление всех ссылок под кнопкой "Мой сайт" в самом левом углу админ бара для не зарегистрировавшихся пользователей', 'sds-options-and-settings' ),
+            'desc'  => __( 'При активации, скрытие всех удаление всех ссылок под кнопкой "Мой сайт" в самом левом углу админ бара для не зарегистрировавшихся пользователей', SDS_OPTIONS_AND_SETTINGS_TD),
             'default'  => false,
         ],
 
@@ -770,7 +787,7 @@ $section = [
 //    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
     'id'    => 'hot_key_for_login_page_sds_options_and_settings',
     'subsection' => false,
-    'desc'  => __( 'Настройки для входа в админку сайта по сочитанию горячих клавиш', 'sds-options-and-settings' ),
+    'desc'  => __( 'Настройки для входа в админку сайта по сочитанию горячих клавиш', SDS_OPTIONS_AND_SETTINGS_TD),
     // Иконки брать здесь
     // http://elusiveicons.com/icons/
     'icon'  => 'el el-torso',
@@ -782,7 +799,7 @@ $section = [
             'type'     => 'switch',
             'title'    => __('Включить вход на сайт по горячим клавишам?', 'redux-framework-demo'),
             'subtitle' => __('Включите вход на сайт при помощи горячих клавишь. Для этого установите переключатель в положение "On". По умолчанию опция включена.', 'redux-framework-demo'),
-            'desc'  => __( 'При активации, появляется возможность переходить на страницу входа в админку при нажатии горячих клавиш Ctrl+Shift+1. Так же активируется скрипт для быстрого входа с мобильного телефона - для этого нужно нажать 5-6 раз (событие таб) по любой пустой области футера сайта, но только на главной странице.', 'sds-options-and-settings' ),
+            'desc'  => __( 'При активации, появляется возможность переходить на страницу входа в админку при нажатии горячих клавиш Ctrl+Shift+1. Так же активируется скрипт для быстрого входа с мобильного телефона - для этого нужно нажать 5-6 раз (событие таб) по любой пустой области футера сайта, но только на главной странице.', SDS_OPTIONS_AND_SETTINGS_TD),
             'default'  => true,
         ],
         [
@@ -808,10 +825,10 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 // * Активация загрузки файлов
 // */
 //$section = [
-//    'title' => __( 'Загрузка файлов', 'sds-options-and-settings' ),
+//    'title' => __( 'Загрузка файлов', SDS_OPTIONS_AND_SETTINGS_TD),
 //    'id'    => 'enable_upload_other_mmi_types_files_sds_options_and_settings',
 //    'subsection' => false,
-//    'desc'  => __( '(активация загрузки ранее не разрешенных типов файлов)', 'sds-options-and-settings' ),
+//    'desc'  => __( '(активация загрузки ранее не разрешенных типов файлов)', SDS_OPTIONS_AND_SETTINGS_TD),
 //    // Иконки брать здесь
 //    // http://elusiveicons.com/icons/
 //    'icon'  => 'el el-file-new',
@@ -842,7 +859,7 @@ $section = [
 //    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
     'id'    => 'gallery_settings_sds_options_and_settings',
     'subsection' => false,
-    'desc'  => __( 'Настройки связанные с отоборажением галерей, глобально во всем сайте', 'sds-options-and-settings' ),
+    'desc'  => __( 'Настройки связанные с отоборажением галерей, глобально во всем сайте', SDS_OPTIONS_AND_SETTINGS_TD),
     // Иконки брать здесь
     // http://elusiveicons.com/icons/
     'icon'  => 'el el-picture',
@@ -904,7 +921,7 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 ////    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
 //    'id'    => 'images_sizes_sds_options_and_settings',
 //    'subsection' => false,
-//    'desc'  => __( 'Здесь отображается список зарегистрированных на сайте эскизов изображений. Плюс можно активировать не достающие популярные варианты эскизов.', 'sds-options-and-settings' ),
+//    'desc'  => __( 'Здесь отображается список зарегистрированных на сайте эскизов изображений. Плюс можно активировать не достающие популярные варианты эскизов.', SDS_OPTIONS_AND_SETTINGS_TD),
 //    // Иконки брать здесь
 //    // http://elusiveicons.com/icons/
 //    'icon'  => 'el el-picture',
@@ -1866,7 +1883,7 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 //$image_this = $MarkDownImageFolder_sds_options_and_settings.'data-hendle.png';
 //dd($image_this);
 $section = [
-    'title' => __( 'Авто генерация страниц', 'sds-options-and-settings' ),
+    'title' => __( 'Авто генерация страниц', SDS_OPTIONS_AND_SETTINGS_TD),
 //    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
     'id'    => 'auto_gen_pages_shortcodes_sds-options-and-settings',
     'subsection' => false,
@@ -2024,7 +2041,7 @@ Redux::set_section( $opt_name__redux_sds_options_and_settings, $section );
 //$image_this = $MarkDownImageFolder_sds_options_and_settings.'data-hendle.png';
 //dd($image_this);
 $section = [
-    'title' => __( 'Ускорение сайта', 'sds-options-and-settings' ),
+    'title' => __( 'Ускорение сайта', SDS_OPTIONS_AND_SETTINGS_TD),
 //    'title' => __( 'Переадрисация при входе и выходе ', 'login_redirects-page-posts-sds-options-and-settings' ),
     'id'    => 'pagespeed_sds-options-and-settings',
     'subsection' => false,
