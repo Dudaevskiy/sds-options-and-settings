@@ -98,7 +98,8 @@ $remove_left_admin_bar_button_sds_options_and_settings = isset($redux['remove_le
  */
 if(!function_exists('sdstudio_get_current_user_roles')){
     function sdstudio_get_current_user_roles() {
-        if( is_user_logged_in() ) {
+//        if( is_user_logged_in() ) {
+        if (function_exists('is_user_logged_in')) {
             $user = wp_get_current_user();
             $roles = ( array ) $user->roles;
             return $roles[0]; // This returns an array

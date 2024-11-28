@@ -21,7 +21,7 @@ global $sds_options_and_settings__enable_sweetalert2;
 $sdstudio_cf7_and_sweetalert2 = $redux['enable_sweetalert2_CF7_allerts' ];
 
 // Если в настройках плагина активированы опции sweetalert2 и CF7
-if ($sds_options_and_settings__enable_sweetalert2 == 1 && $sdstudio_cf7_and_sweetalert2 == 1) {
+if (isset($sds_options_and_settings__enable_sweetalert2) && $sds_options_and_settings__enable_sweetalert2 == 1 && isset($sdstudio_cf7_and_sweetalert2) && $sdstudio_cf7_and_sweetalert2 == 1) {
 
 //    if ($sds_options_and_settings__enable_sweetalert2_for_AddToAny == 1 ) {
         add_action('wp_head', 'sweetalert_for_cf7');
