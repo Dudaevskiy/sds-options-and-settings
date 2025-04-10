@@ -26,38 +26,38 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 		/**
 		 * ReduxFramework object.
 		 *
-		 * @var null
+		 * @var ReduxFramework|null
 		 */
-		private $parent;
+		private ?ReduxFramework $parent;
 
 		/**
 		 * Switch to omit social icons if dev_mode is set to true and Redux defaults are used.
 		 *
 		 * @var bool
 		 */
-		public $omit_icons = false;
+		public bool $omit_icons = false;
 
 		/**
 		 * Switch to omit support menu items if dev_mode is set to true and redux defaults are used.
 		 *
 		 * @var bool
 		 */
-		public $omit_items = false;
+		public bool $omit_items = false;
 
 		/**
 		 * Flag to force dev_mod to true if in localhost or WP_DEBUG is set to true.
 		 *
 		 * @var bool
 		 */
-		public $dev_mode_forced = false;
+		public bool $dev_mode_forced = false;
 
 		/**
 		 * Redux_Args constructor.
 		 *
-		 * @param     object $redux ReduxFramework object.
-		 * @param     array  $args Global arguments array.
+		 * @param ReduxFramework $redux ReduxFramework object.
+		 * @param array          $args  Global arguments array.
 		 */
-		public function __construct( $redux, array $args ) {
+		public function __construct( ReduxFramework $redux, array $args ) {
 			$this->parent = $redux;
 
 			$default = array(
@@ -159,14 +159,11 @@ if ( ! class_exists( 'Redux_Args', false ) ) {
 				'admin_theme'                      => 'wp',
 				'elusive_frontend'                 => false,
 				'fontawesome_frontend'             => false,
-				'pro'                              => array(),
+				'flyout_submenus'                  => true,
 				'font_display'                     => 'swap', // block|swap|fallback|optional.
 				'load_on_cron'                     => false,
 				'search'                           => false,
 			);
-
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName
-			$default = apply_filters( 'redux/pro/args/defaults', $default );
 
 			$args = Redux_Functions::parse_args( $args, $default );
 

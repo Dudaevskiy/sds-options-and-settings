@@ -72,16 +72,16 @@
         },
         {
             "name": "composer/installers",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "c29dc4b93137acb82734f672c37e029dfbd95b35"
+                "reference": "12fb2dfe5e16183de69e784a7b84046c43d97e8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/c29dc4b93137acb82734f672c37e029dfbd95b35",
-                "reference": "c29dc4b93137acb82734f672c37e029dfbd95b35",
+                "url": "https://api.github.com/repos/composer/installers/zipball/12fb2dfe5e16183de69e784a7b84046c43d97e8e",
+                "reference": "12fb2dfe5e16183de69e784a7b84046c43d97e8e",
                 "shasum": ""
             },
             "require": {
@@ -89,12 +89,12 @@
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "composer/composer": "1.6.* || ^2.0",
-                "composer/semver": "^1 || ^3",
-                "phpstan/phpstan": "^0.12.55",
-                "phpstan/phpstan-phpunit": "^0.12.16",
-                "symfony/phpunit-bridge": "^5.3",
-                "symfony/process": "^5"
+                "composer/composer": "^1.10.27 || ^2.7",
+                "composer/semver": "^1.7.2 || ^3.4.0",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-phpunit": "^1",
+                "symfony/phpunit-bridge": "^7.1.1",
+                "symfony/process": "^5 || ^6 || ^7"
             },
             "type": "composer-plugin",
             "extra": {
@@ -151,6 +151,7 @@
                 "cockpit",
                 "codeigniter",
                 "concrete5",
+                "concreteCMS",
                 "croogo",
                 "dokuwiki",
                 "drupal",
@@ -197,7 +198,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v2.2.0"
+                "source": "https://github.com/composer/installers/tree/v2.3.0"
             },
             "funding": [
                 {
@@ -213,20 +214,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-20T06:45:11+00:00"
+            "time": "2024-06-24T20:46:46+00:00"
         },
         {
             "name": "fortawesome/font-awesome",
-            "version": "6.5.1",
+            "version": "6.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "deeea78c52bfe00b6e251ffddccf5570d5fdb05e"
+                "reference": "af620534bfc3c2d4cbefcfeec29603bbe7809e64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/deeea78c52bfe00b6e251ffddccf5570d5fdb05e",
-                "reference": "deeea78c52bfe00b6e251ffddccf5570d5fdb05e",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/af620534bfc3c2d4cbefcfeec29603bbe7809e64",
+                "reference": "af620534bfc3c2d4cbefcfeec29603bbe7809e64",
                 "shasum": ""
             },
             "type": "library",
@@ -258,7 +259,7 @@
                 "issues": "https://github.com/FortAwesome/Font-Awesome/issues",
                 "source": "https://github.com/FortAwesome/Font-Awesome"
             },
-            "time": "2023-11-30T22:38:48+00:00"
+            "time": "2024-12-16T21:31:56+00:00"
         },
         {
             "name": "oomphinc/composer-installers-extender",
@@ -319,16 +320,16 @@
         },
         {
             "name": "redux-framework/redux-framework",
-            "version": "4.4.11",
+            "version": "4.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reduxframework/redux-framework.git",
-                "reference": "dbb1c25fea05baac5a5b772a33ff599ea6641abe"
+                "reference": "b5daa9e37a1fd08ffb725efbe3cdab778c4bcdf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reduxframework/redux-framework/zipball/dbb1c25fea05baac5a5b772a33ff599ea6641abe",
-                "reference": "dbb1c25fea05baac5a5b772a33ff599ea6641abe",
+                "url": "https://api.github.com/repos/reduxframework/redux-framework/zipball/b5daa9e37a1fd08ffb725efbe3cdab778c4bcdf4",
+                "reference": "b5daa9e37a1fd08ffb725efbe3cdab778c4bcdf4",
                 "shasum": ""
             },
             "require": {
@@ -338,14 +339,14 @@
             },
             "type": "wordpress-plugin",
             "extra": {
-                "installer-types": [
-                    "library"
-                ],
                 "installer-paths": {
                     "redux-core/assets/font-awesome": [
                         "fortawesome/font-awesome"
                     ]
-                }
+                },
+                "installer-types": [
+                    "library"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -355,12 +356,12 @@
                 {
                     "name": "Redux.io",
                     "email": "support@redux.io",
-                    "homepage": "http://redux.io",
+                    "homepage": "https://redux.io",
                     "role": "Support"
                 }
             ],
             "description": "Build better and beautiful sites in WordPress, faster.",
-            "homepage": "http://redux.io",
+            "homepage": "https://redux.io",
             "keywords": [
                 "Settings",
                 "customizer",
@@ -374,19 +375,19 @@
                 "docs": "https://devs.redux.io",
                 "forum": "https://wordpress.org/support/plugin/redux-framework/",
                 "issues": "https://github.com/reduxframework/redux-framework/issues",
-                "source": "https://github.com/reduxframework/redux-framework/tree/4.4.11",
+                "source": "https://github.com/reduxframework/redux-framework/tree/4.5.7",
                 "website": "https://redux.io/"
             },
-            "time": "2023-12-18T18:41:32+00:00"
+            "time": "2025-03-26T18:20:47+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

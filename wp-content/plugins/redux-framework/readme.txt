@@ -1,10 +1,10 @@
 === Redux Framework ===
 Contributors: kprovance, dovyp, redux
-Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts, metaboxes, settings
+Tags: admin, options, theme options, plugin options, options framework
 Requires at least: 5.0
-Requires PHP: 7.1
-Tested up to: 6.4
-Stable tag: 4.4.11
+Requires PHP: 7.4
+Tested up to: 6.8
+Stable tag: 4.5.7
 License: GPL-3.0+
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -31,6 +31,8 @@ But what does Redux actually DO? We don't believe that theme and plugin develope
 <li>Color Gradient</li>
 <li>Color Palette</li>
 <li>Color RGBA</li>
+<li>Color Scheme</li>
+<li>Content</li>
 <li>Custom Fonts</li>
 <li>Customizer</li>
 <li>Date</li>
@@ -95,7 +97,7 @@ You can also contribute code via our <a href="https://github.com/reduxframework/
 
 <h4>📝 Documentation and Support</h4>
 <ul>
-<li>We have extremely extensive docs. Please visit [http://devs.redux.io/](http://devs.redux.io). If that doesn't solve your issue, search [the issue tracker on GitHub](https://github.com/reduxframework/redux-framework/issues). If you can’t locate any topics that pertain to your particular problem, [post a new issue](https://github.com/reduxframework/redux-framework/issues/new) for it. Before you submit an issue, please read [our contributing requirements](https://github.com/redux-framework/redux-framework/blob/master/CONTRIBUTING.md). We build on the dev version and push it to WordPress.org when we confirm Redux is stable and ready for release.</li>
+<li>We have extremely extensive docs. Please visit [https://devs.redux.io/](https://devs.redux.io). If that doesn't solve your issue, search [the issue tracker on GitHub](https://github.com/reduxframework/redux-framework/issues). If you can’t locate any topics that pertain to your particular problem, [post a new issue](https://github.com/reduxframework/redux-framework/issues/new) for it. Before you submit an issue, please read [our contributing requirements](https://github.com/redux-framework/redux-framework/blob/master/CONTRIBUTING.md). We build on the dev version and push it to WordPress.org when we confirm Redux is stable and ready for release.</li>
 <li>If you have additional questions, reach out to us at support@redux.io</li>
 </ul>
 
@@ -119,12 +121,138 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= 4.5.7 =
+* Fixed: Bullet-proofed some global args when omitted from the config.
+* Fixed: PHP 8.4 deprecation notices.
+* Fixed: The Options constructor now filters out blank strings, causing fatal errors. Options must always be in an array.
+* Fixed: `gallery` field errors on failed demo imports not installing images into the WP gallery.
+* Release date: March 26, 2025
+
+= 4.5.6 =
+* Fixed: Setting CHMOD defaults in construct to avoid errors in certain use cases.
+* Fixed: Installed empty placeholder for old `search` extension as WP did not remove it from old versions to updates, thus causing errors.
+* Fixed: `raw` field in sample-config.php trigger WP filesystem error when `FS_METHOD` set to `FTP_EXT` and creds are not entered.
+* Fixed: Sorter not saving in customizer.
+* Fixed: `users` metabox not saving on some setups.
+* Fixed: Disable search bar on user profile and taxonomy metaboxes.
+* Updated: Font Awesome 6.7.2
+* Modified: `custom_fonts` now enqueues local font CSS with a version resource of last modified file time and not current time.
+* Modified: Will pass mandatory PCP checks.
+* Release date: January 20, 2025
+
+= 4.5.4 =
+* Fixed: Filesystem class $creds not accepting bool value.
+* Fixed: #4045: Old `search` extension throwing `class not found` error.
+* Fixed: `accordion` extension throwing `Type of Redux_Extension_Accordion::$version must be string` error.
+* Fixed: `color_scheme` typed property must not be accessed before initialization.
+* Release date: December 16, 2024
+
+= 4.5.3 =
+* Removed: Deprecation notice for $filesystem. Too many people think it's an error.  We'll have to support old Redux 3 code for the foreseeable future.
+* Release date: December 5, 2024
+
+= 4.5.2 =
+* Fixed: New global filesystem access broke old methods used on old extensions. Deprecation notice added.
+* Release date: December 5, 2024
+
+= 4.5.1 =
+* Updated: Font Awesome 6.7.1
+* Fixed: Options Search bar rendering multiple time on customizer UI.
+* Fixed: Changed typesafe declarations to transient variables from `array` to `mixed` to prevent fatal errors.
+* Fixed: `color_scheme` and `social_profiles` giving `cannot assign null to array` errors when fields not in use.
+* Fixed: JavaScript errors in regard to TinyMCE when not loaded via `editor` field.
+* Fixed: `repeater` "Add" button failing when no `editor` field was loaded.
+* Fixed: WP 6.7 broke Redux menus in customizer.
+* Fixed: "Reset Section" resetting everything to blank or zero.
+* Fixed: Float loses precision in `color_rgba` when `show_default` is set to true. Thanks @andrejarh
+* Fixed: `multi_media` field not saving or retaining data in customizer.
+* Modified: Customizer HTML output to support WordPress installations prior to version 6.7.
+* Modified: Option panel search bar moved to core (previously an extension).
+* Modified: Allow `null` assignments to core variable to prevent fatal errors when devs disable Google Fonts.
+* Added `null` to multiple typesafe declarations.
+* Added: CSS output added to `slider` field.
+* Added: Minimum PHP 7.4 warning message to admin screen to prevent fatal errors. Some people are, apparently, still using outdated PHP.
+* Release date: December 4, 2024
+
+= 4.5.0 =
+* Changed: Minimum PHP version now 7.4.
+* Fixed: Datetime wasn't escaping some translations and domain was incorrect.
+* Fixed: `required` functionality in `taxonomy` and `users`.
+* Fixed: `repeater` not rendering inside `taxonomy` metaboxes.
+* Fixed: `repeater` not saving inside `users` metaboxes.
+* Fixed: Metaboxes `page_template` feature not showing/hiding properly under Gutenberg due to class name change.
+* Fixed: #4023 - `google_maps` instances bleeding over from previous issue.
+* Fixed: `google_maps` deprecation notice regarding map markers.
+* Fixed: `repeater` in `taxonomy` and `user` metaboxes.
+* Fixed: Unnecessary loading of default data on load (unless `metaboxes` are in use).
+* Fixed: `editor` and `checkbox` fields not saving in `tabbed` field.
+* Fixed: `custom_fonts` not saving uploaded font on conversion failure.
+* Fixed: #4009 - Google Font update issue resolved.
+* Fixed: #4011 - `editor` in `repeater` field not saving.
+* Fixed: `editor` in added `repeater` fields not properly initializing.
+* Fixed: #4008 - Font conversion failure fallback.
+* Fixed: Replaced `validate_values` deprecation in `taxonomy` metabox.
+* Updated: Deprecated JavaScript in all the Metabox extensions.
+* Updated: JavaScript for jQuery 4.0 release.
+* Release date: October 28, 2024
+
+= 4.4.18 =
+* Fixed: #4006: XSS fix in 'color_scheme' import.
+* Updated: Font Awesome 6.6.0
+* Release date: July 19, 2024
+
+= 4.4.17 =
+* Fixed: `social_profiles` in customizer.
+* Fixed: Section divide returning `null`, which caused a PHP warning.
+* Fixed: Undefined index in `tabbed` when resetting settings.
+* Release date: May 23, 2024
+
+= 4.4.16 =
+* Modified: Temporarily disable `social_profiles` and `color_scheme` from customizer. They don't work.
+* Removed: Finished removing Redux Pro support.
+* Removed: Extendify plugin banner at first launch.
+* Updated: Font Awesome 6.5.2
+* Release date: April 27, 2024
+
+= 4.4.15 =
+* Fixed: `spacing`, `dimension`, and `border` fields not saving changed values.
+* Fixed: `switch` and `button_set` not saving within `tabbed` interface.
+* Release date: March 22, 2024
+
+= 4.4.14 =
+* Fixed: "No Field ID is set" message causing jumbled backend layout.
+* New: Content Field [https://devs.redux.io/core-fields/content.html](https://devs.redux.io/core-fields/content.html)
+* Updated: Bring inputs up to W3C standards.
+* Updated: First round of PHP 8.3 compatibility.
+* Release date: March 14, 2024
+
+= 4.4.13 =
+* Fixed: `color_scheme` crashing WordPress with 'critical error' for users still using PHP 7.1.
+* Added: Filter to disable Google Font updates: `"redux/{opt_name}/field/typography/google_font_update"`. Return `false` to disable.
+* Added: WordPress 6.5 compatibility.
+* Release date: February 13, 2024
+
+= 4.4.12 =
+* New: Color Schemes Extension [https://devs.redux.io/core-extensions/color-schemes.html](https://devs.redux.io/core-extensions/color-schemes.html)
+* Fixed: PHP Error when `color_scheme` data doesn't exist.
+* Fixed: `custom_fonts` not importing original font on conversion failure.
+* Fixed: Remove debug info from JS. FA version change.
+* Fixed: #3988 - Warning/error count displayed NaN on color field validation.
+* Fixed: Erroneous error in `color_scheme` when saved scheme array was blank (string).
+* Fixed: Color schemes would not switch via select box after saving a new scheme.
+* Fixed: `typography` sunset dropdown not rendering select2 styling.
+* Fixed: Efficiency for extension loading improved.
+* Removed: Redux Pro support. It's no longer required as all Pro features are now part of Redux.
+* Release date: February 12, 2024
+
 = 4.4.11 =
 * Fixed: Cosmetic `box_shadow` fix.
 * Fixed: Required not hiding linked fields in customizer.
 * Fixed: `tabbed` and `repeater` fields not resetting when using Section Reset.
 * Fixed: #3983 - Continued damage done by WP Filesystem PR
 * Updated: Font Awesome 6.5.1
+* Release date: December 18, 2023
 
 = 4.4.10 =
 * New: Tabbed Extension [https://devs.redux.io/core-extensions/tabbed.html](https://devs.redux.io/core-extensions/tabbed.html)
@@ -133,9 +261,11 @@ NOTE: Redux is not intended to be used on its own. It requires a config file pro
 * Fixed: Errant spaces in ACE Editor field.
 * Fixed: Array check in color validation to avoid errors. It works ONLY with the color field. Nothing else.
 * Improved: Filesystem killswitch logic.
+* Release date: December 05, 2023
 
 = 4.4.9 =
 * Modified: Rollback changes made to the filesystem class causing false file permission issue messages.
+* Release date: October 26, 2023
 
 = 4.4.8 =
 * Modified: Additional safeguards against read-only filesystems. Thanks @cezarpopa-cognita.
@@ -409,5 +539,5 @@ Redux is an option framework... in other words, it's not designed to do anything
 
 = How can I learn more about Redux? =
 
-Visit our website at [https://redux.io/](http://redux.io)
+Visit our website at [https://redux.io/](https://redux.io)
 

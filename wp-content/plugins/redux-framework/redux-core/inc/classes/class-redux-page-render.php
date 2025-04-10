@@ -477,21 +477,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					$core_path = Redux_Core::$dir . "inc/fields/{$field['type']}/field_{$field['type']}.php";
 				}
 
-				if ( Redux_Core::$pro_loaded ) {
-					$pro_path = '';
-
-					if ( class_exists( 'Redux_Pro' ) ) {
-						$pro_path = Redux_Pro::$dir . "core/inc/fields/{$field['type']}/class-redux-pro-$field_type.php";
-					}
-
-					if ( file_exists( $pro_path ) ) {
-						$filter_path = $pro_path;
-					} else {
-						$filter_path = $core_path;
-					}
-				} else {
-					$filter_path = $core_path;
-				}
+				$filter_path = $core_path;
 
 				$field_class = '';
 
@@ -563,15 +549,6 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					if ( ! isset( $field['name_suffix'] ) ) {
 						$field['name_suffix'] = '';
 					}
-
-					$data = array(
-						'field' => $field,
-						'value' => $value,
-						'core'  => $core,
-						'mode'  => 'render',
-					);
-
-					$pro_field_loaded = Redux_Functions::load_pro_field( $data );
 
 					$render = new $field_class( $field, $value, $core );
 
@@ -668,12 +645,6 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 
 					if ( isset( $field['fieldset_class'] ) && ! empty( $field['fieldset_class'] ) ) {
 						$class_string .= ' ' . $field['fieldset_class'];
-					}
-
-					if ( Redux_Core::$pro_loaded ) {
-						if ( $pro_field_loaded ) {
-							$class_string .= ' redux-pro-field-init';
-						}
 					}
 
 					echo '<fieldset id="' . esc_attr( $core->args['opt_name'] . '-' . $field['id'] ) . '" class="' . esc_attr( $hidden . esc_attr( $disabled ) . 'redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string ) . '" data-id="' . esc_attr( $field['id'] ) . '" data-type="' . esc_attr( $field['type'] ) . '">';
@@ -930,6 +901,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 				'info',
 				'section',
 				'repeater',
+				'tabbed',
 				'color_scheme',
 				'social_profiles',
 				'css_layout',
@@ -978,6 +950,9 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 				}
 			} else {
 				foreach ( $field['default'] as $defaultk => $defaultv ) {
+					$defaultk = is_numeric( $defaultk ) ? (string) $defaultk : $defaultk;
+					$defaultv = is_numeric( $defaultv ) ? (string) $defaultv : $defaultv;
+
 					if ( ! empty( $field['options'][ $defaultv ]['alt'] ) ) {
 						$default_output .= $field['options'][ $defaultv ]['alt'] . ', ';
 					} elseif ( ! empty( $field['options'][ $defaultv ] ) ) {
@@ -985,6 +960,18 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 					} elseif ( ! empty( $field['options'][ $defaultk ] ) ) {
 						$default_output .= $field['options'][ $defaultk ] . ', ';
 					} elseif ( ! empty( $defaultv ) ) {
+						if ( is_array( $defaultv ) ) {
+							foreach ( $defaultv as $k => $v ) {
+								if( is_array( $v ) ) {
+									$defaultv = implode( ', ', $v );
+								}
+							}
+
+							if ( is_array( $defaultv ) ) {
+								$defaultv = implode( ', ', $defaultv );
+							}
+						}
+
 						$default_output .= $defaultv . ', ';
 					}
 				}
@@ -1039,6 +1026,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 
 			$string = '';
 			if ( ( ( isset( $core->args['icon_type'] ) && 'image' === $core->args['icon_type'] ) || ( isset( $section['icon_type'] ) && 'image' === $section['icon_type'] ) ) || ( isset( $section['icon'] ) && false !== strpos( $section['icon'], '/' ) ) ) {
+				// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage -- No image/icon to enqueue.
 				$icon = ( ! isset( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url( $section['icon'] ) . '" /> ';
 			} else {
 				if ( ! empty( $section['icon_class'] ) ) {
@@ -1068,14 +1056,10 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 			if ( isset( $section['type'] ) && 'divide' === $section['type'] ) {
 				$string .= '<li class="divide' . esc_attr( $section['class'] ) . '">&nbsp;</li>';
 			} elseif ( ! isset( $section['subsection'] ) || true !== $section['subsection'] ) {
-				if ( ! isset( $core->args['pro']['flyout_submenus'] ) ) {
-					$core->args['pro']['flyout_submenus'] = false;
-				}
-
 				$subsections        = isset( $sections[ ( $k + 1 ) ]['subsection'] ) && true === $sections[ ( $k + 1 ) ]['subsection'];
 				$subsections_class  = $subsections ? ' hasSubSections' : '';
 				$subsections_class .= ( empty( $section['fields'] ) ) ? ' empty_section' : '';
-				$rotate             = true === $core->args['pro']['flyout_submenus'] ? ' el-rotate' : '';
+				$rotate             = true === $core->args['flyout_submenus'] ? ' el-rotate' : '';
 				$extra_icon         = $subsections ? '<span class="extraIconSubsections"><i class="el el-chevron-down' . $rotate . '">&nbsp;</i></span>' : '';
 				$string            .= '<li id="' . esc_attr( $k . $suffix ) . '_section_group_li" class="redux-group-tab-link-li' . esc_attr( $hide_section ) . esc_attr( $section['class'] ) . esc_attr( $subsections_class ) . '">';
 				$string            .= '<a href="javascript:void(0);" id="' . esc_attr( $k . $suffix ) . '_section_group_li_a" class="redux-group-tab-link-a" data-key="' . esc_attr( $k ) . '" data-rel="' . esc_attr( $k . $suffix ) . '">' . $extra_icon . $icon . '<span class="group_title">' . wp_kses_post( $section['title'] ) . '</span></a>';
@@ -1113,6 +1097,7 @@ if ( ! class_exists( 'Redux_Page_Render', false ) ) {
 							}
 
 							if ( ( isset( $core->args['icon_type'] ) && 'image' === $core->args['icon_type'] ) || ( isset( $sections[ $next_k ]['icon_type'] ) && 'image' === $sections[ $next_k ]['icon_type'] ) ) {
+								// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage -- No image/icon to enqueue.
 								$icon = ( ! isset( $sections[ $next_k ]['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . esc_url( $sections[ $next_k ]['icon'] ) . '" /> ';
 							} else {
 								if ( ! empty( $sections[ $next_k ]['icon_class'] ) ) {

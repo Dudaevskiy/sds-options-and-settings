@@ -31,6 +31,21 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		public static $array_units = array( '', '%', 'in', 'cm', 'mm', 'em', 'rem', 'ex', 'pt', 'pc', 'px', 'vh', 'vw', 'vmin', 'vmax', 'ch' );
 
 		/**
+		 * Is customizer loaded.
+		 *
+		 * @return bool
+		 */
+		public static function is_customizer_loaded(): bool {
+			global $wp_customize;
+
+			if ( isset( $wp_customize ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
 		 * Retrieve the section array from field ID.
 		 *
 		 * @param string $opt_name Panel opt_name.
@@ -460,20 +475,9 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @since      3.1.7
 		 */
 		public static function cleanFilePath( string $path ): string { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName
-			// TODO: Uncomment this after Redux Pro is discontinued.
 			// phpcs:ignore Squiz.PHP.CommentedOutCode
-			// _deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Functions_Ex::wp_normalize_path( $path )' );
+			_deprecated_function( __CLASS__ . '::' . __FUNCTION__, 'Redux 4.0', 'Redux_Functions_Ex::wp_normalize_path( $path )' );
 			return Redux_Functions_Ex::wp_normalize_path( $path );
-		}
-
-		/**
-		 * Create unique hash.
-		 *
-		 * @return string
-		 */
-		public static function get_hash(): string {
-			$remote_addr = Redux_Core::$server['REMOTE_ADDR'] ?? '127.0.0.1';
-			return md5( network_site_url() . '-' . $remote_addr );
 		}
 
 		/**
@@ -777,7 +781,7 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 *        user_can( 42, 'edit_page', 17433 );                  // Checks if user ID 42 has the 'edit_page' cap for post-ID 17433.
 		 *        user_can( 42, array( 'edit_pages', 'edit_posts' ) ); // Checks if user ID 42 has both the 'edit_pages' and 'edit_posts' caps.
 		 */
-		public static function user_can( $user, $capabilities, int $object_id = null ): bool {
+		public static function user_can( $user, $capabilities, ?int $object_id = null ): bool {
 			static $depth = 0;
 
 			if ( $depth >= 30 ) {
@@ -915,8 +919,8 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 		 * @return array|WP_Error
 		 */
 		public static function google_fonts_array( bool $download = false ) {
-			if ( ! empty( Redux_Core::$google_fonts ) && ! self::google_fonts_update_needed() ) {
-				return Redux_Core::$google_fonts;
+			if ( ! empty( Redux_Core::$updated_google_fonts ) && ! self::google_fonts_update_needed() ) {
+				return Redux_Core::$updated_google_fonts;
 			}
 
 			$filesystem = Redux_Filesystem::get_instance();
@@ -939,20 +943,20 @@ if ( ! class_exists( 'Redux_Helpers', false ) ) {
 						$body = wp_remote_retrieve_body( $request );
 						if ( ! empty( $body ) ) {
 							$filesystem->put_contents( $path, $body );
-							Redux_Core::$google_fonts = json_decode( $body, true );
+							Redux_Core::$updated_google_fonts = json_decode( $body, true );
 						}
 					} else {
 						return $request;
 					}
 				}
 			} elseif ( file_exists( $path ) ) {
-				Redux_Core::$google_fonts = json_decode( $filesystem->get_contents( $path ), true );
-				if ( empty( Redux_Core::$google_fonts ) ) {
+				Redux_Core::$updated_google_fonts = json_decode( $filesystem->get_contents( $path ), true );
+				if ( empty( Redux_Core::$updated_google_fonts ) ) {
 					$filesystem->unlink( $path );
 				}
 			}
 
-			return Redux_Core::$google_fonts;
+			return Redux_Core::$updated_google_fonts;
 		}
 
 		/**

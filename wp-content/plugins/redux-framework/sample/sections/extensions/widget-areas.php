@@ -1,12 +1,13 @@
 <?php
 /**
- * Redux Pro Widget Areas Sample config.
+ * Redux Widget Areas Sample config.
  *
- * For full documentation, please visit: http:https://devs.redux.io/
+ * For full documentation, please visit: https://devs.redux.io
  *
- * @package Redux Pro
+ * @package Redux
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 // --> Below this line not needed. This is just for demonstration purposes.
@@ -31,3 +32,4 @@ Redux::set_section(
 		),
 	)
 );
+// phpcs:enable

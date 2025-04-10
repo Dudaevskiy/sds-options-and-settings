@@ -1,13 +1,14 @@
 /* jshint unused:false */
 /* global redux */
+// noinspection JSUnresolvedReference
 
-var confirmOnPageExit = function( e ) {
+const confirmOnPageExit = function ( e ) {
 
 	// Return; // ONLY FOR DEBUGGING.
 	// If we haven't been passed the event get the window.event.
 	'use strict';
 
-	var message;
+	let message;
 
 	e = e || window.event;
 
@@ -27,17 +28,17 @@ var confirmOnPageExit = function( e ) {
 function redux_change( variable ) {
 	'use strict';
 
-	(function( $ ) {
-		var rContainer;
-		var parentID;
-		var id;
-		var th;
-		var li;
-		var subParent;
-		var errorCount;
-		var errorsLeft;
-		var warningCount;
-		var warningsLeft;
+	(function ( $ ) {
+		let rContainer;
+		let parentID;
+		let id;
+		let th;
+		let li;
+		let subParent;
+		let errorCount;
+		let errorsLeft;
+		let warningCount;
+		let warningsLeft;
 
 		variable = $( variable );
 
@@ -73,7 +74,7 @@ function redux_change( variable ) {
 				$( variable ).parents( '.redux-container:first' ).find( '.redux-field-errors' ).slideUp();
 				$( '#redux_metaboxes_errors' ).slideUp();
 			} else {
-				errorsLeft = ( parseInt( th.find( 'li .redux-menu-error:first' ).text(), 0 ) - 1 );
+				errorsLeft = ( parseInt( th.find( '.redux-menu-error:first' ).text(), 0 ) - 1 );
 
 				if ( errorsLeft <= 0 ) {
 					th.find( '.redux-menu-error:first' ).fadeOut().remove();
@@ -106,7 +107,7 @@ function redux_change( variable ) {
 			} else {
 
 				// Let's count down the warnings now. Fancy.  ;).
-				warningsLeft = ( parseInt( th.find( 'li .redux-menu-warning:first' ).text(), 0 ) - 1 );
+				warningsLeft = ( parseInt( th.find( '.redux-menu-warning:first' ).text(), 0 ) - 1 );
 
 				if ( warningsLeft <= 0 ) {
 					th.find( '.redux-menu-warning:first' ).fadeOut().remove();

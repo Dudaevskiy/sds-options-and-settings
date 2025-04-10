@@ -1,11 +1,12 @@
 <?php
 /**
- * Redux Pro Icon Select Sample config.
- * For full documentation, please visit: http:https://devs.redux.io/
+ * Redux Icon Select Sample config.
+ * For full documentation, please visit: https://devs.redux.io
  *
- * @package Redux Pro
+ * @package Redux
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -93,3 +94,4 @@ Redux::set_section(
 		),
 	)
 );
+// phpcs:enable

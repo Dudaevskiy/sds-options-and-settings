@@ -2,11 +2,12 @@
 /**
  * Accordion config.
  *
- * For full documentation, please visit: http:https://devs.redux.io/
+ * For full documentation, please visit: https://devs.redux.io
  *
  * @package Redux
  */
 
+// phpcs:disable
 defined( 'ABSPATH' ) || exit;
 
 Redux::set_section(
@@ -30,7 +31,7 @@ Redux::set_section(
 				'subtitle' => esc_html__( 'Frailty, thy name is woman!', 'your-textdomain-here' ),
 			),
 			array(
-				'id'       => 'opt-blank-text-2',
+				'id'       => 'opt-switch-1',
 				'type'     => 'switch',
 				'title'    => esc_html__( 'Switch, for some other important task!', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'Physician, heal thyself!', 'your-textdomain-here' ),
@@ -54,7 +55,7 @@ Redux::set_section(
 				'subtitle' => esc_html__( 'The tartness of his face sours ripe grapes.', 'your-textdomain-here' ),
 			),
 			array(
-				'id'       => 'opt-blank-text-4',
+				'id'       => 'opt-switch-2',
 				'type'     => 'switch',
 				'title'    => esc_html__( 'Yes, another switch, but you\'re free to use any field you like.', 'your-textdomain-here' ),
 				'subtitle' => esc_html__( 'I scorn you, scurvy companion!', 'your-textdomain-here' ),
@@ -67,3 +68,4 @@ Redux::set_section(
 		),
 	)
 );
+// phpcs:enable

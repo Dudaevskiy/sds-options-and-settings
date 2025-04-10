@@ -22,7 +22,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 		 *
 		 * @var string
 		 */
-		private $repeater_values;
+		private string $repeater_values;
 
 		/**
 		 * Set defaults.
@@ -274,7 +274,7 @@ if ( ! class_exists( 'Redux_Repeater' ) ) {
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName
 					$this->url . 'redux-repeater.css',
 					array(),
-					time()
+					Redux_Extension_Repeater::$version
 				);
 			}
 		}
