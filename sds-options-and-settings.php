@@ -16,7 +16,7 @@
  * Plugin Name:       SDStudio addons, options and settings
  * Plugin URI:        https://techblog.sdstudio.top/blog
  * Description:       Set of useful additions, settings, improvements for your site from <a href="https://sdstudio.top"><strong>Serhii Dudchenko</strong></a>
- * Version:           2.2.58
+ * Version:           2.2.60
  * Author:            Serhii Dudchenko
  * Author URI:        https://sdstudio.top
  * License:           GPL-2.0+

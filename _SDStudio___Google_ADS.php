@@ -12,88 +12,53 @@ $CODE__enable_google_adsense_sds_options_and_settings = $redux['CODE__enable_goo
 
 if ($enable_google_adsense_sds_options_and_settings == 1 && !empty($CODE__enable_google_adsense_sds_options_and_settings)) {
 
-//    if (current_user_can( 'administrator' ) === false ) {
     if ( !is_user_logged_in()){
         function GoogleADS_ADD_header_metadata() {
-            // Post object if needed
-            // global $post;
-
-            // Page conditional if needed
-            // if( is_page() ){}
             global $CODE__enable_google_adsense_sds_options_and_settings;
             ?>
-            <link rel="preload" href="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" as="script">
+            <script>
+                // Lazy Load AdSense start
+                var lazyadsense=!1;
+                window.addEventListener("scroll",function(){
+                    (0!=document.documentElement.scrollTop&&!1===lazyadsense||0!=document.body.scrollTop&&!1===lazyadsense)&&(!function(){
+                        var e=document.createElement("script");
+                        e.type="text/javascript",
+                            e.async=!0,
+                            e.crossorigin="anonymous",
+                            e.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-<?php echo $CODE__enable_google_adsense_sds_options_and_settings;?>";
+                        var a=document.getElementsByTagName("script")[0];
+                        a.parentNode.insertBefore(e,a);
 
-            <script type="text/javascript">
-                function downloadJSAtOnload() {
+                        // Сохраняем функциональность вставки рекламных дивов
+                        document.addEventListener('DOMContentLoaded', function(){
+                            let lijuArr = document.querySelectorAll('.liju') || [];
 
-                    // var element = document.createElement("script");
-                    // element.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-                    // document.body.appendChild(element);
+                            // Вставляем дивы с классом advDiv после дивов с классом liju
+                            for (let i = 0; i < lijuArr.length; i++) {
+                                let advDiv = document.createElement('div');
+                                advDiv.classList.add('advDiv');
+                                lijuArr[i].after(advDiv);
+                            }
 
-                    // document.addEventListener("DOMContentLoaded", function(){
+                            // После загрузки страницы в дивы с классом advDiv вставляем <ins class...
+                            let advArr = document.querySelectorAll('.advDiv') || [];
 
-                    var externalScript   = document.createElement("script");
-                    externalScript.type  = "text/javascript";
-                    // externalScript.setAttribute('async','async');
-                    externalScript.setAttribute('defer','defer');
-                    externalScript.src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
-                    document.getElementsByTagName('body')[0].appendChild(externalScript);
-
-                    let lijuArr = document.querySelectorAll('.liju') || [];
-
-                    // Вставляем дивы с классом advDiv после дивов с классом liju
-
-                    for (let i = 0; i < lijuArr.length; i++) {
-                        let advDiv = document.createElement('div');
-                        advDiv.classList.add('advDiv');
-                        lijuArr[i].after(advDiv);
-                    }
-
-                    // После загрузки страницы в дивы с классом advDiv вставляем <ins class... , и после каждого дива вставляем (adsbygoogle = window.adsbygoogle || []).push({});
-                    document.addEventListener('DOMContentLoaded', function(){
-                        let advArr = document.querySelectorAll('.advDiv') || [];
-
-                        advArr.forEach(element => {
-                            // element.innerHTML='<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2272238036927" data-ad-slot="43425234" data-ad-format="auto" data-full-width-responsive="true"></ins>';
-                            element.innerHTML='<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-<?php echo $CODE__enable_google_adsense_sds_options_and_settings;?>" data-ad-format="auto" data-full-width-responsive="true"></ins>';
-                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            advArr.forEach(element => {
+                                element.innerHTML='<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-<?php echo $CODE__enable_google_adsense_sds_options_and_settings;?>" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            });
                         });
 
-                    });
-
-
-                }
-                // downloadJSAtOnload();
-                // document.addEventListener("DOMContentLoaded", function() {
-                if (window.attachEvent) {
-                    window.attachEvent('onload', downloadJSAtOnload());
-                } else {
-                    if (window.onload) {
-                        var curronload = window.onload;
-                        var newonload = function (evt) {
-                            curronload(evt);
-                            downloadJSAtOnload();
-                        };
-                        window.onload = newonload;
-                    } else {
-                        window.onload = downloadJSAtOnload();
-                    }
-                }
-                console.log('Google ADS RUN');
-                // });
-                // }, 1500);
+                    }(),lazyadsense=!0)
+                },!0);
+                // Lazy Load AdSense end
             </script>
-
             <?php
         }
 
         include_once(ABSPATH . 'wp-includes/pluggable.php');
-//if ( !current_user_can( 'administrator' ) || !current_user_can( 'editor' )) {
         if ( !is_user_logged_in()) {
             add_action('wp_footer', 'GoogleADS_ADD_header_metadata');
-//        add_action( 'wp_head', 'GoogleADS_ADD_header_metadata' );
         }
-
     }
 }
