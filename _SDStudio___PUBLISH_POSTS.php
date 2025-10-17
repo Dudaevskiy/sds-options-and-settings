@@ -173,7 +173,8 @@ if ($enable_publish_posts_sds_options_and_settings == 1) {
 }
 
 /***
- *
+ * Активація rel-атрибутів для редактора посилань
+ * Рефакторінг: використовуємо події замість перевизначення методів wpLink
  */
 if ($enable_editposts_relfollow_posts_sds_options_and_settings == 1) {
     if (!function_exists('sdstudio_add_relfollow_in_link')) {
@@ -181,163 +182,281 @@ if ($enable_editposts_relfollow_posts_sds_options_and_settings == 1) {
         function sdstudio_add_relfollow_in_link() {
             ?>
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    if (typeof tinymce !== 'undefined' && typeof _ !== 'undefined' && typeof wpLink !== 'undefined') {
+                (function() {
+                    'use strict';
+
+                    var debugMode = false; // Встановіть true для ввімкнення відлагодження
+
+                    // Ініціалізація функціоналу rel-атрибутів
+                    function initRelAttributesEditor() {
+                        if (debugMode) console.log('SDStudio: initRelAttributesEditor called');
+
+                        // Перевіряємо наявність необхідних об'єктів
+                        if (typeof tinymce === 'undefined' || typeof wpLink === 'undefined') {
+                            if (debugMode) console.warn('SDStudio: tinymce or wpLink not defined');
+                            return;
+                        }
+
                         const linkOptions = document.querySelector('#link-options');
-                        if (linkOptions) {
-                            const newCheckboxes = `
-                                <div class="link-rel-attributes" style="
-                                    display: block;
-                                    max-width: 217px;
-                                    margin: 0 auto;
-                                    border-top: 2px grey dashed;
-                                    margin-top: 10px;
-                                ">
-                                    <label><input type="checkbox" id="wp-link-follow" /><strong style="color:green">💸 Установить <code>rel="follow"</code></strong></label>
-                                    <label><input type="checkbox" id="wp-link-dofollow" />📌 Установить  <code>rel="dofollow"</code></label>
-                                    <label><input type="checkbox" id="wp-link-no-rel" /> <strong>❌ Без атрибуту rel</strong></label>
-                                    <label><input type="checkbox" id="wp-link-ugc" /> Добавить <code>rel="ugc"</code></label>
-                                    <label><input type="checkbox" id="wp-link-noopener" /> Добавить <code>rel="noopener"</code></label>
-                                    <label><input type="checkbox" id="wp-link-noreferrer" /> Добавить <code>rel="noreferrer"</code></label>
-                                    <label><input type="checkbox" id="wp-link-bookmark" /> Добавить <code>rel="bookmark"</code></label>
-                                    <label><input type="checkbox" id="wp-link-alternate" /> Добавить <code>rel="alternate"</code></label>
-                                    <label><input type="checkbox" id="wp-link-author" /> Добавить <code>rel="author"</code></label>
-                                    <label><input type="checkbox" id="wp-link-canonical" /> Добавить <code>rel="canonical"</code></label>
-                                    <label><input type="checkbox" id="wp-link-help" /> Добавить <code>rel="help"</code></label>
-                                    <label><input type="checkbox" id="wp-link-license" /> Добавить <code>rel="license"</code></label>
-                                    <label><input type="checkbox" id="wp-link-search" /> Добавить <code>rel="search"</code></label>
-                                    <label><input type="checkbox" id="wp-link-prev" /> Добавить <code>rel="prev"</code></label>
-                                    <label><input type="checkbox" id="wp-link-next" /> Добавить <code>rel="next"</code></label>
-                                </div>
-                            `;
-                            linkOptions.insertAdjacentHTML('beforeend', newCheckboxes);
+                        if (!linkOptions) {
+                            if (debugMode) console.warn('SDStudio: #link-options not found');
+                            return;
+                        }
 
-                            const originalWpLink = Object.assign({}, wpLink);
+                        if (linkOptions.querySelector('.sdstudio-rel-wrapper')) {
+                            if (debugMode) console.log('SDStudio: Already initialized');
+                            return; // Вже ініціалізовано
+                        }
 
-                            wpLink.getAttrs = function() {
-                                const attrs = originalWpLink.getAttrs();
+                        if (debugMode) console.log('SDStudio: Initializing rel-attributes UI');
 
-                                // Видаляємо атрибут rel, якщо вибрано "Без атрибуту rel"
-                                if (document.getElementById('wp-link-no-rel').checked) {
-                                    delete attrs.rel;
-                                    return attrs;
+                        // Додаємо наші чекбокси в один компактний блок з Grid
+                        const relAttributesHTML = `
+                            <div class="sdstudio-rel-wrapper">
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-follow" /><strong style="color:green">💸 <code>rel="follow"</code></strong></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-dofollow" />📌 <code>rel="dofollow"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-no-rel" /><strong>❌ Без rel</strong></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-ugc" /><code>rel="ugc"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-noopener" /><code>rel="noopener"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-noreferrer" /><code>rel="noreferrer"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-bookmark" /><code>rel="bookmark"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-alternate" /><code>rel="alternate"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-author" /><code>rel="author"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-canonical" /><code>rel="canonical"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-help" /><code>rel="help"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-license" /><code>rel="license"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-search-rel" /><code>rel="search"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-prev" /><code>rel="prev"</code></label></div>
+                                <div class="sdstudio-rel-item"><label><input type="checkbox" id="sdstudio-wp-link-next" /><code>rel="next"</code></label></div>
+                            </div>
+                        `;
+                        linkOptions.insertAdjacentHTML('beforeend', relAttributesHTML);
+
+                        // Функція для отримання вибраних rel-атрибутів з чекбоксів
+                        function getSelectedRelAttributes() {
+                            try {
+                                const noRelCheckbox = document.getElementById('sdstudio-wp-link-no-rel');
+                                if (noRelCheckbox && noRelCheckbox.checked) {
+                                    return null; // Без rel-атрибута
                                 }
 
                                 const relAttrs = [];
-                                if (document.getElementById('wp-link-follow').checked) relAttrs.push('follow');
-                                if (document.getElementById('wp-link-dofollow').checked) relAttrs.push('dofollow');
-                                if (document.getElementById('wp-link-ugc').checked) relAttrs.push('ugc');
-                                if (document.getElementById('wp-link-noopener').checked) relAttrs.push('noopener');
-                                if (document.getElementById('wp-link-noreferrer').checked) relAttrs.push('noreferrer');
-                                if (document.getElementById('wp-link-bookmark').checked) relAttrs.push('bookmark');
-                                if (document.getElementById('wp-link-alternate').checked) relAttrs.push('alternate');
-                                if (document.getElementById('wp-link-author').checked) relAttrs.push('author');
-                                if (document.getElementById('wp-link-canonical').checked) relAttrs.push('canonical');
-                                if (document.getElementById('wp-link-help').checked) relAttrs.push('help');
-                                if (document.getElementById('wp-link-license').checked) relAttrs.push('license');
-                                if (document.getElementById('wp-link-search').checked) relAttrs.push('search');
-                                if (document.getElementById('wp-link-prev').checked) relAttrs.push('prev');
-                                if (document.getElementById('wp-link-next').checked) relAttrs.push('next');
+                                const relCheckboxes = {
+                                    'sdstudio-wp-link-follow': 'follow',
+                                    'sdstudio-wp-link-dofollow': 'dofollow',
+                                    'sdstudio-wp-link-ugc': 'ugc',
+                                    'sdstudio-wp-link-noopener': 'noopener',
+                                    'sdstudio-wp-link-noreferrer': 'noreferrer',
+                                    'sdstudio-wp-link-bookmark': 'bookmark',
+                                    'sdstudio-wp-link-alternate': 'alternate',
+                                    'sdstudio-wp-link-author': 'author',
+                                    'sdstudio-wp-link-canonical': 'canonical',
+                                    'sdstudio-wp-link-help': 'help',
+                                    'sdstudio-wp-link-license': 'license',
+                                    'sdstudio-wp-link-search-rel': 'search',
+                                    'sdstudio-wp-link-prev': 'prev',
+                                    'sdstudio-wp-link-next': 'next'
+                                };
 
-                                if (relAttrs.length > 0) {
-                                    attrs.rel = relAttrs.join(' ');
-                                } else {
-                                    delete attrs.rel;
+                                for (const [id, value] of Object.entries(relCheckboxes)) {
+                                    const checkbox = document.getElementById(id);
+                                    if (checkbox && checkbox.checked) {
+                                        relAttrs.push(value);
+                                    }
                                 }
 
+                                return relAttrs.length > 0 ? relAttrs.join(' ') : '';
+                            } catch (e) {
+                                console.error('SDStudio getSelectedRelAttributes error:', e);
+                                return '';
+                            }
+                        }
+
+                        // Перевизначаємо wpLink.getAttrs ТІЛЬКИ ОДИН РАЗ
+                        if (!wpLink._sdstudio_original_getAttrs) {
+                            if (debugMode) console.log('SDStudio: Wrapping wpLink.getAttrs');
+                            wpLink._sdstudio_original_getAttrs = wpLink.getAttrs;
+
+                            wpLink.getAttrs = function() {
+                                if (debugMode) console.log('SDStudio: getAttrs called');
+                                const attrs = wpLink._sdstudio_original_getAttrs.call(this);
+                                if (debugMode) console.log('SDStudio: Original attrs:', attrs);
+
+                                // Додаємо rel-атрибути з наших чекбоксів
+                                const customRel = getSelectedRelAttributes();
+                                if (customRel === null) {
+                                    // Користувач вибрав "Без атрибуту rel"
+                                    delete attrs.rel;
+                                } else if (customRel) {
+                                    attrs.rel = customRel;
+                                }
+
+                                if (debugMode) console.log('SDStudio: Modified attrs:', attrs);
                                 return attrs;
                             };
+                        }
 
-                            wpLink.mceRefresh = function(searchStr, text) {
-                                originalWpLink.mceRefresh(searchStr, text);
+                        // Функція для оновлення стану чекбоксів на основі поточного посилання
+                        function updateRelCheckboxes() {
+                            try {
                                 const editor = tinymce.get(wpActiveEditor);
-                                if (typeof editor !== 'undefined' && !editor.isHidden()) {
-                                    const linkNode = editor.dom.getParent(editor.selection.getNode(), 'a[href]');
-                                    if (linkNode) {
-                                        const rel = editor.dom.getAttrib(linkNode, 'rel');
-                                        const relAttrs = rel.split(' ');
+                                if (!editor || editor.isHidden()) {
+                                    return;
+                                }
 
-                                        document.getElementById('wp-link-no-rel').checked = rel === '';
-                                        document.getElementById('wp-link-follow').checked = relAttrs.includes('follow');
-                                        document.getElementById('wp-link-dofollow').checked = relAttrs.includes('dofollow');
-                                        document.getElementById('wp-link-ugc').checked = relAttrs.includes('ugc');
-                                        document.getElementById('wp-link-noopener').checked = relAttrs.includes('noopener');
-                                        document.getElementById('wp-link-noreferrer').checked = relAttrs.includes('noreferrer');
-                                        document.getElementById('wp-link-bookmark').checked = relAttrs.includes('bookmark');
-                                        document.getElementById('wp-link-alternate').checked = relAttrs.includes('alternate');
-                                        document.getElementById('wp-link-author').checked = relAttrs.includes('author');
-                                        document.getElementById('wp-link-canonical').checked = relAttrs.includes('canonical');
-                                        document.getElementById('wp-link-help').checked = relAttrs.includes('help');
-                                        document.getElementById('wp-link-license').checked = relAttrs.includes('license');
-                                        document.getElementById('wp-link-search').checked = relAttrs.includes('search');
-                                        document.getElementById('wp-link-prev').checked = relAttrs.includes('prev');
-                                        document.getElementById('wp-link-next').checked = relAttrs.includes('next');
+                                const linkNode = editor.dom.getParent(editor.selection.getNode(), 'a[href]');
+                                const rel = linkNode ? (editor.dom.getAttrib(linkNode, 'rel') || '') : '';
+                                const relAttrs = rel ? rel.split(' ').map(r => r.trim()).filter(Boolean) : [];
+
+                                // Оновлюємо стан чекбоксів
+                                const checkboxMap = {
+                                    'sdstudio-wp-link-no-rel': rel === '',
+                                    'sdstudio-wp-link-follow': relAttrs.includes('follow'),
+                                    'sdstudio-wp-link-dofollow': relAttrs.includes('dofollow'),
+                                    'sdstudio-wp-link-ugc': relAttrs.includes('ugc'),
+                                    'sdstudio-wp-link-noopener': relAttrs.includes('noopener'),
+                                    'sdstudio-wp-link-noreferrer': relAttrs.includes('noreferrer'),
+                                    'sdstudio-wp-link-bookmark': relAttrs.includes('bookmark'),
+                                    'sdstudio-wp-link-alternate': relAttrs.includes('alternate'),
+                                    'sdstudio-wp-link-author': relAttrs.includes('author'),
+                                    'sdstudio-wp-link-canonical': relAttrs.includes('canonical'),
+                                    'sdstudio-wp-link-help': relAttrs.includes('help'),
+                                    'sdstudio-wp-link-license': relAttrs.includes('license'),
+                                    'sdstudio-wp-link-search-rel': relAttrs.includes('search'),
+                                    'sdstudio-wp-link-prev': relAttrs.includes('prev'),
+                                    'sdstudio-wp-link-next': relAttrs.includes('next')
+                                };
+
+                                for (const [id, checked] of Object.entries(checkboxMap)) {
+                                    const checkbox = document.getElementById(id);
+                                    if (checkbox) {
+                                        checkbox.checked = checked;
                                     }
                                 }
-                            };
+                            } catch (e) {
+                                console.error('SDStudio updateRelCheckboxes error:', e);
+                            }
+                        }
 
-                            document.querySelectorAll('.link-rel-attributes input[type="checkbox"]').forEach(checkbox => {
+                        // Слухаємо подію wplink-open для оновлення чекбоксів
+                        jQuery(document).on('wplink-open', updateRelCheckboxes);
+
+                        // Обробка взаємовиключних чекбоксів
+                        const exclusiveCheckboxes = ['sdstudio-wp-link-follow', 'sdstudio-wp-link-dofollow', 'sdstudio-wp-link-no-rel'];
+                        exclusiveCheckboxes.forEach(id => {
+                            const checkbox = document.getElementById(id);
+                            if (checkbox) {
                                 checkbox.addEventListener('change', function() {
-                                    if (this.checked && this.id !== 'wp-link-no-rel') {
-                                        document.getElementById('wp-link-no-rel').checked = false;
-                                    } else if (this.id === 'wp-link-no-rel' && this.checked) {
-                                        document.querySelectorAll('.link-rel-attributes input[type="checkbox"]').forEach(cb => {
-                                            if (cb.id !== 'wp-link-no-rel') cb.checked = false;
-                                        });
-                                    }
-                                });
-                            });
-
-                            document.getElementById('wp-link-no-rel').addEventListener('change', function() {
-                                if (this.checked) {
-                                    // Знімаємо всі інші чекбокси
-                                    document.querySelectorAll('.link-rel-attributes input[type="checkbox"]').forEach(cb => {
-                                        if (cb !== this) cb.checked = false;
-                                    });
-
-                                    // Видаляємо атрибут rel з поточного посилання
-                                    const editor = tinymce.get(wpActiveEditor);
-                                    if (editor && !editor.isHidden()) {
-                                        const linkNode = editor.dom.getParent(editor.selection.getNode(), 'a[href]');
-                                        if (linkNode) {
-                                            editor.dom.setAttrib(linkNode, 'rel', null);
-                                        }
-                                    }
-                                }
-                            });
-
-                            const exclusiveCheckboxes = ['wp-link-follow', 'wp-link-dofollow', 'wp-link-no-rel'];
-                            exclusiveCheckboxes.forEach(id => {
-                                document.getElementById(id).addEventListener('change', function() {
                                     if (this.checked) {
                                         exclusiveCheckboxes.forEach(cbId => {
-                                            if (cbId !== this.id) {
-                                                document.getElementById(cbId).checked = false;
+                                            if (cbId !== id) {
+                                                const cb = document.getElementById(cbId);
+                                                if (cb) cb.checked = false;
                                             }
                                         });
                                     }
                                 });
+                            }
+                        });
+
+                        // Обробка чекбокса "Без атрибуту rel"
+                        const noRelCheckbox = document.getElementById('sdstudio-wp-link-no-rel');
+                        if (noRelCheckbox) {
+                            noRelCheckbox.addEventListener('change', function() {
+                                if (this.checked) {
+                                    // Знімаємо всі інші чекбокси
+                                    document.querySelectorAll('.sdstudio-rel-item input[type="checkbox"]').forEach(cb => {
+                                        if (cb !== this) cb.checked = false;
+                                    });
+                                }
                             });
                         }
+
+                        // Обробка решти чекбоксів
+                        document.querySelectorAll('.sdstudio-rel-item input[type="checkbox"]').forEach(checkbox => {
+                            checkbox.addEventListener('change', function() {
+                                if (this.checked && this.id !== 'sdstudio-wp-link-no-rel') {
+                                    const noRel = document.getElementById('sdstudio-wp-link-no-rel');
+                                    if (noRel) noRel.checked = false;
+                                }
+                            });
+                        });
                     }
-                });
+
+                    // Функція для безпечної ініціалізації з повторними спробами
+                    function safeInit() {
+                        if (typeof wpLink !== 'undefined' && wpLink.open) {
+                            initRelAttributesEditor();
+                        } else {
+                            // Повторна спроба через 100ms, максимум 20 разів (2 секунди)
+                            var attempts = 0;
+                            var retryInit = setInterval(function() {
+                                attempts++;
+                                if (typeof wpLink !== 'undefined' && wpLink.open) {
+                                    clearInterval(retryInit);
+                                    initRelAttributesEditor();
+                                } else if (attempts >= 20) {
+                                    clearInterval(retryInit);
+                                    console.warn('SDStudio: wpLink not found after 2 seconds');
+                                }
+                            }, 100);
+                        }
+                    }
+
+                    // Запускаємо ініціалізацію при готовності DOM
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', safeInit);
+                    } else {
+                        safeInit();
+                    }
+
+                    // Додатково запускаємо при відкритті діалогу wplink
+                    jQuery(document).on('wplink-open', function() {
+                        setTimeout(initRelAttributesEditor, 50);
+                    });
+                })();
             </script>
             <style>
-                #wp-link #link-options .link-rel-attributes {
-                    padding: 3px 0 0;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                /* Компактний Grid для наших чекбоксів */
+                .sdstudio-rel-wrapper {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 4px 8px;
+                    margin-top: 8px;
+                    border-top: 1px dashed #ddd;
+                    background-color: rgb(60 67 74 / 8%);
+                    padding: 10px;
                 }
-                #wp-link #link-options .link-rel-attributes label {
+
+                .sdstudio-rel-item label {
                     display: block;
-                    margin-bottom: 5px;
+                    font-size: 13.2px;
+                    line-height: 1.4;
                 }
-                .has-text-field #wp-link .query-results {
-                    top: 500px;
+
+                .sdstudio-rel-item code {
+                    font-size: 12px;
                 }
-                div#most-recent-results {
+
+                /* Виправлення для результатів пошуку */
+                div#most-recent-results,
+                div#search-results {
+                    position: relative;
                     display: contents;
+                }
+
+                /* Стилі для текстових підказок */
+                p#wplink-link-existing-content,
+                p#wplink-enter-url {
+                    text-align: center;
+                    font-weight: 700;
+                }
+
+                /* Для екранів шириною більше 786px */
+                @media (min-width: 786px) {
+                    div#wp-link-wrap {
+                        min-width: 523px;
+                    }
                 }
             </style>
             <?php

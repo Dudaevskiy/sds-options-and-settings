@@ -9,7 +9,7 @@
  * that starts the plugin.
  *
  * @link              https://sdstudio.top
- * @since             2.0.1
+ * @since             2.0.2
  * @package           Sds_Options_And_Settings
  *
  * @wordpress-plugin
